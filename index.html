@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HELLAS — ศูนย์การเรียนรู้อารยธรรมกรีกโบราณ</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Sarabun:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            --color-cream: #FDFBF7;
+            --color-cream-dark: #F7F4EF;
+            --color-navy: #111827;
+            --color-navy-muted: #1E293B;
+            --color-gold: #C5A880;
+            --color-gold-dark: #D4AF37;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', 'Sarabun', sans-serif;
+            background-color: var(--color-cream);
+            color: var(--color-navy);
+        }
+        .font-serif-greek {
+            font-family: 'Cinzel', serif;
+        }
+        /* Greek Meander Pattern Background */
+        .bg-meander {
+            background-color: var(--color-cream);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Cpath d='M0 0h36v36H0V0zm4 4h28v28H4V4zm4 4v20h20V8H8zm4 4h12v12H12V12zm2 2v8h8v-8h-8zm2 2h4v4h-4v-4z' fill='%23C5A880' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        /* Hide Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--color-cream-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--color-gold); border-radius: 3px; }
+        
+        /* 3D Dice Flip Animation */
+        @keyframes roll {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(720deg); }
+        }
+        .animate-roll { animation: roll 0.8s ease-out forwards; }
+    </style>
+</head>
+<body class="bg-meander min-h-screen flex flex-col antialiased selection:bg-[#C5A880]/30">
+
+    <nav class="sticky top-0 z-50 bg-[#FDFBF7]/80 backdrop-blur-md border-b border-slate-200/60 px-6 py-4 transition-all">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" onclick="switchView('hero')" class="font-serif-greek text-2xl font-black tracking-[0.2em] text-[#111827] flex items-center gap-2">
+                <span class="text-[#C5A880]">🏛️</span> HELLAS
+            </a>
+            <div class="flex items-center gap-1 md:gap-4 font-medium text-sm">
+                <button onclick="switchView('hero')" class="nav-link px-4 py-2 rounded-full hover:bg-slate-100 transition text-[#111827]">หน้าแรก</button>
+                <button onclick="switchView('study')" class="nav-link px-4 py-2 rounded-full hover:bg-slate-100 transition text-[#111827]">คลังความรู้</button>
+                <button onclick="switchView('lobby')" class="nav-link px-4 py-2 rounded-full bg-[#111827] text-white hover:bg-[#1E293B] shadow-sm transition flex items-center gap-2">
+                    <i data-lucide="gamepad-2" class="w-4 h-4"></i> แดนเกมการศึกษา
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-8">
+
+        <section id="view-hero" class="view-section space-y-16 py-12 md:py-24 text-center max-w-4xl mx-auto">
+            <div class="space-y-6 animate-fade-in">
+                <span class="font-serif-greek text-xs tracking-[0.4em] text-[#C5A880] uppercase font-bold block">The Cradle of Western Civilization</span>
+                <h1 class="font-serif-greek text-5xl md:text-7xl font-black text-[#111827] leading-tight">
+                    อารยธรรมกรีกโบราณ <br><span class="font-normal italic text-slate-700 text-4xl md:text-5xl font-sans">ความรุ่งโรจน์แห่งปัญญา</span>
+                </h1>
+                <p class="text-slate-600 max-w-2xl mx-auto text-base md:text-lg leading-relaxed font-light">
+                    ร่วมเดินทางย้อนเวลากลับสู่ยุคแห่งปรัชญา ประชาธิปไตย สถาปัตยกรรมหินอ่อนอันวิจิตร และตำนานทวยเทพแห่งโอลิมปัส ผ่านระบบคลังความรู้พรีเมียมและนวัตกรรมเกมการศึกษาเสมือนจริง 6 รูปแบบ
+                </p>
+            </div>
+
+            <div class="relative flex justify-center py-6">
+                <div class="w-full max-w-lg border-t-2 border-b border-[#C5A880]/40 py-2 flex justify-between px-10 text-xs font-serif-greek tracking-widest text-[#C5A880]/80">
+                    <span>PHILOSOPHIA</span>
+                    <span>•</span>
+                    <span>ARCHITECTURA</span>
+                    <span>•</span>
+                    <span>MYTHOLOGIA</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
+                <button onclick="switchView('study')" class="w-full sm:w-auto px-8 py-4 bg-white border border-[#C5A880] text-[#111827] rounded-full font-medium hover:bg-[#F7F4EF] transition-all transform hover:-translate-y-0.5 shadow-sm flex items-center justify-center gap-2">
+                    <i data-lucide="book-open" class="w-5 h-5 text-[#C5A880]"></i> เริ่มศึกษาบทเรียน
+                </button>
+                <button onclick="switchView('lobby')" class="w-full sm:w-auto px-8 py-4 bg-[#111827] text-white rounded-full font-medium hover:bg-[#1E293B] transition-all transform hover:-translate-y-0.5 shadow-md flex items-center justify-center gap-2">
+                    <i data-lucide="sparkles" class="w-5 h-5 text-[#C5A880]"></i> เข้าสู่สมรภูมิเกมทดสอบ
+                </button>
+            </div>
+        </section>
+
+
+        <section id="view-study" class="view-section hidden space-y-12 animate-fade-in">
+            <div class="text-center space-y-3">
+                <h2 class="font-serif-greek text-4xl font-bold text-[#111827]">🏛️ คลังความรู้แห่งเฮลลัส</h2>
+                <p class="text-slate-500 max-w-xl mx-auto font-light">เลือกหัวข้อด้านล่างเพื่อรับองค์ความรู้พื้นฐานสำหรับใช้พิชิตคะแนนสูงสุดในแดนเกมการศึกษา</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center border-b border-slate-200/80 gap-2 max-w-3xl mx-auto">
+                <button onclick="switchStudyTab('timeline')" id="tab-timeline" class="study-tab-btn border-b-2 border-transparent px-4 py-3 text-sm font-medium transition text-slate-500 hover:text-[#111827]">1. ลำดับเวลาประวัติศาสตร์</button>
+                <button onclick="switchStudyTab('athens-sparta')" id="tab-athens-sparta" class="study-tab-btn border-b-2 border-transparent px-4 py-3 text-sm font-medium transition text-slate-500 hover:text-[#111827]">2. เอเธนส์ vs สปาร์ตา</button>
+                <button onclick="switchStudyTab('pantheon')" id="tab-pantheon" class="study-tab-btn border-b-2 border-transparent px-4 py-3 text-sm font-medium transition text-slate-500 hover:text-[#111827]">3. ทวยเทพและวิหาร</button>
+                <button onclick="switchStudyTab('philosophers')" id="tab-philosophers" class="study-tab-btn border-b-2 border-transparent px-4 py-3 text-sm font-medium transition text-slate-500 hover:text-[#111827]">4. สามนักปราชญ์</button>
+                <button onclick="switchStudyTab('architecture')" id="tab-architecture" class="study-tab-btn border-b-2 border-transparent px-4 py-3 text-sm font-medium transition text-slate-500 hover:text-[#111827]">5. สถาปัตยกรรมหัวเสา</button>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-white border border-slate-200/60 rounded-3xl p-6 md:p-10 shadow-sm">
+                <div id="content-timeline" class="study-content space-y-6 hidden">
+                    <h3 class="text-2xl font-bold font-serif-greek text-[#111827] border-l-4 border-[#C5A880] pl-3">ลำดับเวลาและยุคสมัยของกรีกโบราณ (Greek Chronology)</h3>
+                    <p class="text-slate-600 leading-relaxed">ประวัติศาสตร์อารยธรรมกรีกโบราณแบ่งออกเป็น 3 ยุคสมัยสำคัญที่สร้างรากฐานทางวัฒนธรรมแก่โลกตะวันตกอย่างมหาศาล:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                        <div class="bg-[#F7F4EF] p-5 rounded-2xl border border-slate-100">
+                            <span class="text-xs font-bold font-serif-greek text-[#C5A880] block mb-2">800 - 500 BCE</span>
+                            <h4 class="font-bold text-lg mb-2">ยุคอาร์เคอิก (Archaic Period)</h4>
+                            <p class="text-sm text-slate-600 font-light">ยุคเริ่มต้นแห่งการฟื้นตัว มีการประดิษฐ์อักษรกรีก การจัดตั้งนครรัฐ (Polis) และจุดกำเนิดของกีฬาโอลิมปิกโบราณในปี 776 ก่อนคริสตกาล</p>
+                        </div>
+                        <div class="bg-[#F7F4EF] p-5 rounded-2xl border border-slate-100">
+                            <span class="text-xs font-bold font-serif-greek text-[#C5A880] block mb-2">500 - 323 BCE</span>
+                            <h4 class="font-bold text-lg mb-2">ยุคคลาสสิก (Classical Period)</h4>
+                            <p class="text-sm text-slate-600 font-light">ยุคทองแห่งศิลปวัฒนธรรม ปรัชญา และการปกครองในระบบประชาธิปไตยของเอเธนส์ เกิดมหาสงครามกรีก-เปอร์เซีย และสงครามเพโลพอนนีเซียน</p>
+                        </div>
+                        <div class="bg-[#F7F4EF] p-5 rounded-2xl border border-slate-100">
+                            <span class="text-xs font-bold font-serif-greek text-[#C5A880] block mb-2">323 - 31 BCE</span>
+                            <h4 class="font-bold text-lg mb-2">ยุคเฮลเลนิสติก (Hellenistic Period)</h4>
+                            <p class="text-sm text-slate-600 font-light">ยุคหลังการสวรรคตของพระเจ้าอเล็กซานดรมหาราช วัฒนธรรมกรีกโบราณแผ่ขยายอิทธิพลไปทั่วอียิปต์ ตะวันออกกลาง จนถูกโรมันเข้าครอบครองในที่สุด</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content-athens-sparta" class="study-content space-y-6 hidden">
+                    <h3 class="text-2xl font-bold font-serif-greek text-[#111827] border-l-4 border-[#C5A880] pl-3">เอเธนส์ ปะทะ สปาร์ตา: สองอัตลักษณ์แห่งนครรัฐ</h3>
+                    <p class="text-slate-600 leading-relaxed">กรีกโบราณไม่ได้รวมศูนย์เป็นประเทศ แต่แบ่งออกเป็นนครรัฐอิสระ (Polis) โดยมีสองนครรัฐที่ทรงอิทธิพลและขัดแย้งกันอย่างสิ้นเชิงทางอุดมการณ์:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2">
+                        <div class="border border-slate-100 p-6 rounded-2xl bg-gradient-to-br from-white to-sky-50/20">
+                            <div class="text-3xl mb-2">🕊️ นครรัฐเอเธนส์ (Athens)</div>
+                            <h4 class="font-bold text-lg text-[#111827] mb-2">ดินแดนแห่งปัญญาและประชาธิปไตย</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed font-light">
+                                มุ่งเน้นการพัฒนาสติปัญญา ศิลปวัฒนธรรม วรรณกรรม และการค้าทางทะเล เป็นต้นกำเนิดระบบการปกครองระบอบประชาธิปไตยโดยตรง (Direct Democracy) ที่ให้พลเมืองชายมีสิทธิออกเสียงในสภา
+                            </p>
+                        </div>
+                        <div class="border border-slate-100 p-6 rounded-2xl bg-gradient-to-br from-white to-rose-50/20">
+                            <div class="text-3xl mb-2">🛡️ นครรัฐสปาร์ตา (Sparta)</div>
+                            <h4 class="font-bold text-lg text-[#111827] mb-2">จักรกลสงครามและคณาธิปไตย</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed font-light">
+                                ปกครองด้วยระบบคณาธิปไตย (Oligarchy) สังคมขับเคลื่อนด้วยระเบียบวินัยและการทหารอย่างเข้มงวด ชายชาวสปาร์ตาทุกคนต้องเข้ารับการฝึกฝนวิชาทหารอย่างทรหดผ่านระบบ Agoge ตั้งแต่อายุ 7 ปี
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content-pantheon" class="study-content space-y-6 hidden">
+                    <h3 class="text-2xl font-bold font-serif-greek text-[#111827] border-l-4 border-[#C5A880] pl-3">ทวยเทพแห่งโอลิมปัสและมหาวิหารพาร์เธนอน</h3>
+                    <p class="text-slate-600 leading-relaxed">ชาวกรีกโบราณนับถือศาสนาประเภทพหุเทวนิยม (Polytheism) มีความเชื่อว่าทวยเทพผู้ทรงอิทธิฤทธิ์อาศัยอยู่บนยอดเขาโอลิมปัส (Mount Olympus):</p>
+                    <ul class="space-y-3 text-slate-600 text-sm">
+                        <li>⚡ <strong class="text-[#111827]">ซุส (Zeus):</strong> ราชาแห่งทวยเทพ ผู้ปกครองสรวงสวรรค์และสายฟ้า</li>
+                        <li>🦉 <strong class="text-[#111827]">อาธีนา (Athena):</strong> เทพีแห่งปัญญา ยุทธศาสตร์ และการสงครามอันชอบธรรม (ผู้อุปถัมภ์เอเธนส์)</li>
+                        <li>🔱 <strong class="text-[#111827]">โพไซดอน (Poseidon):</strong> เทพแห่งมหาสมุทร พายุ และแผ่นดินไหว</li>
+                        <li>☀️ <strong class="text-[#111827]">อพอลโล (Apollo):</strong> เทพแห่งแสงสว่าง สัจจะ ดนตรี และการแพทย์</li>
+                    </ul>
+                    <div class="p-4 bg-[#F7F4EF] rounded-2xl border border-[#C5A880]/30 text-xs text-slate-500 italic">
+                        *วิหารพาร์เธนอน (Parthenon) สร้างขึ้นบนบริวณอะโครโพลิสแห่งเอเธนส์เพื่อถวายแด่เทพีอาธีนา สะท้อนความรุ่งเรืองขั้นสูงสุดของสัดส่วนทองคำทางสถาปัตยกรรม
+                    </div>
+                </div>
+
+                <div id="content-philosophers" class="study-content space-y-6 hidden">
+                    <h3 class="text-2xl font-bold font-serif-greek text-[#111827] border-l-4 border-[#C5A880] pl-3">สามมหาปราชญ์ผู้พลิกโฉมความคิดโลก</h3>
+                    <p class="text-slate-600 leading-relaxed">แก่นแท้ของอารยธรรมกรีกคือการแสวงหาความจริงด้วยเหตุผล (Rationalism) ผ่านศิษย์-อาจารย์ 3 รุ่นที่เป็นรากฐานปรัชญาตะวันตก:</p>
+                    <div class="space-y-4">
+                        <div class="p-4 border-l-2 border-slate-300">
+                            <h4 class="font-bold text-[#111827]">1. โสเครติส (Socrates)</h4>
+                            <p class="text-sm text-slate-600 font-light">เน้นวิธีการตั้งคำถามเพื่อให้บุคคลค้นพบความจริงด้วยตนเอง (Socratic Method) ท่านยอมรับโทษดื่มยาพิษเฮมล็อกเพื่อรักษาความสัจจะ</p>
+                        </div>
+                        <div class="p-4 border-l-2 border-[#C5A880]">
+                            <h4 class="font-bold text-[#111827]">2. เพลโต (Plato)</h4>
+                            <p class="text-sm text-slate-600 font-light">ศิษย์ของโสเครติส ผู้ก่อตั้งสถาบัน "Academy" เสนอทฤษฎีแห่งแบบ (Theory of Forms) และเขียนหนังสือระบอบการปกครองในอุดมคติอย่าง "อภิรัฐ" (The Republic)</p>
+                        </div>
+                        <div class="p-4 border-l-2 border-slate-300">
+                            <h4 class="font-bold text-[#111827]">3. อริสโตเติล (Aristotle)</h4>
+                            <p class="text-sm text-slate-600 font-light">ศิษย์ของเพลโตและพระอาจารย์ของพระเจ้าอเล็กซานดรมหาราช ผู้วางรากฐานวิชาตรรกศาสตร์ ชีววิทยา และการแบ่งประเภทศาสตร์สมัยใหม่</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content-architecture" class="study-content space-y-6 hidden">
+                    <h3 class="text-2xl font-bold font-serif-greek text-[#111827] border-l-4 border-[#C5A880] pl-3">สถาปัตยกรรมหัวเสากรีกโบราณ (Classical Orders)</h3>
+                    <p class="text-slate-600 leading-relaxed">การจำแนกสถาปัตยกรรมกรีกที่ชัดเจนที่สุดดูได้จากเอกลักษณ์ของลวดลายบน "หัวเสา" (Capitals) 3 รูปแบบหลัก:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div class="border border-slate-100 p-4 rounded-xl bg-[#FDFBF7]">
+                            <div class="text-4xl my-2">🏛️</div>
+                            <h4 class="font-bold text-base text-[#111827]">แบบดอริก (Doric)</h4>
+                            <p class="text-xs text-slate-500 font-light mt-1">เรียบง่าย หนา มั่นคง ไม่มีฐานเสา สะท้อนความแข็งแกร่ง (พบได้ที่วิหารพาร์เธนอน)</p>
+                        </div>
+                        <div class="border border-slate-100 p-4 rounded-xl bg-[#FDFBF7]">
+                            <div class="text-4xl my-2">🌀</div>
+                            <h4 class="font-bold text-base text-[#111827]">แบบไอโอนิก (Ionic)</h4>
+                            <p class="text-xs text-slate-500 font-light mt-1">หัวเสามีม้วนย้อยยื่นออกมาสองข้างคล้ายม้วนกระดาษโบราณหรือเขาแกะ ดูอ่อนช้อยเพรียวบาง</p>
+                        </div>
+                        <div class="border border-slate-100 p-4 rounded-xl bg-[#FDFBF7]">
+                            <div class="text-4xl my-2">🌿</div>
+                            <h4 class="font-bold text-base text-[#111827]">แบบคอรินเทียน (Corinthian)</h4>
+                            <p class="text-xs text-slate-500 font-light mt-1">ตกแต่งอย่างหรูหราอลังการที่สุด ประดับประดาด้วยลวดลายใบไม้ "อะแคนทัส" (Acanthus)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="view-lobby" class="view-section hidden space-y-12 animate-fade-in">
+            <div class="text-center space-y-2">
+                <h2 class="font-serif-greek text-4xl font-bold text-[#111827]">🎮 สังเวียนเกมวิชาการกรีกโบราณ</h2>
+                <p class="text-slate-500 max-w-xl mx-auto font-light">ท้าทายภูมิปัญญาผ่านเกมนวัตกรรมทั้ง 6 รูปแบบ สะสมตราเกียรติยศแห่งอารยธรรม</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div class="bg-white border border-slate-200/60 rounded-3xl p-6 hover:shadow-xl transition-all group flex flex-col justify-between transform hover:-translate-y-1">
+                    <div>
+                        <div class="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center text-2xl border border-amber-100 mb-4 group-hover:scale-110 transition-transform">🎲</div>
+                        <h3 class="text-xl font-bold text-[#111827] mb-2 font-serif-greek">1. เกมลูกเต๋าคำถาม</h3>
+                        <p class="text-xs text-slate-500 font-light leading-relaxed mb-4">หมุนลูกเต๋า 3 มิติ เพื่อสุ่มคำถามสหวิทยาการและกรีกศึกษา ตอบถูก 5 ข้อเพื่อคว้าชัย</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <span id="badge-game1" class="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-100 text-slate-500">ยังไม่ปลดล็อก</span>
+                        <button onclick="launchGame(1)" class="text-xs font-semibold bg-[#111827] text-white px-4 py-2 rounded-full hover:bg-[#C5A880] transition flex items-center gap-1">เล่นเกม <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-slate-200/60 rounded-3xl p-6 hover:shadow-xl transition-all group flex flex-col justify-between transform hover:-translate-y-1">
+                    <div>
+                        <div class="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-2xl border border-emerald-100 mb-4 group-hover:scale-110 transition-transform">🐍</div>
+                        <h3 class="text-xl font-bold text-[#111827] mb-2 font-serif-greek">2. งูกินหางความรู้</h3>
+                        <p class="text-xs text-slate-500 font-light leading-relaxed mb-4">บังคับงูเก็บแอปเปิ้ลทองคำ เมื่อกินต้องตอบคำถามประวัติศาสตร์เพื่อเติบโต ตอบถูก 3 ข้อชนะ</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <span id="badge-game2" class="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-100 text-slate-500">ยังไม่ปลดล็อก</span>
+                        <button onclick="launchGame(2)" class="text-xs font-semibold bg-[#111827] text-white px-4 py-2 rounded-full hover:bg-[#C5A880] transition flex items-center gap-1">เล่นเกม <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-slate-200/60 rounded-3xl p-6 hover:shadow-xl transition-all group flex flex-col justify-between transform hover:-translate-y-1">
+                    <div>
+                        <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-2xl border border-blue-100 mb-4 group-hover:scale-110 transition-transform">🏃</div>
+                        <h3 class="text-xl font-bold text-[#111827] mb-2 font-serif-greek">3. วิ่งตอบปัญหา 4 มุม</h3>
+                        <p class="text-xs text-slate-500 font-light leading-relaxed mb-4">ควบคุมอวตารนักวิ่งให้วิ่งไปยังมุมห้องเรียน A, B, C, D ที่ถูกต้องตามคำถามให้ครบ 10 ข้อ</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <span id="badge-game3" class="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-100 text-slate-500">ยังไม่ปลดล็อก</span>
+                        <button onclick="launchGame(3)" class="text-xs font-semibold bg-[#111827] text-white px-4 py-2 rounded-full hover:bg-[#C5A880] transition flex items-center gap-1">เล่นเกม <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-slate-200/60 rounded-3xl p-6 hover:shadow-xl transition-all group flex flex-col justify-between transform hover:-translate-y-1">
+                    <div>
+                        <div class="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center text-2xl border border-indigo-100 mb-4 group-hover:scale-110 transition-transform">🧩</div>
+                        <h3 class="text-xl font-bold text-[#111827] mb-2 font-serif-greek">4. ต่อจิ๊กซอว์วิหารพาร์เธนอน</h3>
+                        <p class="text-xs text-slate-500 font-light leading-relaxed mb-4">ตอบคำถามสถาปัตยกรรมและสงครามกรีก 10 ข้อ เพื่อปลดล็อกชิ้นส่วนภาพวิหารอันงดงาม</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <span id="badge-game4" class="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-100 text-slate-500">ยังไม่ปลดล็อก</span>
+                        <button onclick="launchGame(4)" class="text-xs font-semibold bg-[#111827] text-white px-4 py-2 rounded-full hover:bg-[#C5A880] transition flex items-center gap-1">เล่นเกม <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-slate-200/60 rounded-3xl p-6 hover:shadow-xl transition-all group flex flex-col justify-between transform hover:-translate-y-1">
+                    <div>
+                        <div class="w-12 h-12 bg-rose-50 rounded-2xl flex items-center justify-center text-2xl border border-rose-100 mb-4 group-hover:scale-110 transition-transform">💰</div>
+                        <h3 class="text-xl font-bold text-[#111827] mb-2 font-serif-greek">5. เศรษฐีแผ่นดินกรีก</h3>
+                        <p class="text-xs text-slate-500 font-light leading-relaxed mb-4">ทอยเต๋าเดินบนกระดาน 11 ช่อง ตอบคำถามถูก/ผิด (True/False) เพื่อยึดครอง 4 นครรัฐที่เหยียบ</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <span id="badge-game5" class="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-100 text-slate-500">ยังไม่ปลดล็อก</span>
+                        <button onclick="launchGame(5)" class="text-xs font-semibold bg-[#111827] text-white px-4 py-2 rounded-full hover:bg-[#C5A880] transition flex items-center gap-1">เล่นเกม <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-slate-200/60 rounded-3xl p-6 hover:shadow-xl transition-all group flex flex-col justify-between transform hover:-translate-y-1">
+                    <div>
+                        <div class="w-12 h-12 bg-purple-50 rounded-2xl flex items-center justify-center text-2xl border border-purple-100 mb-4 group-hover:scale-110 transition-transform">🕵️</div>
+                        <h3 class="text-xl font-bold text-[#111827] mb-2 font-serif-greek">6. ล่าสมบัติวิหารลับ</h3>
+                        <p class="text-xs text-slate-500 font-light leading-relaxed mb-4">วิเคราะห์ปริศนาข้อความ 10 ด่าน ค้นหาโบราณวัตถุและกล่องสมบัติให้ตรงตามตำนานเพื่อคว้าชัย</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <span id="badge-game6" class="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-100 text-slate-500">ยังไม่ปลดล็อก</span>
+                        <button onclick="launchGame(6)" class="text-xs font-semibold bg-[#111827] text-white px-4 py-2 rounded-full hover:bg-[#C5A880] transition flex items-center gap-1">เล่นเกม <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="view-gameplay" class="view-section hidden max-w-4xl mx-auto space-y-6 animate-fade-in">
+            <div class="flex justify-between items-center bg-white border border-slate-200/60 px-6 py-4 rounded-2xl shadow-sm">
+                <button onclick="switchView('lobby')" class="text-xs font-semibold text-slate-600 hover:text-[#111827] flex items-center gap-1">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> กลับไปล็อบบี้
+                </button>
+                <h2 id="gameplay-title" class="font-serif-greek font-bold text-lg text-[#111827]">ชื่อเกมการศึกษา</h2>
+                <button id="btn-game-reset" class="text-xs text-[#C5A880] font-semibold hover:underline">เริ่มเกมใหม่</button>
+            </div>
+
+            <div id="game-arena-box" class="bg-white border-2 border-slate-200/80 rounded-3xl p-6 md:p-8 shadow-inner min-h-[480px] flex flex-col justify-center items-center relative overflow-hidden">
+                </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#F7F4EF] border-t border-slate-200/60 py-8 px-6 text-center text-xs text-slate-500 font-light space-y-2">
+        <p class="font-serif-greek tracking-widest text-[#C5A880] font-bold">🏛️ HELLAS PLATFORM — ACADEMIC EDITION</p>
+        <p>© 2026 ออกแบบระบบด้วยเทคนิคชั้นสูงในสไตล์พรีเมียมมินิมอลลิสต์</p>
+    </footer>
+
+    <div id="custom-modal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden transition-opacity duration-300 opacity-0">
+        <div class="bg-white border border-[#C5A880] rounded-3xl p-6 max-w-md w-full shadow-2xl text-center space-y-4 transform scale-95 transition-transform duration-300">
+            <div id="modal-icon" class="text-4xl">✨</div>
+            <h3 id="modal-title" class="font-bold text-xl text-[#111827] font-serif-greek">แจ้งเตือน</h3>
+            <p id="modal-desc" class="text-slate-600 text-sm font-light leading-relaxed">รายละเอียดการแจ้งเตือน</p>
+            <button id="modal-close-btn" class="w-full bg-[#111827] text-white py-3 rounded-full text-sm font-semibold hover:bg-[#C5A880] transition">รับทราบ</button>
+        </div>
+    </div>
+
+    <script>
+        // GLOBAL STATE MANAGEMENT
+        let state = {
+            currentView: 'hero',
+            unlockedBadges: { game1: false, game2: false, game3: false, game4: false, game5: false, game6: false }
+        };
+
+        // VIEW NAVIGATION CONTROLLER
+        function switchView(view) {
+            state.currentView = view;
+            document.querySelectorAll('.view-section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(`view-${view}`).classList.remove('hidden');
+            
+            // Highlight current active states in UI
+            lucide.createIcons();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // STUDY HUB TAB TOGGLE
+        function switchStudyTab(tab) {
+            document.querySelectorAll('.study-content').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('.study-tab-btn').forEach(b => {
+                b.classList.remove('border-[#C5A880]', 'text-[#111827]');
+                b.classList.add('border-transparent', 'text-slate-500');
+            });
+            
+            document.getElementById(`content-${tab}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-${tab}`);
+            activeBtn.classList.add('border-[#C5A880]', 'text-[#111827]');
+            activeBtn.classList.remove('border-transparent', 'text-slate-500');
+        }
+
+        // CUSTOM MODAL ALERTS SYSTEM
+        function showAlert(title, desc, icon = '✨', callback = null) {
+            const modal = document.getElementById('custom-modal');
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal-icon').innerText = icon;
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+                modal.firstElementChild.classList.remove('scale-95');
+            }, 10);
+
+            const closeBtn = document.getElementById('modal-close-btn');
+            closeBtn.onclick = function() {
+                modal.classList.remove('opacity-100');
+                modal.firstElementChild.classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    if(callback) callback();
+                }, 300);
+            };
+        }
+
+        // UPDATE BADGE VISUALS IN LOBBY
+        function updateLobbyBadges() {
+            Object.keys(state.unlockedBadges).forEach(key => {
+                const el = document.getElementById(`badge-${key}`);
+                if (el) {
+                    if (state.unlockedBadges[key]) {
+                        el.innerText = "🏆 สำเร็จแล้ว";
+                        el.classList.remove('bg-slate-100', 'text-slate-500');
+                        el.classList.add('bg-amber-100', 'text-amber-700', 'border', 'border-amber-200');
+                    } else {
+                        el.innerText = "ยังไม่ปลดล็อก";
+                        el.classList.remove('bg-amber-100', 'text-amber-700');
+                        el.classList.add('bg-slate-100', 'text-slate-500');
+                    }
+                }
+            });
+        }
+
+        // =========================================================================
+        // DATA BANK & CORE IMPLEMENTATION FOR THE 6 MINIGAMES
+        // =========================================================================
+        
+        // --- GAME 1: 3D DICE QUIZ ---
+        const g1Data = [
+            { q: "คณิตศาสตร์: พีทาโกรัส นักคณิตศาสตร์กรีก คิดค้นทฤษฎีบทเกี่ยวกับรูปสามเหลี่ยมใด?", a: ["สามเหลี่ยมมุมฉาก", "สามเหลี่ยมด้านเท่า", "สามเหลี่ยมหน้าจั่ว", "สามเหลี่ยมมุมแหลม"], c: 0 },
+            { q: "วิทยาศาสตร์: 'ยูเรก้า!' เป็นคำอุทานของนักปราชญ์กรีกท่านใดเมื่อค้นพบหลักการแทนที่น้ำ?", a: ["อริสโตเติล", "อาร์คิมิดีส", "เพลโต", "โสเครติส"], c: 1 },
+            { q: "ภาษาอังกฤษ: คำศัพท์ภาษาอังกฤษ 'Democracy' (ประชาธิปไตย) มีรากศัพท์มาจากคำกรีกโบราณใด?", a: ["Demos + Kratos", "Monos + Archos", "Oligos + Kratos", "Aristos + Kratos"], c: 0 },
+            { q: "ภาษาไทย: วรรณคดีชุดใดของไทยที่มีโครงเรื่องดัดแปลงหรือได้รับอิทธิพลจากมหากาพย์อีเลียด (Iliad)?", a: ["รามเกียรติ์", "สมุทรโฆษคำฉันท์", "ลิลิตตะเลงพ่าย", "มหาชาติคำหลวง"], c: 0 },
+            { q: "สังคมศึกษา: นครรัฐใดของกรีกโบราณที่ขึ้นชื่อเรื่องการปกครองแบบระบอบประชาธิปไตยโดยตรง?", a: ["สปาร์ตา", "เทบส์", "เอเธนส์", "คอรินธ์"], c: 2 },
+            { q: "ประวัติศาสตร์กรีก: กีฬาโอลิมปิกโบราณจัดขึ้นเป็นครั้งแรกเพื่อบูชาเทพเจ้าองค์ใด?", a: ["เทพซุส", "เทพโพไซดอน", "เทพีอาธีนา", "เทพฮาเดส"], c: 0 },
+            { q: "ประวัติศาสตร์กรีก: มหาสงครามเพโลพอนนีเซียนเป็นการสู้รบระหว่างนครรัฐหลักคู่ใด?", a: ["กรีก ปะทะ เปอร์เซีย", "เอเธนส์ ปะทะ สปาร์ตา", "มาซิโดเนีย ปะทะ โรม", "เทบส์ ปะทะ คอรินธ์"], c: 1 },
+            { q: "ประวัติศาสตร์กรีก: กษัตริย์ผู้ยิ่งใหญ่แห่งมาซิโดเนียผู้แผ่ขยายอารยธรรมกรีกไปยังอียิปต์และเอเชียคือใคร?", a: ["พระเจ้าอเล็กซานดรมหาราช", "พระเจ้าเปริคลีส", "พระเจ้าลีโอนิดัส", "พระเจ้าฟิลิปที่ 2"], c: 0 },
+            { q: "ประวัติศาสตร์กรีก: มหากาพย์อีเลียดและโอดิสซีย์ รจนาโดยกวีตาบอดชื่อดังท่านใด?", a: ["โฮเมอร์", "เฮซิโอด", "ซาฟโฟ", "พินดาร์"], c: 0 },
+            { q: "ประวัติศาสตร์กรีก: แพทย์ชาวกรีกผู้ได้รับการยกย่องว่าเป็น 'บิดาแห่งการแพทย์แผนตะวันตก' คือใคร?", a: ["ฮิปโปเครติส", "กาเลน", "โซลอน", "ธาเลส"], c: 0 }
+        ];
+        let g1CorrectCount = 0;
+        let g1AnsweredIndexes = [];
+        let g1CurrentQuestionIndex = null;
+
+        function initGame1() {
+            g1CorrectCount = 0;
+            g1AnsweredIndexes = [];
+            const box = document.getElementById('game-arena-box');
+            box.innerHTML = `
+                <div class="text-center space-y-6 w-full max-w-md">
+                    <div class="text-sm font-medium text-slate-500">เป้าหมาย: ตอบถูก 5 ข้อเพื่อคว้าเหรียญรางวัลกรีกโบราณ</div>
+                    <div class="flex justify-center items-center h-32">
+                        <div id="dice-3d" class="w-20 h-20 bg-white border-2 border-[#C5A880] text-[#111827] text-3xl font-serif-greek flex items-center justify-center rounded-2xl shadow-md transition-transform">🎲</div>
+                    </div>
+                    <button onclick="rollDiceG1()" id="btn-roll-g1" class="w-full py-3 bg-[#111827] text-white rounded-full font-bold hover:bg-[#C5A880] transition shadow-md">ทอยลูกเต๋าสุ่มคำถาม (1-10)</button>
+                    <div id="g1-status" class="text-sm font-medium text-slate-700">คะแนนปัจจุบัน: 0/5 ข้อ</div>
+                </div>
+            `;
+        }
+
+        function rollDiceG1() {
+            const dice = document.getElementById('dice-3d');
+            dice.classList.add('animate-roll');
+            document.getElementById('btn-roll-g1').disabled = true;
+            
+            setTimeout(() => {
+                dice.classList.remove('animate-roll');
+                
+                // หาข้อที่ยังไม่ได้ตอบ
+                let available = g1Data.map((_, i) => i).filter(i => !g1AnsweredIndexes.includes(i));
+                if (available.length === 0) { g1AnsweredIndexes = []; available = g1Data.map((_, i) => i); }
+                
+                const randIndex = available[Math.floor(Math.random() * available.length)];
+                g1CurrentQuestionIndex = randIndex;
+                const diceValue = randIndex + 1;
+                
+                dice.innerText = diceValue;
+                renderG1Question(randIndex);
+            }, 800);
+        }
+
+        function renderG1Question(idx) {
+            const item = g1Data[idx];
+            const box = document.getElementById('game-arena-box');
+            box.innerHTML = `
+                <div class="w-full max-w-lg space-y-6">
+                    <div class="text-xs font-bold text-[#C5A880] font-serif-greek uppercase tracking-wider">คำถามข้อที่ ${idx + 1} (จากเต๋าหน้า ${idx + 1})</div>
+                    <h3 class="text-lg font-bold text-[#111827]">${item.q}</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        ${item.a.map((opt, oIdx) => `
+                            <button onclick="submitG1Answer(${oIdx})" class="p-4 text-left border border-slate-200 rounded-2xl text-sm hover:border-[#C5A880] hover:bg-[#FDFBF7] transition active:scale-98 font-medium">${opt}</button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function submitG1Answer(choice) {
+            const item = g1Data[g1CurrentQuestionIndex];
+            g1AnsweredIndexes.push(g1CurrentQuestionIndex);
+            
+            if (choice === item.c) {
+                g1CorrectCount++;
+                if (g1CorrectCount >= 5) {
+                    state.unlockedBadges.game1 = true;
+                    updateLobbyBadges();
+                    showAlert("🏆 ชัยชนะอันยิ่งใหญ่!", "คุณตอบคำถามจากลูกเต๋าถูกต้องครบ 5 ข้อ ปลดล็อกตราเกียรติยศเรียบร้อย!", "🏛️", () => { initGame1(); });
+                } else {
+                    showAlert("ถูกต้อง!", "ปัญญาของคุณเฉียบแหลมมาก ลุยด่านต่อไป!", "✅", () => { reloadG1Lobby(); });
+                }
+            } else {
+                showAlert("คำตอบไม่ถูกต้อง", `คำตอบที่ถูกคือ: ${item.a[item.c]}`, "❌", () => { reloadG1Lobby(); });
+            }
+        }
+
+        function reloadG1Lobby() {
+            const box = document.getElementById('game-arena-box');
+            box.innerHTML = `
+                <div class="text-center space-y-6 w-full max-w-md">
+                    <div class="text-sm font-medium text-slate-500">เป้าหมาย: ตอบถูก 5 ข้อเพื่อคว้าเหรียญรางวัลกรีกโบราณ</div>
+                    <div class="flex justify-center items-center h-32">
+                        <div id="dice-3d" class="w-20 h-20 bg-white border-2 border-[#C5A880] text-[#111827] text-3xl font-serif-greek flex items-center justify-center rounded-2xl shadow-md transition-transform">🎲</div>
+                    </div>
+                    <button onclick="rollDiceG1()" id="btn-roll-g1" class="w-full py-3 bg-[#111827] text-white rounded-full font-bold hover:bg-[#C5A880] transition shadow-md">ทอยลูกเต๋าสุ่มคำถามต่อเนื่อง</button>
+                    <div id="g1-status" class="text-sm font-medium text-slate-700">คะแนนปัจจุบัน: ${g1CorrectCount}/5 ข้อ</div>
+                </div>
+            `;
+        }
+
+
+        // --- GAME 2: KNOWLEDGE SNAKE GAME ---
+        const g2Data = [
+            { q: "นักประวัติศาสตร์ชื่อดังชาวกรีกผู้ได้รับฉายา 'บิดาแห่งประวัติศาสตร์โลก' คือใคร?", a: ["เฮโรโดตัส", "ทูซิดิดีส", "โพลีบิอุส", "ซีโนฟอน"], c: 0 },
+            { q: "สงครามกรุงทรอย (Trojan War) เกิดจากการส่งทหารกรีกบุกล้อมเมืองทรอยโดยซ่อนตัวในสิ่งใด?", a: ["ม้าไม้โบราณ", "เรือสำเภา", "อุโมงค์ใต้ดิน", "หอคอยเหล็ก"], c: 0 },
+            { q: "นักปรัชญาธรรมชาติชาวกรีกท่านใดที่เสนอว่า 'น้ำ' คือปฐมธาตุของสรรพสิ่งในจักรวาล?", a: ["ธาเลสแห่งไมลีตุส", "อนักซิแมนเดอร์", "เดโมคริตุส", "เฮราคลิตุส"], c: 0 },
+            { q: "ศาลพยากรณ์เดลฟี (Oracle of Delphi) ที่โด่งดังสร้างขึ้นถวายเทพเจ้าองค์ใดเพื่อทำนายอนาคต?", a: ["เทพอพอลโล", "เทพซุส", "เทพเฮอร์เมส", "เทพดีโอนีซุส"], c: 0 },
+            { q: "สัตว์ประหลาดในตำนานกรีกที่มีหัวเป็นมนุษย์ผู้หญิงและมีผมเป็นฝูงงูพิษคือใคร?", a: ["เมดูซ่า", "ไฮดรา", "คิเมร่า", "สฟิงซ์"], c: 0 },
+            { q: "สถานที่ใจกลางนครรัฐกรีกที่ใช้เป็นตลาดนัดสาธารณะและสภานัดพบปะของพลเมืองเรียกว่าอะไร?", a: ["อะโกรา (Agora)", "อะโครโพลิส", "พาร์เธนอน", "สเตเดียม"], c: 0 },
+            { q: "ยอดเขาศักดิ์สิทธิ์ที่สูงที่สุดในประเทศกรีซ ซึ่งตามตำนานเชื่อว่าเป็นที่สถิตของเทพเจ้าคือภูเขาใด?", a: ["ยอดเขาโอลิมปัส", "ยอดเขาพาร์นาสซัส", "ยอดเขาเอตนา", "ยอดเขาไซนาย"], c: 0 },
+            { q: "นักคณิตศาสตร์ชาวกรีกผู้เขียนตำรา 'Elements' วางรากฐานวิชาเรขาคณิตจนถึงปัจจุบันคือใคร?", a: ["ยูคลิด", "พีทาโกรัส", "อาร์คิมิดีส", "เอราทอสเทนีส"], c: 0 },
+            { q: "กษัตริย์กรีกโบราณแห่งสปาร์ตาผู้นำนักรบ 300 นายต้านกองทัพเปอร์เซียนับแสนที่ช่องเขาเทอร์โมพิลีคือใคร?", a: ["กษัตริย์ลีโอนิดัส", "กษัตริย์อกาเมมนอน", "กษัตริย์เมเนเลอัส", "กษัตริย์เซอร์ซีส"], c: 0 },
+            { q: "เหรียญกษาปณ์โบราณของเอเธนส์มักประทับสัญลักษณ์รูปสัตว์ชนิดใดที่แสดงถึงปัญญาญาณ?", a: ["นกเค้าแมว", "สิงโต", "อินทรี", "งูเก็งกอง"], c: 0 }
+        ];
+        let g2Score = 0;
+        let snake, apple, dx, dy, gameInterval, canvas, ctx;
+        let g2TargetScore = 3;
+        const gridSize = 20;
+
+        function initGame2() {
+            g2Score = 0;
+            clearInterval(gameInterval);
+            const box = document.getElementById('game-arena-box');
+            box.innerHTML = `
+                <div class="flex flex-col items-center space-y-4 w-full">
+                    <div class="text-xs font-semibold text-slate-500 text-center">วิธีเล่น: กดปุ่มลูกศรบนจอหรือคีย์บอร์ดเพื่อเลี้ยว กินแอปเปิ้ล (🍏) เพื่อเปิดคำถามคลังความรู้ ตอบถูก 3 ข้อชนะ!</div>
+                    <div class="bg-slate-900 rounded-2xl p-1 border-4 border-[#C5A880]">
+                        <canvas id="snakeCanvas" width="300" height="240" class="bg-slate-950 block rounded-xl"></canvas>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 w-36 text-center">
+                        <div></div>
+                        <button onclick="moveSnakeMobile('UP')" class="bg-slate-100 hover:bg-slate-200 border p-2 rounded-xl font-bold font-mono">▲</button>
+                        <div></div>
+                        <button onclick="moveSnakeMobile('LEFT')" class="bg-slate-100 hover:bg-slate-200 border p-2 rounded-xl font-bold font-mono">◀</button>
+                        <button onclick="moveSnakeMobile('DOWN')" class="bg-slate-100 hover:bg-slate-200 border p-2 rounded-xl font-bold font-mono">▼</button>
+                        <button onclick="moveSnakeMobile('RIGHT')" class="bg-slate-100 hover:bg-slate-200 border p-2 rounded-xl font-bold font-mono">▶</button>
+                    </div>
+                    <div id="g2-scoreboard" class="text-sm font-bold text-[#111827]">ตอบถูกแล้ว: 0 / 3 ข้อ</div>
+                </div>
+            `;
+            canvas = document.getElementById('snakeCanvas');
+            ctx = canvas.getContext('2d');
+            
+            snake = [{ x: 100, y: 100 }, { x: 80, y: 100 }, { x: 60, y: 100 }];
+            dx = gridSize;
+            dy = 0;
+            spawnApple();
+            
+            document.removeEventListener('keydown', handleSnakeKey);
+            document.addEventListener('keydown', handleSnakeKey);
+            
+            gameInterval = setInterval(updateSnakeFrame, 180);
+        }
+
+        function handleSnakeKey(e) {
+            if (e.key === 'ArrowUp' && dy === 0) { dx = 0; dy = -gridSize; }
+            if (e.key === 'ArrowDown' && dy === 0) { dx = 0; dy = gridSize; }
+            if (e.key === 'ArrowLeft' && dx === 0) { dx = -gridSize; dy = 0; }
+            if (e.key === 'ArrowRight' && dx === 0) { dx = gridSize; dy = 0; }
+        }
+        function moveSnakeMobile(dir) {
+            if (dir === 'UP' && dy === 0) { dx = 0; dy = -gridSize; }
+            if (dir === 'DOWN' && dy === 0) { dx = 0; dy = gridSize; }
+            if (dir === 'LEFT' && dx === 0) { dx = -gridSize; dy = 0; }
+            if (dir === 'RIGHT' && dx === 0) { dx = gridSize; dy = 0; }
+        }
+
+        function spawnApple() {
+            apple = {
+                x: Math.floor(Math.random() * (canvas.width / gridSize)) * gridSize,
+                y: Math.floor(Math.random() * (canvas.height / gridSize)) * gridSize
+            };
+        }
+
+        function updateSnakeFrame() {
+            const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+            
+            // Wall Collision detection
+            if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
+                clearInterval(gameInterval);
+                showAlert("เกมจบลงแล้ว", "งูชนกำแพงวิหาร! ระบบกำลังรีเซ็ตเริ่มเกมใหม่", "🐍", () => { initGame2(); });
+                return;
+            }
+            
+            // Tail collision detection
+            for (let i = 0; i < snake.length; i++) {
+                if (snake[i].x === head.x && snake[i].y === head.y) {
+                    clearInterval(gameInterval);
+                    showAlert("เกมจบลงแล้ว", "งูกินหางตัวเองเสื่อมสลาย! เริ่มใหม่อีกครั้ง", "🐍", () => { initGame2(); });
+                    return;
+                }
+            }
+
+            snake.unshift(head);
+            
+            // Check if apple is eaten
+            if (head.x === apple.x && head.y === apple.y) {
+                clearInterval(gameInterval);
+                triggerSnakeQuiz();
+            } else {
+                snake.pop();
+            }
+            
+            // Rendering Loop
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Draw Apple
+            ctx.fillStyle = '#D4AF37';
+            ctx.beginPath();
+            ctx.arc(apple.x + gridSize/2, apple.y + gridSize/2, gridSize/2 - 2, 0, 2*Math.PI);
+            ctx.fill();
+            // Draw Snake
+            snake.forEach((part, index) => {
+                ctx.fillStyle = index === 0 ? '#C5A880' : '#1E293B';
+                ctx.fillRect(part.x, part.y, gridSize - 1, gridSize - 1);
+            });
+        }
+
+        function triggerSnakeQuiz() {
+            const randIdx = Math.floor(Math.random() * g2Data.length);
+            const item = g2Data[randIdx];
+            
+            const overlay = document.createElement('div');
+            overlay.id = "snake-quiz-modal";
+            overlay.className = "absolute inset-0 bg-white/95 flex flex-col justify-center p-6 space-y-4 animate-fade-in";
+            overlay.innerHTML = `
+                <div class="text-xs font-bold text-emerald-600">🐍 คลังปัญญาแห่งงูวิเศษ</div>
+                <h4 class="font-bold text-sm text-[#111827]">${item.q}</h4>
+                <div class="flex flex-col gap-2">
+                    ${item.a.map((opt, oIdx) => `
+                        <button onclick="submitSnakeQuiz(${oIdx}, ${item.c})" class="p-3 text-left border rounded-xl text-xs hover:border-[#C5A880] hover:bg-[#FDFBF7] transition font-medium">${opt}</button>
+                    `).join('')}
+                </div>
+            `;
+            document.getElementById('game-arena-box').appendChild(overlay);
+        }
+
+        function submitSnakeQuiz(choice, correct) {
+            document.getElementById('snake-quiz-modal').remove();
+            if (choice === correct) {
+                g2Score++;
+                document.getElementById('g2-scoreboard').innerText = `ตอบถูกแล้ว: ${g2Score} / 3 ข้อ`;
+                if (g2Score >= g2TargetScore) {
+                    state.unlockedBadges.game2 = true;
+                    updateLobbyBadges();
+                    showAlert("🏆 สำเร็จภารกิจงูวิเศษ!", "คุณนำพางูเก็บปัญญาตอบถูก 3 ข้อ ยึดครองเหรียญรางวัลสำเร็จ!", "🍏");
+                } else {
+                    showAlert("ถูกต้อง!", "งูได้รับพลังเติบโตต่อไป!", "✅", () => {
+                        spawnApple();
+                        gameInterval = setInterval(updateSnakeFrame, 180);
+                    });
+                }
+            } else {
+                if (snake.length > 2) snake.pop(); // Shrink tail as penalty
+                showAlert("ผิดพลาด", "คำตอบไม่ถูก ตัวงูหดสั้นลง พยายามท้าทายใหม่!", "❌", () => {
+                    spawnApple();
+                    gameInterval = setInterval(updateSnakeFrame, 180);
+                });
+            }
+        }
+
+
+        // --- GAME 3: RUNNING CORNER VIRTUAL GAME ---
+        const g3Data = [
+            { q: "สงครามมาราธอน (Battle of Marathon) เกิดขึ้นจากการต่อสู้ระหว่างฝ่ายกรีกโบราณกับมหาอำนาจใด?", a: ["จักรวรรดิโรมัน", "จักรวรรดิเปอร์เซีย", "อาณาจักรอียิปต์", "เผ่าคาร์เทจ"], c: 1 },
+            { q: "เทพีแห่งชัยชนะของกรีกโบราณ ผู้นำพาความสำเร็จในสนามรบและกีฬาชื่อว่าอะไร?", a: ["ไนกี้ (Nike)", "อโฟรไดท์", "อาร์เทมิส", "เฮรา"], c: 0 },
+            { q: "นักปราชญ์ผู้สร้างทฤษฎีการเมืองว่ามนุษย์โดยธรรมชาติคือ 'สัตว์การเมือง' (Political Animal) คือใคร?", a: ["โสเครติส", "เพลโต", "อริสโตเติล", "ซีโน"], c: 2 },
+            { q: "กลุ่มสตรีนักรบโบราณในตำนานกรีกที่ขึ้นชื่อเรื่องความเหี้ยมหาญและฝีมือยิงธนูคือใคร?", a: ["วาลคิรี", "อเมซอน (Amazons)", "นิมฟ์", "ไซเรน"], c: 1 },
+            { q: "ระบอบการปกครองที่อำนาจสูงสุดอยู่ในมือของกลุ่มชนชั้นสูงหรือคนรวยเพียงไม่กี่คนเรียกว่าระบอบใด?", a: ["ประชาธิปไตย", "คณาธิปไตย (Oligarchy)", "สมบูรณาญาสิทธิราชย์", "ทรราชย์"], c: 1 },
+            { q: "นักประวัติศาสตร์ชื่อเสียงโด่งดังผู้เขียนบันทึกสงครามเพโลพอนนีเซียนอย่างละเอียดคือใคร?", a: ["ทูซิดิดีส", "เฮโรโดตัส", "พลูตาร์ค", "สตราโบ"], c: 0 },
+            { q: "เครื่องดนตรีประเภทเครื่องสายโบราณยอดนิยมของกรีก มักใช้ดีดประกอบบทกวีคือชิ้นใด?", a: ["พิณไลร์ (Lyre)", "ขลุ่ยแพน", "แตรทรัมเป็ต", "กลองเพอร์คัชชัน"], c: 0 },
+            { q: "ชื่อเกาะขนาดใหญ่ทางใต้ของกรีซ เป็นแหล่งกำเนิดอารยธรรมมิโนอัน (Minoan) คือเกาะใด?", a: ["เกาะครีต (Crete)", "เกาะโรดส์", "เกาะซานโตรินี", "เกาะซิซิลี"], c: 0 },
+            { q: "ประติมากรกรีกโบราณระดับปรมาจารย์ ผู้ควบคุมการปั้นรูปเคารพและวิหารพาร์เธนอนคือใคร?", a: ["ฟิเดียส (Phidias)", "ไมรอน", "โพลีคลีตุส", "ปรากซิติลิส"], c: 0 },
+            { q: "เมืองโบราณที่เป็นสถานที่จัดการแข่งขันกีฬาโอลิมปิกเพื่อสันติภาพในยุคกรีกโบราณคือเมืองใด?", a: ["เมืองโอลิมเปีย (Olympia)", "เมืองเอเธนส์", "เมืองสปาร์ตา", "เมืองเดลฟี"], c: 0 }
+        ];
+        let g3Index = 0;
+
+        function initGame3() {
+            g3Index = 0;
+            renderG3Step();
+        }
+
+        function renderG3Step() {
+            if (g3Index >= g3Data.length) {
+                state.unlockedBadges.game3 = true;
+                updateLobbyBadges();
+                showAlert("🏆 แชมป์นักวิ่งทางปัญญา!", "คุณวิ่งตอบปัญหาครบถ้วนทั้ง 10 ข้ออย่างงดงาม ปลดล็อกเหรียญตราเกียรติยศแห่งเอเธนส์!", "🏃");
+                switchView('lobby');
+                return;
+            }
+            const item = g3Data[g3Index];
+            const box = document.getElementById('game-arena-box');
+            box.innerHTML = `
+                <div class="w-full flex flex-col space-y-4 items-center">
+                    <div class="text-xs font-bold text-[#C5A880] font-serif-greek tracking-widest">RUNNING CORNER — ด่านที่ ${g3Index + 1}/10</div>
+                    <div class="bg-amber-50 border border-[#C5A880]/30 px-4 py-2 rounded-xl text-center font-bold text-[#111827] max-w-lg shadow-sm">${item.q}</div>
+                    
+                    <div class="relative w-full max-w-md h-64 bg-[#F7F4EF] border-2 border-dashed border-slate-300 rounded-2xl p-4 grid grid-cols-2 grid-rows-2 gap-4">
+                        <button onclick="submitG3Move(0)" class="border-2 border-slate-200 hover:border-[#C5A880] rounded-xl p-2 text-left bg-white text-xs flex flex-col justify-between transition group">
+                            <span class="font-bold text-[#C5A880] group-hover:scale-110 block">มุม A</span>
+                            <span class="text-slate-600 font-medium">${item.a[0]}</span>
+                        </button>
+                        <button onclick="submitG3Move(1)" class="border-2 border-slate-200 hover:border-[#C5A880] rounded-xl p-2 text-left bg-white text-xs flex flex-col justify-between transition group">
+                            <span class="font-bold text-[#C5A880] group-hover:scale-110 block">มุม B</span>
+                            <span class="text-slate-600 font-medium">${item.a[1]}</span>
+                        </button>
+                        <button onclick="submitG3Move(2)" class="border-2 border-slate-200 hover:border-[#C5A880] rounded-xl p-2 text-left bg-white text-xs flex flex-col justify-between transition group">
+                            <span class="font-bold text-[#C5A880] group-hover:scale-110 block">มุม C</span>
+                            <span class="text-slate-600 font-medium">${item.a[2]}</span>
+                        </button>
+                        <button onclick="submitG3Move(3)" class="border-2 border-slate-200 hover:border-[#C5A880] rounded-xl p-2 text-left bg-white text-xs flex flex-col justify-between transition group">
+                            <span class="font-bold text-[#C5A880] group-hover:scale-110 block">มุม D</span>
+                            <span class="text-slate-600 font-medium">${item.a[3]}</span>
+                        </button>
+                        
+                        <div id="runner-avatar" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#111827] text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shadow-md transition-all duration-500">🏃</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function submitG3Move(cornerIdx) {
+            const avatar = document.getElementById('runner-avatar');
+            // Move avatar to corresponding quadrant visually before showing modal
+            if(cornerIdx === 0) { avatar.style.top = '20%'; avatar.style.left = '20%'; }
+            if(cornerIdx === 1) { avatar.style.top = '20%'; avatar.style.left = '80%'; }
+            if(cornerIdx === 2) { avatar.style.top = '80%'; avatar.style.left = '20%'; }
+            if(cornerIdx === 3) { avatar.style.top = '80%'; avatar.style.left = '80%'; }
+
+            const item = g3Data[g3Index];
+            setTimeout(() => {
+                if (cornerIdx === item.c) {
+                    g3Index++;
+                    showAlert("วิ่งเข้ามุมถูกต้อง!", "คำตอบแม่นยำ เร่งฝีเท้าเข้าสู่โจทย์ถัดไป", "✅", () => { renderG3Step(); });
+                } else {
+                    showAlert("เข้ามุมผิดพลาด", `คำตอบที่ถูกต้องคือมุมที่มีข้อความ: ${item.a[item.c]}`, "❌", () => { renderG3Step(); });
+                }
+            }, 600);
+        }
+
+
+        // --- GAME 4: JIGSAW PILLAR ASSEMBLER ---
+        const g4Data = [
+            { q: "สถาปัตยกรรมหัวเสาแบบเรียบง่าย มั่นคง แข็งแรง และปรากฏบนวิหารพาร์เธนอนคือแบบใด?", a: ["ดอริก", "ไอโอนิก", "คอรินเทียน", "คอมโพสิต"], c: 0 },
+            { q: "สงครามกรีก-เปอร์เซีย ฝ่ายกรีกร่วมใจชนะทัพเรือกษัตริย์เซอร์ซีส ณ ยุทธนาวีอันเลื่องชื่อใด?", a: ["ยุทธนาวีซาลามิส", "ยุทธการมาราธอน", "ยุทธการพลาเทีย", "ยุทธการกอกามีลา"], c: 0 },
+            { q: "ปรัชญาสำนักสโตอิก (Stoicism) ที่สอนให้มนุษย์สงบนิ่งและยอมรับธรรมชาติ ก่อตั้งโดยใคร?", a: ["ซีโนแห่งคิติอุม", "เอปิกิวรุส", "ไดโอจีนีส", "พีร์โร"], c: 0 },
+            { q: "ผู้หญิงชาวสปาร์ตามีสิทธิเสรีภาพเหนือผู้หญิงเอเธนส์ในด้านใดชัดเจนที่สุดในประวัติศาสตร์?", a: ["การถือกรรมสิทธิ์ที่ดินและฝึกกีฬา", "การเป็นทหารแนวหน้าออกศึก", "การออกเสียงเลือกตั้งสภาผู้แทน", "การเป็นนักปราชญ์หลวง"], c: 0 },
+            { q: "ศิลานักปราชญ์หรือผู้ปกครองในอุดมคติที่เพลโตระบุไว้ในหนังสือ The Republic คือใคร?", a: ["ราชาปราชญ์ (Philosopher King)", "ขุนศึกไร้พ่าย", "พ่อค้าผู้ร่ำรวย", "สมณะผู้ทรงศีล"], c: 0 },
+            { q: "อนุสรณ์สถาน 'ประตูปูชนียสถาน' ทางเข้าสู่บริเวณอะโครโพลิสแห่งเอเธนส์เรียกว่าอะไร?", a: ["โพรพิลีอา (Propylaea)", "พาร์เธนอน", "อีเร็กเทียม", "วิหารนิกี"], c: 0 },
+            { q: "สงครามที่มีการปิดล้อมนครรัฐยาวนานและนำไปสู่ความล่มสลายของจักรวรรดิเอเธนส์คือสงครามใด?", a: ["สงครามเพโลพอนนีเซียน", "สงครามเปอร์เซีย", "สงครามคอรินเทียน", "สงครามศักดิ์สิทธิ์"], c: 0 },
+            { q: "ลวดลายม้วนย้อยสองข้างทางซ้ายและขวาของหัวเสาแบบไอโอนิกเรียกว่าอะไร?", a: ["โวลูต (Volute)", "ฟลูตติ้ง", "อาคิเทรฟ", "เมโทป"], c: 0 },
+            { q: "นักเขียนบทละครแนวโศกนาฏกรรม (Tragedy) ผู้ยิ่งใหญ่ผู้ประพันธ์เรื่อง Oedipus Rex คือใคร?", a: ["โซโฟคลีส", "เอสคิลัส", "ยูริพิเดส", "อริสโตฟานีส"], c: 0 },
+            { q: "เทพเจ้ากรีกผู้เป็นเจ้าแห่งยมโลกและดินแดนแห่งความตายหลังความตายคือใคร?", a: ["ฮาเดส (Hades)", "อาเรส", "เฮอร์เมส", "เฮฟเฟสตุส"], c: 0 }
+        ];
+        let g4Index = 0;
+        let g4UnlockedPieces = [];
+
+        function initGame4() {
+            g4Index = 0;
+            g4UnlockedPieces = Array(10).fill(false);
+            renderG4Step();
+        }
+
+        function renderG4Step() {
+            if (g4Index >= g4Data.length) {
+                state.unlockedBadges.game4 = true;
+                updateLobbyBadges();
+                showAlert("🏆 มหาปฏิสังขรณ์วิหาร!", "คุณตอบถูกครบทั้ง 10 ข้อ ปลดล็อกชิ้นส่วนวิหารพาร์เธนอนสีทองทองคำเรียบร้อยสมบูรณ์!", "🧩");
+                switchView('lobby');
+                return;
+            }
+            const item = g4Data[g4Index];
+            const box = document.getElementById('game-arena-box');
+            box.innerHTML = `
+                <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <div class="space-y-4">
+                        <div class="text-xs font-bold text-slate-500 font-serif-greek text-center">ภาพรวมการต่อเสาวิหารพาร์เธนอน (${g4Index}/10 ชิ้น)</div>
+                        <div class="grid grid-cols-5 gap-1.5 p-3 bg-slate-100 rounded-2xl border border-slate-200">
+                            ${g4UnlockedPieces.map((unlocked, i) => `
+                                <div class="aspect-square flex items-center justify-center text-xs font-bold rounded-lg border transition-all ${unlocked ? 'bg-amber-400 border-amber-500 text-white shadow-sm' : 'bg-slate-300 border-slate-400 text-slate-500 line-through'}">
+                                    🏛️
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="h-1 bg-slate-200 rounded-full overflow-hidden">
+                            <div class="bg-[#C5A880] h-full transition-all duration-300" style="width: ${g4Index * 10}%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="text-xs font-serif-greek font-bold text-[#C5A880]">คำถามด่านย่อยที่ ${g4Index + 1}</div>
+                        <h3 class="text-base font-bold text-[#111827] leading-relaxed">${item.q}</h3>
+                        <div class="flex flex-col gap-2">
+                            ${item.a.map((opt, oIdx) => `
+                                <button onclick="submitG4Answer(${oIdx})" class="p-3 text-left border border-slate-200 text-xs rounded-xl hover:bg-[#FDFBF7] hover:border-[#C5A880] transition font-medium">${opt}</button>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function submitG4Answer(choice) {
+            const item = g4Data[g4Index];
+            if (choice === item.c) {
+                g4UnlockedPieces[g4Index] = true;
+                g4Index++;
+                showAlert("วิเคราะห์ถูกต้อง!", "ชิ้นส่วนวิหารถูกสกัดประกอบขึ้นรูปสำเร็จด้วยพาร์ทิเคิลระเบิดแสง!", "✨", () => { renderG4Step(); });
+            } else {
+                showAlert("การวิเคราะห์คลาดเคลื่อน", `คำตอบที่ถูกต้องคือ: ${item.a[item.c]}`, "❌", () => { renderG4Step(); });
+            }
+        }
+
+
+        // --- GAME 5: HELLAS MONOPOLY GRID ---
+        const g5BoardSlots = [
+            { name: "จุดเริ่มต้น", type: "start", desc: "รับพรจากสภาเทพ" },
+            { name: "นครเอเธนส์", type: "city", q: "เอเธนส์ปกครองด้วยระบอบคณาธิปไตยที่มีกษัตริย์นักรบ 2 พระองค์?", choice: ["จริง", "ไม่จริง (ปกครองด้วยประชาธิปไตย)"], c: 1 },
+            { name: "เมืองเดลฟี", type: "city", q: "เดลฟีคือสถานที่ตั้งของวิหารพยากรณ์โบราณแห่งเทพอพอลโล?", choice: ["จริง", "ไม่จริง"], c: 0 },
+            { name: "นครสปาร์ตา", type: "city", q: "สปาร์ตาเน้นระเบียบวินัยทหารและเด็กชายทุกคนเข้าฝึก Agoge ตั้งแต่อายุ 7 ปี?", choice: ["จริง", "ไม่จริง"], c: 0 },
+            { name: "คุกทาร์ทารัส", type: "prison", desc: "ขังลืมตระกูลไททัน" },
+            { name: "เมืองคอรินธ์", type: "city", q: "หัวเสาแบบคอรินเทียนเป็นสถาปัตยกรรมกรีกโบราณที่เรียบง่ายที่สุด?", choice: ["จริง (แบบดอริกเรียบสุด)", "ไม่จริง"], c: 1 },
+            { name: "เกาะครีต", type: "city", q: "เกาะครีตเป็นดินแดนต้นกำเนิดสัตว์ประหลาดครึ่งคนครึ่งวัว มิโนทอร์?", choice: ["จริง", "ไม่จริง"], c: 0 },
+            { name: "นครไมซีนี", type: "city", q: "ไมซีนีคืออารยธรรมนักรบกรีกยุคบรอนซ์ที่บุกถล่มทรอยในมหากาพย์อีเลียด?", choice: ["จริง", "ไม่จริง"], c: 0 },
+            { q: "เมืองธีบส์เป็นเมืองบ้านเกิดตามตำนานของวีรบุรุษจอมพลัง เฮอร์คิวลิส?", choice: ["จริง", "ไม่จริง"], name: "นครธีบส์", type: "city", c: 0 },
+            { name: "เกาะโรดส์", type: "city", q: "เกาะโรดส์ในอดีตมีเทวรูปสัมฤทธิ์ขนาดมหึมา Colossus ซึ่งเป็น 1 ใน 7 สิ่งมหัศจรรย์โลกยุคโบราณ?", choice: ["จริง", "ไม่จริง"], c: 0 },
+            { name: "การ์ดโชคชะตา", type: "luck", desc: "รับโบนัสพลังงานจากเทพเฮอร์เมส" }
+        ];
+        let g5PlayerPos = 0;
+        let g5OwnedCities = [];
+
+        function initGame5() {
+            g5PlayerPos = 0;
+            g5OwnedCities = [];
+            renderG5Board();
+        }
+
+        function renderG5Board() {
+            const box = document.getElementById('game-arena-box');
+            box.innerHTML = `
+                <div class="w-full flex flex-col items-center space-y-6">
+                    <div class="text-xs font-bold text-slate-500 text-center">วิธีชนะ: ทอยเต๋าเดินหมาก และตอบคำถามซื้อนครรัฐให้ครอบครองอย่างน้อย 4 เมือง ปัจจุบันยึดได้: ${g5OwnedCities.length} เมือง</div>
+                    
+                    <div class="grid grid-cols-4 gap-2 w-full max-w-md bg-slate-50 p-3 border border-slate-200 rounded-3xl text-center text-[11px]">
+                        ${g5BoardSlots.map((slot, idx) => {
+                            let bgClass = "bg-white text-[#111827] border border-slate-200";
+                            if (slot.type === 'start') bgClass = "bg-emerald-50 text-emerald-800 font-bold border border-emerald-200";
+                            if (slot.type === 'prison') bgClass = "bg-rose-50 text-rose-800 font-bold border border-rose-200";
+                            if (slot.type === 'luck') bgClass = "bg-sky-50 text-sky-800 border border-sky-200";
+                            if (g5OwnedCities.includes(idx)) bgClass = "bg-amber-100 text-amber-900 font-semibold border-2 border-amber-500";
+                            
+                            const isCurrent = (g5PlayerPos === idx);
+                            return `
+                                <div class="p-2 rounded-xl relative flex flex-col justify-between min-h-[56px] transition-all ${bgClass} ${isCurrent ? 'ring-4 ring-[#111827] scale-102 shadow-md' : ''}">
+                                    <span class="block font-bold">${slot.name}</span>
+                                    ${isCurrent ? '<span class="absolute -top-2 left-1/2 -translate-x-1/2 bg-[#111827] text-white text-[9px] px-1.5 py-0.5 rounded-full animate-bounce">📍 คุณ</span>' : ''}
+                                    <span class="text-[9px] text-slate-400 font-light">${slot.type === 'city' && !g5OwnedCities.includes(idx) ? '🪙 ยึดครองได้' : ''}</span>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+
+                    <button onclick="rollG5Monopoly()" class="w-full max-w-xs py-3.5 bg-[#111827] text-white rounded-full font-bold hover:bg-[#C5A880] transition shadow-md flex items-center justify-center gap-2">
+                        <i data-lucide="dices" class="w-4 h-4"></i> ทอยเต๋าเดินหน้าหมาก
+                    </button>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        function rollG5Monopoly() {
+            const steps = Math.floor(Math.random() * 3) + 1; // สุ่มเดิน 1-3 ก้าว
+            g5PlayerPos = (g5PlayerPos + steps) % g5BoardSlots.length;
+            
+            const slot = g5BoardSlots[g5PlayerPos];
+            setTimeout(() => {
+                if (slot.type === 'city') {
+                    if (g5OwnedCities.includes(g5PlayerPos)) {
+                        showAlert("ผ่านเมืองตัวเอง", `นครรัฐ ${slot.name} นี้เป็นของคุณอยู่แล้ว ปลอดภัย!`, "🏰", () => { renderG5Board(); });
+                    } else {
+                        triggerG5CityQuiz(slot);
+                    }
+                } else if (slot.type === 'prison') {
+                    showAlert("ตกหลุมทาร์ทารัส", "คุกความมืดคุมขัง ทวยเทพช่วยให้รอดพ้นได้ทันทีโดยไม่เสียสิทธิ์", "⛓️", () => { renderG5Board(); });
+                } else if (slot.type === 'luck') {
+                    showAlert("การ์ดโชคดี", "เทพเฮอร์เมสมอบปีกติดรองเท้าให้คุณได้สิทธิ์เดินสำรวจแผ่นดินต่อ", "🕊️", () => { renderG5Board(); });
+                } else {
+                    renderG5Board();
+                }
+            }, 400);
+        }
+
+        function triggerG5CityQuiz(slot) {
+            const box = document.getElementById('game-arena-box');
+            box.innerHTML = `
+                <div class="w-full max-w-md space-y-6">
+                    <div class="text-center space-y-2">
+                        <span class="text-xs font-bold text-[#C5A880] font-serif-greek uppercase tracking-widest block">ภารกิจยึดครองดินแดน</span>
+                        <h3 class="text-xl font-bold text-[#111827]">ยินดีต้อนรับสู่: ${slot.name}</h3>
+                        <p class="text-xs text-slate-500 font-light">ตอบคำถามถูก/ผิดข้อนี้ เพื่อแผ่อิทธิพลเข้ายึดครองสิทธิ์บริหารนครรัฐ</p>
+                    </div>
+                    <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200/50 text-sm font-medium text-slate-800 text-center">${slot.q}</div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="submitG5Quiz(0)" class="py-3 bg-white border border-slate-200 hover:border-emerald-500 rounded-xl text-xs font-bold text-slate-700 transition">1. ${slot.choice[0]}</button>
+                        <button onclick="submitG5Quiz(1)" class="py-3 bg-white border border-slate-200 hover:border-rose-500 rounded-xl text-xs font-bold text-slate-700 transition">2. ${slot.choice[1]}</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function submitG5Quiz(choice) {
+            const slot = g5BoardSlots[g5PlayerPos];
+            if (choice === slot.c) {
+                g5OwnedCities.push(g5PlayerPos);
+                if (g5OwnedCities.length >= 4) {
+                    state.unlockedBadges.game5 = true;
+                    updateLobbyBadges();
+                    showAlert("🏆 เจ้าแห่งจักรวรรดิกรีก!", `คุณบริหารตอบถูกเพื่อยึดครองนครรัฐได้ครบ ${g5OwnedCities.length} หัวเมือง คว้าเหรียญรางวัลเศรษฐีเฮลลัสสำเร็จ!`, "💰");
+                    switchView('lobby');
+                } else {
+                    showAlert("ยึดครองสำเร็จ!", `ยินดีด้วย นครรัฐ ${slot.name} ตกเป็นเขตอิทธิพลปัญญาของคุณแล้ว`, "✅", () => { renderG5Board(); });
+                }
+            } else {
+                showAlert("เจรจาผิดพลาด", "สภาเมืองปฏิเสธข้อเสนอของคุณเนื่องจากข้อมูลไม่ถูกต้อง", "❌", () => { renderG5Board(); });
+            }
+        }
+
+
+        // --- GAME 6: SECRET TEMPLE TREASURE HUNT ---
+        const g6Data = [
+            { r: "ข้าคือราชาผู้ปกครองทัศนียภาพแห่งสวรรค์และสายฟ้า ผู้เป็นประมุขสูงสุดเหนือยอดเขาโอลิมปัส นามของข้าคือใคร?", o: ["เทพโพไซดอน", "เทพฮาเดส", "เทพซุส"], c: 2 },
+            { r: "ข้าเกิดมาจากหน้าผากของมหาเทพซุส สวมชุดเกราะหินอ่อน ถือโล่ห์ปัญญาอุปถัมภ์ศิลปะการสู้รบอันชอบธรรม ข้าคือใคร?", o: ["เทพีอาธีนา", "เทพีอโฟรไดท์", "เทพีเฮรา"], c: 0 },
+            { r: "ข้าคือสิ่งปลูกสร้างสัดส่วนทองคำ เสาหินอ่อนสกัดแบบดอริกตั้งตระหง่านอยู่บนอะโครโพลิสเพื่อถวายบูชาแด่เทพีผู้ครองเมือง ข้าคือสถิตยสถานใด?", o: ["วิหารพาร์เธนอน", "โรงละครเอพิดอรัส", "หอประภาคารฟาโรส"], c: 0 },
+            { r: "ข้าคือปราชญ์ผู้ไม่ยอมจดบันทึกคำสอนใดๆ แต่เลือกคุยท้าทายความคิดผู้คนด้วยคำถาม จนสุดท้ายต้องยอมปลิดชีพด้วยสุราเฮมล็อกพิษ ข้าคือใคร?", o: ["เพลโต", "โสเครติส", "อริสโตเติล"], c: 1 },
+            { r: "ข้าคือผู้แต่งหนังสือ 'อภิรัฐ' (The Republic) ผู้วาดฝันถึงระบอบการปกครองอันชอบธรรมและโลกแห่งแบบที่เป็นจริง ข้าคือใคร?", o: ["เพลโต", "โฮเมอร์", "โซลอน"], c: 0 },
+            { r: "ข้าเป็นสัตว์อสูรในร่างสิงโตทรงพลัง แผงคอเป็นแพะ แต่มีส่วนหางยาวเป็นหัวงูพิษพ่นไฟทำลายล้าง ข้าคืออสูรกายตนใด?", o: ["คิเมร่า (Chimera)", "มินิธอร์", "เซนทอร์"], c: 0 },
+            { r: "ข้าคือวีรบุรุษไร้พ่ายผู้มีจุดอ่อนเพียงแห่งเดียวอยู่ที่บริเวณเอ็นร้อยหวายข้อเท้าหลังจากการจุ่มน้ำแม่น้ำศักดิ์สิทธิ์ ข้าคือใคร?", o: ["เฮอร์คิวลิส", "อคิลลิส (Achilles)", "โอดีซุส"], c: 1 },
+            { r: "ข้าเป็นเสาสถาปัตยกรรมกรีกที่เพรียวบางสง่างาม อ่อนช้อยด้วยลวดลายหัวเสาม้วนย้อยงอคล้ายม้วนกระดาษคัมภีร์ ข้าคือรูปแบบใด?", o: ["ดอริก", "ไอโอนิก", "คอรินเทียน"], c: 1 },
+            { r: "ข้าคือมหากาพย์แห่งสงครามอันยาวนาน 10 ปีเพื่อทวงคืนพระนางเฮเลนและถล่มกรุงทรอยด้วยอุบายม้าไม้ ข้าคือวรรณคดีใด?", o: ["มหากาพย์อีเลียด", "มหากาพย์โอดิสซีย์", "มหากาพย์ธีโอโกนี"], c: 0 },
+            { r: "ข้าคือเทพผู้ควบคุมท้องทะเลกว้างใหญ่ คลื่นยักษ์ และแผ่นดินไหว มือข้าถืออาวุธสามง่ามอันทรงฤทธิ์ ข้าคือใคร?", o: ["เทพอพอลโล", "เทพโพไซดอน", "เทพอาเรส"], c: 1 }
+        ];
+        let g6Stage = 0;
+
+        function initGame6() {
+            g6Stage = 0;
+            renderG6Stage();
+        }
+
+        function renderG6Stage() {
+            if (g6Stage >= g6Data.length) {
+                state.unlockedBadges.game6 = true;
+                updateLobbyBadges();
+                showAlert("🏆 สมบัติเทวสถานโบราณถูกค้นพบ!", "คุณถอดรหัสปริศนาศักดิ์สิทธิ์ครบ 10 ข้อ เจอกล่องมหาสมบัติลับ 'Pantheon Treasure' สีทองอร่าม!", "👑");
+                switchView('lobby');
+                return;
+            }
+            const item = g6Data[g6Stage];
+            const box = document.getElementById('game-arena-box');
+            box.innerHTML = `
+                <div class="w-full max-w-lg space-y-6 text-center">
+                    <div class="text-xs font-bold font-serif-greek text-purple-600 tracking-[0.3em] uppercase">TREASURE HUNT — ห้องลับที่ ${g6Stage + 1}/10</div>
+                    
+                    <div class="bg-[#F7F4EF] border-2 border-double border-[#C5A880]/60 p-6 rounded-2xl shadow-sm italic text-slate-700 leading-relaxed font-light">
+                        "${item.r}"
+                    </div>
+                    
+                    <div class="text-xs text-slate-400">เลือกวิเคราะห์เปิดหีบโบราณวัตถุที่ตรงกับรหัสปริศนาคำใบ้ด้านบน:</div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        ${item.o.map((option, oIdx) => `
+                            <button onclick="submitG6Choice(${oIdx})" class="p-4 bg-white border border-slate-200 hover:border-[#C5A880] rounded-2xl flex flex-col items-center justify-center gap-2 transition active:scale-95 shadow-sm group">
+                                <span class="text-3xl group-hover:scale-110 transition-transform">⚱️</span>
+                                <span class="text-xs font-bold text-slate-800">${option}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function submitG6Choice(choice) {
+            const item = g6Data[g6Stage];
+            if (choice === item.c) {
+                g6Stage++;
+                showAlert("ถอดรหัสสำเร็จ", "กลไกประตูวิหารโบราณเปิดออกเพื่อพาลึกเข้าไปยังห้องถัดไป...", "🗝️", () => { renderG6Stage(); });
+            } else {
+                showAlert("กับดักทำงาน!", "ปริศนาไขไขไม่ถูกต้อง ทวยเทพสลับห้องกลไกท้าทายสติคุณใหม่อีกครั้ง", "⚠️", () => { renderG6Stage(); });
+            }
+        }
+
+
+        // =========================================================================
+        // CORE ROUTER & CONFIGURATIONS LAUNCHER
+        // =========================================================================
+        function launchGame(gameId) {
+            switchView('gameplay');
+            
+            const titles = {
+                1: "🎲 1. เกมลูกเต๋าคำถาม (3D-Simulated Quiz)",
+                2: "🐍 2. งูกินหางความรู้ (Knowledge Snake Game)",
+                3: "🏃 3. วิ่งตอบปัญหา (Running Corner Virtual Game)",
+                4: "🧩 4. เกมต่อจิ๊กซอว์ความรู้ (Parthenon Assembler)",
+                5: "💰 5. เกมเศรษฐีแผ่นดินกรีก (Hellas Monopoly Grid)",
+                6: "🕵️ 6. เกมล่าสมบัติในวิหารลับ (10-Stage Treasure Hunt)"
+            };
+            document.getElementById('gameplay-title').innerText = titles[gameId];
+            
+            // Bind reset button logic dynamically
+            document.getElementById('btn-game-reset').onclick = function() { launchGame(gameId); };
+            
+            // Clear existing game canvas intervals if any
+            clearInterval(gameInterval);
+            document.removeEventListener('keydown', handleSnakeKey);
+            
+            // Switch initialization functions accordingly
+            if (gameId === 1) initGame1();
+            if (gameId === 2) initGame2();
+            if (gameId === 3) initGame3();
+            if (gameId === 4) initGame4();
+            if (gameId === 5) initGame5();
+            if (gameId === 6) initGame6();
+        }
+
+        // INITIAL ONLOAD TRIGGERS
+        window.onload = function() {
+            switchView('hero');
+            switchStudyTab('timeline');
+            updateLobbyBadges();
+        };
+    </script>
+</body>
+</html>
