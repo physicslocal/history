@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เกมบอร์ดอารยธรรมกรีก 🏛️⚡</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ============ GREEK KEY BORDER PATTERN ============ */
+        .greek-border {
+            background-image: 
+                repeating-linear-gradient(90deg, #d4af37 0, #d4af37 10px, transparent 10px, transparent 20px),
+                repeating-linear-gradient(0deg, #d4af37 0, #d4af37 10px, transparent 10px, transparent 20px),
+                repeating-linear-gradient(45deg, transparent 0, transparent 10px, #d4af37 10px, #d4af37 20px),
+                repeating-linear-gradient(-45deg, transparent 0, transparent 10px, #d4af37 10px, #d4af37 20px);
+            background-size: 40px 40px, 40px 40px, 60px 60px, 60px 60px;
+            background-position: 0 0, 0 0, 0 0, 0 0;
+            background-attachment: fixed;
+            border: 4px solid #d4af37;
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        /* ============ BACKGROUND ATHENS ============ */
+        .athens-bg {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(101, 67, 33, 0.15) 0%, transparent 50%);
+            position: relative;
+        }
+
+        /* ============ ZEUS ANIMATION ⚡ ============ */
+        @keyframes zeus-lightning {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            12% { opacity: 0; }
+            15% { opacity: 1; }
+            17% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes zeus-shake {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(-2deg); }
+            50% { transform: translateY(0) rotate(2deg); }
+            75% { transform: translateY(-5px) rotate(-1deg); }
+        }
+
+        .zeus-container {
+            position: relative;
+            display: inline-block;
+            width: 150px;
+            height: 200px;
+            animation: zeus-shake 2s ease-in-out;
+        }
+
+        .zeus-body {
+            font-size: 120px;
+            text-align: center;
+            line-height: 1;
+        }
+
+        .lightning {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 60px;
+            animation: zeus-lightning 2s ease-in-out;
+        }
+
+        /* ============ CONTAINERS & CARDS ============ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .card {
+            background: rgba(26, 26, 46, 0.95);
+            border: 2px solid #d4af37;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: #d4af37;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        /* ============ BUTTONS ============ */
+        button {
+            font-family: 'Sarabun', sans-serif;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border: 2px solid #d4af37;
+            background: transparent;
+            color: #d4af37;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #d4af37;
+            color: #1a1a2e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .button-primary {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, #d4af37, #c9a627);
+            color: #1a1a2e;
+            margin: 0.5rem 0;
+        }
+
+        .button-primary:hover {
+            background: linear-gradient(135deg, #e0c341, #d4af37);
+        }
+
+        /* ============ INPUT FORMS ============ */
+        input[type="text"],
+        select {
+            font-family: 'Sarabun', sans-serif;
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0 1rem 0;
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid #d4af37;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            outline: none;
+            background: rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 16px rgba(212, 175, 55, 0.5);
+        }
+
+        label {
+            display: block;
+            margin-top: 1rem;
+            color: #d4af37;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        /* ============ GAME MENU ============ */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .game-card {
+            background: rgba(212, 175, 55, 0.05);
+            border: 3px solid #d4af37;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .game-card:hover::before {
+            left: 100%;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 32px rgba(212, 175, 55, 0.4);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .game-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .game-card h3 {
+            font-size: 1.5rem;
+            color: #d4af37;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-card p {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ============ GAME BOARD UI ============ */
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(212, 175, 55, 0.05);
+            border: 2px dashed #d4af37;
+            border-radius: 12px;
+        }
+
+        .game-tile {
+            aspect-ratio: 1;
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-tile:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+        }
+
+        .tile-emoji {
+            font-size: 3rem;
+        }
+
+        .tile-text {
+            font-size: 0.85rem;
+            color: #d4af37;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        /* ============ QUIZ POPUP ============ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 3px solid #d4af37;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 16px 48px rgba(212, 175, 55, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal h2 {
+            color: #d4af37;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .modal p {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-option {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Sarabun', sans-serif;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .quiz-option:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+        }
+
+        .quiz-option.correct {
+            background: rgba(76, 175, 80, 0.3);
+            border-color: #4caf50;
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(244, 67, 54, 0.3);
+            border-color: #f44336;
+        }
+
+        /* ============ PLAYER PAWNS ============ */
+        .players-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .player-pawn {
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .pawn-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .player-name {
+            color: #d4af37;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .player-score {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .player-progress {
+            width: 100%;
+            height: 8px;
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 4px;
+            margin-top: 0.8rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #d4af37, #c9a627);
+            transition: width 0.3s ease;
+        }
+
+        /* ============ GAME SPECIFIC ============ */
+        .uno-card {
+            width: 100px;
+            height: 140px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            border: 2px solid #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .uno-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-red { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .card-blue { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .card-yellow { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .card-green { background: linear-gradient(135deg, #27ae60, #229954); }
+
+        .werewolf-info {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #d4af37;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .game-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid #d4af37;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            color: #d4af37;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        /* ============ LEARNING PROGRESSION ============ */
+        .learning-log {
+            background: rgba(212, 175, 55, 0.05);
+            border: 2px dashed #d4af37;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .learning-item {
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #d4af37;
+            border-radius: 4px;
+            color: #ccc;
+        }
+
+        .learning-item.unlocked {
+            border-left-color: #4caf50;
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .learning-emoji {
+            margin-right: 0.5rem;
+        }
+
+        /* ============ DESCRIPTION TOOLTIP ============ */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            border-bottom: 2px dotted #d4af37;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: rgba(0, 0, 0, 0.95);
+            color: #d4af37;
+            text-align: center;
+            border-radius: 8px;
+            padding: 1rem;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 2px solid #d4af37;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-board {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .modal {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body class="athens-bg">
+    <div id="root"></div>
+
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+
+    <script type="text/babel">
+        // ============ GAME STATE MANAGEMENT ============
+        const GameState = {
+            gameTitle: '',
+            players: [],
+            currentGame: null,
+            learningProgress: {
+                'UNO': { learned: [], quizzesPassed: 0 },
+                'Werewolf': { learned: [], quizzesPassed: 0 },
+                'เกมเศรษฐี': { learned: [], quizzesPassed: 0 },
+                'Ticket to Ride': { learned: [], quizzesPassed: 0 }
+            }
+        };
+
+        // ============ LEARNING CONTENT ============
+        const LearningContent = {
+            UNO: {
+                title: 'อูโน่แห่งปวงเทพโอลิมปัส ⚡',
+                description: 'ไพ่สีแทนเทพและนครรัฐกรีก แบบละครทีมไพ่',
+                items: [
+                    { emoji: '🔴', name: 'สปาร์ตา (Sparta)', desc: 'นครรัฐทหารที่มีอำนาจแข็งแกร่ง' },
+                    { emoji: '🔵', name: 'โพไซดอน (Poseidon)', desc: 'เทพเจ้าแห่งทะเล' },
+                    { emoji: '🟡', name: 'อพอลโล (Apollo)', desc: 'เทพเจ้าแห่งแสงแดด ศิลป์ดนตรี' },
+                    { emoji: '🟢', name: 'เอเธนส์ (Athens)', desc: 'นครรัฐประชาธิปไตย' }
+                ]
+            },
+            Werewolf: {
+                title: 'สภาเอเธนส์และสายลับสปาร์ตา 🐺',
+                description: 'เกมสังคมของการหักเงื่อนว่านครรัฐ',
+                items: [
+                    { emoji: '🏛️', name: 'พลเมืองเอเธนส์', desc: 'สมาชิกสภาผู้พิทักษ์นครรัฐ' },
+                    { emoji: '⚔️', name: 'สายลับสปาร์ตา', desc: 'คนร้ายที่ทำให้นครรัฐเสื่อม' },
+                    { emoji: '🔮', name: 'เทพยากรณ์เดลฟี', desc: 'ผู้หยั่งรู้คำพูดของเทพ' }
+                ]
+            },
+            'เกมเศรษฐี': {
+                title: 'มหาอำนาจแห่งทะเลอีเจียน 💰',
+                description: 'ซื้อขายนครรัฐเพื่อสร้างจักรวรรดิทางการค้า',
+                items: [
+                    { emoji: '🫒', name: 'น้ำมันมะกอก', desc: 'สินค้าส่งออกหลักของเอเธนส์' },
+                    { emoji: '🍷', name: 'ไวน์', desc: 'สินค้าค้นหาในเมืองต่างๆ' },
+                    { emoji: '🏺', name: 'เครื่องปั้นดินเผา', desc: 'งานศิลป์และการค้า' }
+                ]
+            },
+            'Ticket to Ride': {
+                title: 'เส้นทางสายไหมทางทะเล 🚢',
+                description: 'สร้างเส้นทางเดินเรือค้าขายข้ามเมดิเตอร์เรเนียน',
+                items: [
+                    { emoji: '🚢', name: 'เดินเรือค้าขาย', desc: 'เชื่อมต่อเมืองต่างๆ' },
+                    { emoji: '🏺', name: 'สินค้าส่งออก', desc: 'แต่ละเมืองมีสินค้าเฉพาะ' },
+                    { emoji: '🗺️', name: 'แผนที่ทะเลเมดิเตอร์เรเนียน', desc: 'เส้นทางทางการค้าของกรีก' }
+                ]
+            }
+        };
+
+        // ============ QUIZ DATA ============
+        const Quizzes = {
+            UNO: [
+                {
+                    question: 'สีแดงในเกมแทนเทพองค์ไหน?',
+                    options: ['สปาร์ตา', 'เอเธนส์', 'โพไซดอน', 'อพอลโล'],
+                    correct: 0,
+                    fact: 'สปาร์ตา คือนครรัฐที่มีชื่อเสียงในด้านการทหารและวัฒนธรรมทหาร'
+                },
+                {
+                    question: 'นครรัฐไหนจึงเป็นหลวงของประชาธิปไตยตรง?',
+                    options: ['สปาร์ตา', 'เอเธนส์', 'คอรินท์', 'ธีบส์'],
+                    correct: 1,
+                    fact: 'เอเธนส์เป็นที่กำเนิดของประชาธิปไตยแบบตรง (Direct Democracy)'
+                }
+            ],
+            Werewolf: [
+                {
+                    question: 'สภาเอเธนส์สร้างขึ้นเพื่อให้ใครตัดสินใจบ้านเมือง?',
+                    options: ['กษัตริย์', 'พลเมืองทั่วไป', 'ทหารเท่านั้น', 'เทพเจ้า'],
+                    correct: 1,
+                    fact: 'สภาประชาชนเอเธนส์ (Ecclesia) มีสมาชิกจากพลเมืองทั่วไป'
+                },
+                {
+                    question: 'เทพยากรณ์เดลฟีประสูติอยู่ที่ไหน?',
+                    options: ['เอเธนส์', 'สปาร์ตา', 'ภูเขาปาร์นาสซัส', 'เกาะครีต'],
+                    correct: 2,
+                    fact: 'เดลฟีอยู่บนภูเขา ถือเป็นสถานที่บริสุทธิ์สำหรับการพบเพ่นพยากรณ์'
+                }
+            ],
+            'เกมเศรษฐี': [
+                {
+                    question: 'เมืองไหนเด่นในการส่งออกน้ำมันมะกอก?',
+                    options: ['เอเธนส์', 'สปาร์ตา', 'คอรินท์', 'ธีบส์'],
+                    correct: 0,
+                    fact: 'เอเธนส์มีเทพธิดา Athena ซึ่งมอบต้นมะกอกให้กับเมือง'
+                },
+                {
+                    question: 'สกุลเงินของกรีกคืออะไร?',
+                    options: ['สตาเตอร์', 'ดรักมา', 'เดนารีอุส', 'สเตอร์ลิง'],
+                    correct: 1,
+                    fact: 'ดรักมา (Drachma) คือสกุลเงินหลักในยุคกรีกโบราณ'
+                }
+            ],
+            'Ticket to Ride': [
+                {
+                    question: 'กรีกค้นหาสินค้าไหนมากที่สุดจากเพื่อนบ้าน?',
+                    options: ['ไวน์', 'เครื่องปั้นดินเผา', 'น้ำมันมะกอก', 'ข้าว'],
+                    correct: 0,
+                    fact: 'ไวน์เป็นสินค้าค้นหาที่สำคัญแม้ว่ากรีกก็ผลิตเองเหมือนกัน'
+                },
+                {
+                    question: 'ทะเล Aegean ถูกล้อมรอบด้วยเมืองไหน?',
+                    options: ['กรีกและทุรกี', 'กรีกและอียิปต์', 'อิตาลีและกรีก', 'ทุรกีและอียิปต์'],
+                    correct: 0,
+                    fact: 'ทะเล Aegean ตั้งอยู่ระหว่างกรีก (ยุโรป) และทุรกี (เอเชีย)'
+                }
+            ]
+        };
+
+        // ============ REACT COMPONENTS ============
+        function HomePage() {
+            const [gameName, setGameName] = React.useState('');
+            const [players, setPlayers] = React.useState(['']);
+
+            const handleAddPlayer = () => {
+                setPlayers([...players, '']);
+            };
+
+            const handlePlayerChange = (index, value) => {
+                const newPlayers = [...players];
+                newPlayers[index] = value;
+                setPlayers(newPlayers);
+            };
+
+            const handleStart = () => {
+                if (gameName.trim() === '' || players.some(p => p.trim() === '')) {
+                    alert('กรุณากรอกชื่อเกมและชื่อผู้เล่นทั้งหมด');
+                    return;
+                }
+                GameState.gameTitle = gameName;
+                GameState.players = players.filter(p => p.trim() !== '');
+                App.setState({ page: 'menu' });
+            };
+
+            return (
+                <div className="container">
+                    <div className="greek-border">
+                        <div className="header">
+                            <h1>🏛️ เกมบอร์ดอารยธรรมกรีก ⚡</h1>
+                            <p>เรียนรู้ประวัติศาสตร์ผ่านการเล่นเกมสนุกๆ</p>
+                        </div>
+
+                        <div className="card">
+                            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                                <div className="zeus-container">
+                                    <div className="zeus-body">⚡🧔‍♂️⚡</div>
+                                    <div className="lightning">⚡</div>
+                                </div>
+                            </div>
+
+                            <label>ชื่อเกมของคุณ 🎲</label>
+                            <input 
+                                type="text" 
+                                placeholder="เช่น เกมสนุกกรีก"
+                                value={gameName}
+                                onChange={(e) => setGameName(e.target.value)}
+                            />
+
+                            <label>ชื่อผู้เล่น 👥</label>
+                            {players.map((player, index) => (
+                                <input 
+                                    key={index}
+                                    type="text" 
+                                    placeholder={`ผู้เล่น ${index + 1}`}
+                                    value={player}
+                                    onChange={(e) => handlePlayerChange(index, e.target.value)}
+                                />
+                            ))}
+                            
+                            <button 
+                                style={{ marginTop: '1rem', color: '#1a1a2e', background: '#d4af37' }}
+                                onClick={handleAddPlayer}
+                            >
+                                ➕ เพิ่มผู้เล่น
+                            </button>
+
+                            <button 
+                                className="button-primary" 
+                                onClick={handleStart}
+                            >
+                                ▶️ เริ่มเกม
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function GameMenu() {
+            const games = [
+                {
+                    id: 'UNO',
+                    name: 'อูโน่แห่งปวงเทพ ⚡',
+                    emoji: '🎴',
+                    desc: 'เกมไพ่ที่สอดแทรกเทพเจ้าและนครรัฐกรีก'
+                },
+                {
+                    id: 'Werewolf',
+                    name: 'สภาเอเธนส์ 🐺',
+                    emoji: '🏛️',
+                    desc: 'เกมสังคมเกี่ยวกับการหักเงื่อนและการหารือ'
+                },
+                {
+                    id: 'เกมเศรษฐี',
+                    name: 'มหาอำนาจแห่งทะเล 💰',
+                    emoji: '🏦',
+                    desc: 'ซื้อขายนครรัฐและสร้างจักรวรรดิการค้า'
+                },
+                {
+                    id: 'Ticket to Ride',
+                    name: 'สายไหมทางทะเล 🚢',
+                    emoji: '🗺️',
+                    desc: 'สร้างเส้นทางเดินเรือค้าขายทั่วทะเลเมดิเตอร์เรเนียน'
+                }
+            ];
+
+            return (
+                <div className="container">
+                    <div className="greek-border">
+                        <div className="header">
+                            <h1>🎮 เลือกเกม</h1>
+                            <p>ยินดีต้อนรับ {GameState.players.join(', ')}</p>
+                        </div>
+
+                        <div className="game-grid">
+                            {games.map(game => (
+                                <div 
+                                    key={game.id}
+                                    className="game-card"
+                                    onClick={() => {
+                                        GameState.currentGame = game.id;
+                                        App.setState({ page: `game-${game.id}` });
+                                    }}
+                                >
+                                    <div className="game-icon">{game.emoji}</div>
+                                    <h3>{game.name}</h3>
+                                    <p>{game.desc}</p>
+                                    <p style={{ marginTop: '1rem', fontSize: '0.8rem', color: '#d4af37' }}>
+                                        📖 {LearningContent[game.id].description}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+                            <button onClick={() => App.setState({ page: 'home' })}>
+                                ← กลับไปหน้าแรก
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function GameBoard({ gameId }) {
+            const [showQuiz, setShowQuiz] = React.useState(false);
+            const [currentQuiz, setCurrentQuiz] = React.useState(0);
+            const [quizAnswered, setQuizAnswered] = React.useState(false);
+            const [selectedAnswer, setSelectedAnswer] = React.useState(null);
+            const [gameScore, setGameScore] = React.useState(0);
+
+            const content = LearningContent[gameId];
+            const quizzes = Quizzes[gameId] || [];
+
+            const handleQuizOption = (index) => {
+                setSelectedAnswer(index);
+                setQuizAnswered(true);
+                
+                if (index === quizzes[currentQuiz].correct) {
+                    setGameScore(gameScore + 10);
+                    GameState.learningProgress[gameId].quizzesPassed++;
+                    GameState.learningProgress[gameId].learned.push(
+                        quizzes[currentQuiz].question
+                    );
+                }
+            };
+
+            const handleNextQuiz = () => {
+                if (currentQuiz < quizzes.length - 1) {
+                    setCurrentQuiz(currentQuiz + 1);
+                    setQuizAnswered(false);
+                    setSelectedAnswer(null);
+                } else {
+                    setShowQuiz(false);
+                }
+            };
+
+            return (
+                <div className="container">
+                    <div className="greek-border">
+                        <div className="header">
+                            <h1>{content.title}</h1>
+                            <p>{content.description}</p>
+                        </div>
+
+                        {/* PLAYER PAWNS */}
+                        <div className="players-container">
+                            {GameState.players.map((player, idx) => (
+                                <div key={idx} className="player-pawn">
+                                    <div className="pawn-icon">
+                                        {['🏛️', '⚔️', '📚', '🎨'][idx % 4]}
+                                    </div>
+                                    <div className="player-name">{player}</div>
+                                    <div className="player-score">คะแนน: {gameScore + idx * 5}</div>
+                                    <div className="player-progress">
+                                        <div 
+                                            className="progress-bar" 
+                                            style={{ width: `${Math.min(gameScore * 10, 100)}%` }}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* GAME SPECIFIC CONTENT */}
+                        {gameId === 'UNO' && <UNOGame />}
+                        {gameId === 'Werewolf' && <WerewolfGame />}
+                        {gameId === 'เกมเศรษฐี' && <MonopolyGame />}
+                        {gameId === 'Ticket to Ride' && <TicketToRideGame />}
+
+                        {/* LEARNING LOG */}
+                        <div className="learning-log">
+                            <h3 style={{ color: '#d4af37', marginBottom: '1rem' }}>
+                                📚 บันทึกการเรียนรู้
+                            </h3>
+                            {content.items.map((item, idx) => (
+                                <div 
+                                    key={idx} 
+                                    className={`learning-item ${
+                                        GameState.learningProgress[gameId].learned.length > idx ? 'unlocked' : ''
+                                    }`}
+                                >
+                                    <span className="learning-emoji">{item.emoji}</span>
+                                    <strong>{item.name}:</strong> {item.desc}
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* ACTION BUTTONS */}
+                        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+                            <button 
+                                onClick={() => setShowQuiz(!showQuiz)}
+                                style={{ marginRight: '1rem' }}
+                            >
+                                🎯 {showQuiz ? 'ปิด' : 'เปิด'}แบบทดสอบ
+                            </button>
+                            <button onClick={() => App.setState({ page: 'menu' })}>
+                                ← กลับไปเมนูเกม
+                            </button>
+                        </div>
+
+                        {/* QUIZ MODAL */}
+                        {showQuiz && quizzes.length > 0 && (
+                            <div className="modal-overlay" onClick={() => setShowQuiz(false)}>
+                                <div className="modal" onClick={(e) => e.stopPropagation()}>
+                                    <h2>🎯 แบบทดสอบ</h2>
+                                    <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
+                                        <strong>คำถาม {currentQuiz + 1}/{quizzes.length}:</strong>
+                                    </p>
+                                    <p>{quizzes[currentQuiz].question}</p>
+                                    
+                                    <div className="quiz-options">
+                                        {quizzes[currentQuiz].options.map((option, idx) => (
+                                            <button 
+                                                key={idx}
+                                                className={`quiz-option ${
+                                                    selectedAnswer === idx ? (
+                                                        idx === quizzes[currentQuiz].correct ? 'correct' : 'incorrect'
+                                                    ) : ''
+                                                }`}
+                                                onClick={() => !quizAnswered && handleQuizOption(idx)}
+                                                disabled={quizAnswered}
+                                            >
+                                                {option}
+                                            </button>
+                                        ))}
+                                    </div>
+
+                                    {quizAnswered && (
+                                        <div style={{ 
+                                            background: selectedAnswer === quizzes[currentQuiz].correct 
+                                                ? 'rgba(76, 175, 80, 0.2)' 
+                                                : 'rgba(244, 67, 54, 0.2)',
+                                            padding: '1rem',
+                                            borderRadius: '8px',
+                                            marginBottom: '1rem',
+                                            borderLeft: `4px solid ${
+                                                selectedAnswer === quizzes[currentQuiz].correct ? '#4caf50' : '#f44336'
+                                            }`
+                                        }}>
+                                            <p>
+                                                {selectedAnswer === quizzes[currentQuiz].correct 
+                                                    ? '✅ ถูกต้อง!' 
+                                                    : '❌ ผิด'
+                                                }
+                                            </p>
+                                            <p style={{ fontSize: '0.95rem', marginTop: '0.5rem' }}>
+                                                💡 {quizzes[currentQuiz].fact}
+                                            </p>
+                                            <button 
+                                                onClick={handleNextQuiz}
+                                                style={{ marginTop: '1rem', width: '100%' }}
+                                            >
+                                                {currentQuiz < quizzes.length - 1 ? '⏭️ คำถามถัดไป' : '✅ จบแบบทดสอบ'}
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        function UNOGame() {
+            const [hand, setHand] = React.useState(['🔴', '🔵', '🟡', '🟢', '🔴']);
+            const [selectedCard, setSelectedCard] = React.useState(null);
+
+            return (
+                <div className="card">
+                    <h3 style={{ color: '#d4af37', marginBottom: '1rem' }}>
+                        🎴 เล่นไพ่ - แมทช์สีตามเทพเจ้า
+                    </h3>
+                    
+                    <div className="tooltip">
+                        <span>🏛️ The Agora</span>
+                        <span className="tooltiptext">หนึ่งในจตุรัสหลักของเอเธนส์ สถานที่รวมตัวของพลเมืองและผู้ค้าขาย</span>
+                    </div>
+                    <div style={{ marginLeft: '2rem', display: 'inline-block' }}>
+                        อูโน่ แข่งขันไพ่ระหว่างเทพเจ้า
+                    </div>
+
+                    <p style={{ color: '#ccc', margin: '1rem 0' }}>
+                        🎮 เลือกไพ่ที่ตรงสีกับเทพเจ้าที่ปรากฏในกระดานเกม
+                    </p>
+
+                    <div style={{ 
+                        background: 'rgba(212, 175, 55, 0.1)',
+                        padding: '2rem',
+                        borderRadius: '8px',
+                        textAlign: 'center',
+                        marginBottom: '2rem'
+                    }}>
+                        <p style={{ color: '#d4af37', marginBottom: '1rem' }}>กระดานเกม (ไพ่ปัจจุบัน)</p>
+                        <div style={{ fontSize: '4rem' }}>🔴</div>
+                        <p style={{ color: '#ccc', marginTop: '0.5rem' }}>สปาร์ตา</p>
+                    </div>
+
+                    <p style={{ color: '#d4af37', marginBottom: '1rem', fontWeight: 600 }}>
+                        ไพ่ในมือของคุณ:
+                    </p>
+
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center' }}>
+                        {hand.map((card, idx) => (
+                            <div
+                                key={idx}
+                                className={`uno-card ${
+                                    card === '🔴' ? 'card-red' :
+                                    card === '🔵' ? 'card-blue' :
+                                    card === '🟡' ? 'card-yellow' : 'card-green'
+                                }`}
+                                onClick={() => setSelectedCard(idx)}
+                                style={{
+                                    border: selectedCard === idx ? '4px solid #fff' : '2px solid #333',
+                                    opacity: card === '🔴' ? 1 : 0.6
+                                }}
+                            >
+                                {card}
+                            </div>
+                        ))}
+                    </div>
+
+                    {selectedCard !== null && (
+                        <div style={{ 
+                            textAlign: 'center', 
+                            marginTop: '2rem',
+                            padding: '1rem',
+                            background: 'rgba(76, 175, 80, 0.2)',
+                            borderRadius: '8px'
+                        }}>
+                            <p style={{ color: '#4caf50', fontWeight: 600 }}>
+                                ✅ เลือกไพ่ {hand[selectedCard]} คุณสามารถเล่นได้!
+                            </p>
+                        </div>
+                    )}
+
+                    <div className="stat-box" style={{ marginTop: '2rem' }}>
+                        <div className="stat-value">{hand.length}</div>
+                        <div className="stat-label">ไพ่เหลือในมือ</div>
+                    </div>
+                </div>
+            );
+        }
+
+        function WerewolfGame() {
+            const [phase, setPhase] = React.useState('day');
+            const [votes, setVotes] = React.useState(0);
+
+            return (
+                <div className="card">
+                    <h3 style={{ color: '#d4af37', marginBottom: '1rem' }}>
+                        🐺 เกมสภาเอเธนส์
+                    </h3>
+
+                    <div className="tooltip">
+                        <span>⚔️ Sparta vs 🏛️ Athens</span>
+                        <span className="tooltiptext">สปาร์ตามีระบบการปกครองแบบโอลิการ์ชี ส่วนเอเธนส์มีระบบประชาธิปไตย</span>
+                    </div>
+
+                    <div style={{ marginTop: '1.5rem' }}>
+                        <div className="werewolf-info">
+                            <strong>⏰ ช่วง {phase === 'day' ? 'กลางวัน 🌞' : 'กลางคืน 🌙'}:</strong>
+                            <p style={{ marginTop: '0.5rem' }}>
+                                {phase === 'day' 
+                                    ? 'สภาประชาชนหารือและโหวตประหารผู้ต้องสงสัย' 
+                                    : 'สายลับสปาร์ตาเลือกกำจัดผู้เล่นคนหนึ่ง'
+                                }
+                            </p>
+                        </div>
+
+                        <div style={{ 
+                            display: 'grid', 
+                            gridTemplateColumns: '1fr 1fr',
+                            gap: '1rem',
+                            marginTop: '1.5rem'
+                        }}>
+                            <div className="game-tile">
+                                <div className="tile-emoji">🏛️</div>
+                                <div className="tile-text">พลเมืองเอเธนส์</div>
+                                <div style={{ fontSize: '0.8rem', marginTop: '0.3rem', color: '#ccc' }}>
+                                    ปกป้องนครรัฐ
+                                </div>
+                            </div>
+                            <div className="game-tile">
+                                <div className="tile-emoji">⚔️</div>
+                                <div className="tile-text">สายลับสปาร์ตา</div>
+                                <div style={{ fontSize: '0.8rem', marginTop: '0.3rem', color: '#ccc' }}>
+                                    สร้างความวุ่นวาย
+                                </div>
+                            </div>
+                        </div>
+
+                        <button 
+                            style={{ 
+                                width: '100%',
+                                marginTop: '1.5rem',
+                                background: phase === 'day' ? 'rgba(100, 150, 200, 0.2)' : 'rgba(100, 100, 100, 0.2)'
+                            }}
+                            onClick={() => setPhase(phase === 'day' ? 'night' : 'day')}
+                        >
+                            {phase === 'day' ? '🌙 เข้าสู่กลางคืน' : '🌞 เข้าสู่กลางวัน'}
+                        </button>
+
+                        <div className="game-stats" style={{ marginTop: '1.5rem' }}>
+                            <div className="stat-box">
+                                <div className="stat-value">5</div>
+                                <div className="stat-label">ผู้เล่นทั้งหมด</div>
+                            </div>
+                            <div className="stat-box">
+                                <div className="stat-value">3</div>
+                                <div className="stat-label">พลเมืองเอเธนส์</div>
+                            </div>
+                            <div className="stat-box">
+                                <div className="stat-value">2</div>
+                                <div className="stat-label">สายลับสปาร์ตา</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function MonopolyGame() {
+            const [ownedCities, setOwnedCities] = React.useState(['เอเธนส์']);
+            const [money, setMoney] = React.useState(1500);
+
+            const cities = [
+                { emoji: '🏛️', name: 'เอเธนส์', price: 200, trait: 'ประชาธิปไตย' },
+                { emoji: '⚔️', name: 'สปาร์ตา', price: 200, trait: 'ทหาร' },
+                { emoji: '🌊', name: 'คอรินท์', price: 180, trait: 'ท่าเรือค้าขาย' },
+                { emoji: '📚', name: 'ธีบส์', price: 160, trait: 'ศิลป์' }
+            ];
+
+            const handleBuyCity = (city) => {
+                if (money >= city.price && !ownedCities.includes(city.name)) {
+                    setOwnedCities([...ownedCities, city.name]);
+                    setMoney(money - city.price);
+                }
+            };
+
+            return (
+                <div className="card">
+                    <h3 style={{ color: '#d4af37', marginBottom: '1rem' }}>
+                        💰 มหาอำนาจแห่งทะเลอีเจียน
+                    </h3>
+
+                    <div className="tooltip">
+                        <span>🪙 Drachma (ดรักมา)</span>
+                        <span className="tooltiptext">หน่วยเงินหลักของกรีกโบราณ แบ่งออกเป็น 6 obols</span>
+                    </div>
+
+                    <div style={{ marginTop: '1.5rem' }}>
+                        <div className="game-stats">
+                            <div className="stat-box">
+                                <div className="stat-value">{money}</div>
+                                <div className="stat-label">ดรักมา (💰)</div>
+                            </div>
+                            <div className="stat-box">
+                                <div className="stat-value">{ownedCities.length}</div>
+                                <div className="stat-label">นครรัฐที่เป็นเจ้าของ</div>
+                            </div>
+                            <div className="stat-box">
+                                <div className="stat-value">{ownedCities.length > 1 ? ownedCities.length * 10 : 0}</div>
+                                <div className="stat-label">รายได้ต่อเทิร์น</div>
+                            </div>
+                        </div>
+
+                        <p style={{ color: '#d4af37', marginTop: '2rem', marginBottom: '1rem', fontWeight: 600 }}>
+                            🏘️ นครรัฐที่มีให้ซื้อ:
+                        </p>
+
+                        <div className="game-board" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
+                            {cities.map((city, idx) => (
+                                <div 
+                                    key={idx}
+                                    className="game-tile"
+                                    onClick={() => handleBuyCity(city)}
+                                    style={{
+                                        opacity: ownedCities.includes(city.name) ? 0.5 : 1,
+                                        cursor: ownedCities.includes(city.name) || money < city.price ? 'not-allowed' : 'pointer',
+                                        background: ownedCities.includes(city.name) ? 'rgba(76, 175, 80, 0.2)' : 'rgba(212, 175, 55, 0.1)'
+                                    }}
+                                >
+                                    <div className="tile-emoji">{city.emoji}</div>
+                                    <div className="tile-text">{city.name}</div>
+                                    {ownedCities.includes(city.name) ? (
+                                        <div style={{ fontSize: '0.7rem', color: '#4caf50', marginTop: '0.3rem' }}>✓ เป็นของคุณ</div>
+                                    ) : (
+                                        <div style={{ fontSize: '0.7rem', color: '#d4af37', marginTop: '0.3rem' }}>{city.price} 💰</div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+
+                        <div style={{ 
+                            marginTop: '2rem',
+                            padding: '1rem',
+                            background: 'rgba(212, 175, 55, 0.1)',
+                            borderRadius: '8px'
+                        }}>
+                            <p style={{ color: '#d4af37', fontWeight: 600, marginBottom: '0.5rem' }}>
+                                📖 เกร็ดความรู้:
+                            </p>
+                            <p style={{ fontSize: '0.95rem' }}>
+                                ในสมัยโบราณ เมืองกรีกแต่ละเมืองมีระบบการค้าขายที่แตกต่างกัน เอเธนส์เป็นศูนย์กลางการค้า ส่วนคอรินท์มีท่าเรือสำคัญระหว่างสองทะเล
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function TicketToRideGame() {
+            const [routes, setRoutes] = React.useState([]);
+            const [ships, setShips] = React.useState(10);
+
+            const availableRoutes = [
+                { from: 'เอเธนส์', to: 'คอรินท์', distance: 50, cargo: '🫒 น้ำมันมะกอก' },
+                { from: 'เอเธนส์', to: 'ทรอย', distance: 100, cargo: '🍷 ไวน์' },
+                { from: 'คอรินท์', to: 'ซิซิลี', distance: 80, cargo: '🏺 เครื่องปั้นดินเผา' }
+            ];
+
+            const handleClaimRoute = (route) => {
+                if (ships >= route.distance / 25) {
+                    setRoutes([...routes, route]);
+                    setShips(ships - Math.ceil(route.distance / 25));
+                }
+            };
+
+            return (
+                <div className="card">
+                    <h3 style={{ color: '#d4af37', marginBottom: '1rem' }}>
+                        🚢 สายไหมทางทะเล
+                    </h3>
+
+                    <div className="tooltip">
+                        <span>🗺️ Mediterranean Trade Routes</span>
+                        <span className="tooltiptext">เส้นทางการค้าหลักของชาวกรีกผ่านทะเลเมดิเตอร์เรเนียน</span>
+                    </div>
+
+                    <div style={{ marginTop: '1.5rem' }}>
+                        <div className="game-stats">
+                            <div className="stat-box">
+                                <div className="stat-value">{ships}</div>
+                                <div className="stat-label">เรือเหลือ 🚢</div>
+                            </div>
+                            <div className="stat-box">
+                                <div className="stat-value">{routes.length}</div>
+                                <div className="stat-label">เส้นทางที่สร้าง</div>
+                            </div>
+                            <div className="stat-box">
+                                <div className="stat-value">{routes.length * 10}</div>
+                                <div className="stat-label">คะแนน</div>
+                            </div>
+                        </div>
+
+                        <p style={{ color: '#d4af37', marginTop: '2rem', marginBottom: '1rem', fontWeight: 600 }}>
+                            🛤️ เส้นทางที่สามารถสร้างได้:
+                        </p>
+
+                        {availableRoutes.map((route, idx) => (
+                            <div 
+                                key={idx}
+                                style={{
+                                    background: routes.some(r => r.from === route.from && r.to === route.to) 
+                                        ? 'rgba(76, 175, 80, 0.2)' 
+                                        : 'rgba(212, 175, 55, 0.1)',
+                                    padding: '1rem',
+                                    marginBottom: '1rem',
+                                    borderRadius: '8px',
+                                    border: '2px solid #d4af37',
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center'
+                                }}
+                            >
+                                <div>
+                                    <p style={{ color: '#d4af37', fontWeight: 600, marginBottom: '0.3rem' }}>
+                                        {route.from} → {route.to}
+                                    </p>
+                                    <p style={{ fontSize: '0.9rem', color: '#ccc' }}>
+                                        ระยะ: {route.distance}km | สินค้า: {route.cargo}
+                                    </p>
+                                </div>
+                                <button 
+                                    onClick={() => handleClaimRoute(route)}
+                                    disabled={ships < Math.ceil(route.distance / 25) || routes.some(r => r.from === route.from && r.to === route.to)}
+                                    style={{
+                                        opacity: ships < Math.ceil(route.distance / 25) || routes.some(r => r.from === route.from && r.to === route.to) ? 0.5 : 1,
+                                        cursor: ships < Math.ceil(route.distance / 25) || routes.some(r => r.from === route.from && r.to === route.to) ? 'not-allowed' : 'pointer'
+                                    }}
+                                >
+                                    {routes.some(r => r.from === route.from && r.to === route.to) 
+                                        ? '✓ สร้างแล้ว' 
+                                        : `สร้าง (ต้อง ${Math.ceil(route.distance / 25)} เรือ)`
+                                    }
+                                </button>
+                            </div>
+                        ))}
+
+                        <div style={{ 
+                            marginTop: '2rem',
+                            padding: '1rem',
+                            background: 'rgba(212, 175, 55, 0.1)',
+                            borderRadius: '8px',
+                            borderLeft: '4px solid #d4af37'
+                        }}>
+                            <p style={{ color: '#d4af37', fontWeight: 600, marginBottom: '0.5rem' }}>
+                                📚 สมุดบันทึกการค้า:
+                            </p>
+                            <p style={{ fontSize: '0.95rem', lineHeight: '1.5' }}>
+                                🫒 <strong>เอเธนส์</strong> ผลิตน้ำมันมะกอกมากที่สุด | 
+                                🍷 <strong>ทรอย</strong> มีไวน์ดีเด่น | 
+                                🏺 <strong>คอรินท์</strong> ผลิตเครื่องปั้นดินเผา
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // ============ MAIN APP COMPONENT ============
+        class App extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { page: 'home' };
+                App.setState = this.setState.bind(this);
+            }
+
+            render() {
+                const { page } = this.state;
+
+                return (
+                    <div>
+                        {page === 'home' && <HomePage />}
+                        {page === 'menu' && <GameMenu />}
+                        {page === 'game-UNO' && <GameBoard gameId="UNO" />}
+                        {page === 'game-Werewolf' && <GameBoard gameId="Werewolf" />}
+                        {page === 'game-เกมเศรษฐี' && <GameBoard gameId="เกมเศรษฐี" />}
+                        {page === 'game-Ticket to Ride' && <GameBoard gameId="Ticket to Ride" />}
+                    </div>
+                );
+            }
+        }
+
+        // ============ RENDER APP ============
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+
+</body>
+</html>
