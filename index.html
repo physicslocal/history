@@ -10,39 +10,25 @@
     <style>
         /* ================= CSS: สุนทรียภาพแห่งอีเจียน ================= */
         :root {
-            /* สีกลุ่มใหม่: กระตุ้นการเรียนรู้และสบายตา */
-            --warm-paper: #fdf6e3;        /* สีฐานกระดาษเก่า */
-            --sage-green: #859900;        /* สีเขียวใบไม้ (ช่วยเรื่องสมาธิ) */
-            --terracotta: #cb4b16;        /* สีดินเผา (อ้างอิงเครื่องปั้นดินเผากรีก) */
-            --deep-sea: #073642;          /* สีน้ำเงินเข้มสำหรับข้อความ */
+            --aegean-blue: #005b96;
+            --marble-white: #f4f4f9;
+            --gold-accent: #d4af37;
+            --dark-text: #2c3e50;
         }
 
         body {
             margin: 0;
             padding: 0;
+            /* 1. ใช้ฟอนต์ Sarabun และปรับขนาดให้ใหญ่อ่านง่ายขึ้น */
             font-family: 'Sarabun', sans-serif;
-            color: var(--deep-sea);
-            
-            /* พื้นหลังใหม่: กระดาษหนังโบราณ พร้อมลวดลายจางๆ */
-            background-color: var(--warm-paper);
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(203, 75, 22, 0.05) 0%, transparent 50%),
-                url('https://www.transparenttextures.com/patterns/paven.png'); /* ลวดลายพื้นผิวหิน/กระดาษ */
+            font-size: 18px; 
+            color: var(--dark-text);
+            background-image: linear-gradient(rgba(244, 244, 249, 0.8), rgba(244, 244, 249, 0.9)), 
+                              url('https://images.unsplash.com/photo-1555992828-ca4dbe41d294?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
             background-attachment: fixed;
             min-height: 100vh;
-        }
-
-        /* ปรับสีปุ่มให้กระตุ้นพลังงานบวก */
-        .enter-btn { background-color: var(--sage-green); }
-        .enter-btn:hover { background-color: #6c7a00; }
-        
-        /* ปรับสี Header ให้เป็นโทนดินเผา (Terracotta) */
-        header { background-color: var(--terracotta); }
-        
-        /* การ์ดเกมให้โปร่งใสและนวลตาขึ้น */
-        .game-card {
-            background: rgba(255, 255, 255, 0.8);
-            border-top: 5px solid var(--sage-green);
         }
 
         /* ================= หน้าต่างเข้าสู่ระบบ (Login Screen) ================= */
