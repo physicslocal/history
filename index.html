@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Agora: Greek Civilization Games</title>
+    <title>🏛️ The Agora: Greek Civilization Games</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
         /* ================= CSS: สุนทรียภาพแห่งอีเจียน ================= */
         :root {
@@ -16,12 +19,11 @@
         body {
             margin: 0;
             padding: 0;
-            /* 1. เปลี่ยนฟอนต์ทั้งหมดเป็น สุขุมวิท */
-            font-family: 'Sukhumvit Set', 'Sukhumvit', 'Kanit', sans-serif;
+            /* 1. ใช้ฟอนต์ Sarabun และปรับขนาดให้ใหญ่อ่านง่ายขึ้น */
+            font-family: 'Sarabun', sans-serif;
+            font-size: 18px; 
             color: var(--dark-text);
-            
-            /* 2. เปลี่ยนพื้นหลังเป็นรูปกรีกโบราณ พร้อม Overlay สีขาวโปร่งแสง */
-            background-image: linear-gradient(rgba(244, 244, 249, 0.75), rgba(244, 244, 249, 0.85)), 
+            background-image: linear-gradient(rgba(244, 244, 249, 0.8), rgba(244, 244, 249, 0.9)), 
                               url('https://images.unsplash.com/photo-1555992828-ca4dbe41d294?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
@@ -29,11 +31,84 @@
             min-height: 100vh;
         }
 
-        /* Header Navigation */
+        /* ================= หน้าต่างเข้าสู่ระบบ (Login Screen) ================= */
+        #login-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 40, 70, 0.85); /* สีน้ำเงินเข้มโปร่งแสง */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 400px;
+            width: 90%;
+            border-top: 6px solid var(--gold-accent);
+        }
+
+        .login-box h2 {
+            color: var(--aegean-blue);
+            font-size: 32px;
+            margin-bottom: 20px;
+            margin-top: 0;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-weight: bold;
+            color: var(--dark-text);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            font-family: 'Sarabun', sans-serif;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .input-group input:focus {
+            border-color: var(--aegean-blue);
+            outline: none;
+        }
+
+        .enter-btn {
+            background-color: var(--aegean-blue);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 20px;
+            font-family: 'Sarabun', sans-serif;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .enter-btn:hover { background-color: #004470; }
+
+        /* ================= Header และ Tooltip ================= */
         header {
             background-color: var(--aegean-blue);
             color: white;
-            padding: 20px 40px;
+            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -42,9 +117,9 @@
 
         header h1 {
             margin: 0;
-            font-family: 'Sukhumvit Set', 'Sukhumvit', sans-serif; /* ใช้สุขุมวิทแทนฟอนต์เดิม */
-            letter-spacing: 1px;
+            font-size: 30px;
             color: var(--gold-accent);
+            cursor: pointer; /* ให้รู้ว่ากด/ชี้ได้ */
         }
 
         .stats-bar {
@@ -52,47 +127,85 @@
             gap: 20px;
             font-weight: bold;
             align-items: center;
+            font-size: 20px;
         }
 
-        .drachma { color: var(--gold-accent); }
+        .drachma { color: var(--gold-accent); cursor: pointer; }
 
-        /* Main Grid: Game Selection */
+        /* CSS สำหรับ Tooltip (ทำงานเมื่อ Hover หรือ Focus/Active สำหรับมือถือ) */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: rgba(44, 62, 80, 0.95);
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            top: 130%; /* ให้อยู่ด้านล่างข้อความ */
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 16px;
+            font-weight: normal;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            pointer-events: none; /* ป้องกันไม่ให้ tooltip บังการคลิก */
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            bottom: 100%; /* ลูกศรชี้ขึ้น */
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent rgba(44, 62, 80, 0.95) transparent;
+        }
+
+        /* แสดง Tooltip เมื่อเอาเมาส์ชี้ (PC) หรือกดค้าง/จิ้ม (Mobile) */
+        .tooltip:hover .tooltiptext,
+        .tooltip:active .tooltiptext,
+        .tooltip:focus .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* ================= Main Grid ================= */
         .container {
             max-width: 1200px;
-            margin: 50px auto;
+            margin: 30px auto;
             padding: 0 20px;
             text-align: center;
         }
 
         .container h2 {
-            font-size: 28px;
+            font-size: 32px;
             color: var(--aegean-blue);
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
-        }
-
-        .container p {
-            font-size: 18px;
-            font-weight: bold;
         }
 
         .game-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
-            margin-top: 40px;
+            margin-top: 30px;
         }
 
-        /* Game Cards */
         .game-card {
-            background: rgba(255, 255, 255, 0.95); /* ทำให้การ์ดโปร่งแสงนิดๆ ให้เห็นฉากหลัง */
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
             padding: 30px 20px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             border-top: 5px solid var(--aegean-blue);
-            position: relative;
-            overflow: hidden;
         }
 
         .game-card:hover {
@@ -101,21 +214,11 @@
             border-top: 5px solid var(--gold-accent);
         }
 
-        .game-card h2 {
-            color: var(--aegean-blue);
-            margin-bottom: 10px;
-            font-size: 22px;
-        }
+        .game-card h2 { color: var(--aegean-blue); margin-bottom: 5px; font-size: 26px; }
+        .game-card h3 { font-size: 20px; color: #e67e22; margin-top: 0; }
+        .game-card p { font-size: 18px; color: #555; }
 
-        .game-card h3 {
-            font-size: 16px;
-            color: #e67e22;
-            margin-top: 0;
-        }
-
-        .game-card p { font-size: 15px; color: #555; font-weight: normal; }
-
-        /* Modal: หอสมุดอเล็กซานเดรีย (Shared Codex) */
+        /* ================= Modal หอสมุด ================= */
         .modal {
             display: none; 
             position: fixed;
@@ -134,73 +237,76 @@
             width: 90%;
             text-align: center;
             border: 2px solid var(--gold-accent);
-            box-shadow: 0 0 20px var(--gold-accent);
-            position: relative;
+            font-size: 20px;
         }
 
-        .close-btn {
-            position: absolute;
-            top: 15px; right: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #c0392b;
-        }
-
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #c0392b; }
         button.action-btn {
-            background-color: var(--gold-accent);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            font-family: 'Sukhumvit Set', sans-serif;
-            transition: background 0.3s;
+            background-color: var(--gold-accent); color: white; border: none;
+            padding: 8px 15px; font-size: 18px; border-radius: 5px; cursor: pointer; font-family: 'Sarabun', sans-serif;
         }
-
         button.action-btn:hover { background-color: #b8992e; }
 
     </style>
 </head>
 <body>
 
+    <div id="login-screen">
+        <div class="login-box">
+            <h2>🏺 เข้าสู่ศูนย์รวมเกม</h2>
+            <div class="input-group">
+                <label for="roomName">🎮 ชื่อเกม / ชื่อห้อง (เช่น ห้องเรียน ม.5/1)</label>
+                <input type="text" id="roomName" placeholder="กรอกชื่อเกมหรือห้องเรียน..." autocomplete="off">
+            </div>
+            <div class="input-group">
+                <label for="playerName">👤 ชื่อผู้เล่น</label>
+                <input type="text" id="playerName" placeholder="นามแฝงของคุณ..." autocomplete="off">
+            </div>
+            <button class="enter-btn" onclick="enterGame()">เริ่มการผจญภัย ⛵</button>
+        </div>
+    </div>
+
     <header>
-        <h1>🏛️ The Agora</h1>
+        <h1 class="tooltip" tabindex="0">🏛️ The Agora
+            <span class="tooltiptext">อะกอรา (Agora) คือจัตุรัสศูนย์กลางของนครรัฐกรีกโบราณ ใช้เป็นทั้งตลาดและที่ชุมนุมทางการเมือง 🗣️</span>
+        </h1>
         <div class="stats-bar">
-            <span>ผู้เล่น: อเล็กซานเดอร์</span>
-            <span class="drachma">🪙 ดรักมา: 1,500</span>
-            <button class="action-btn" onclick="openCodex()" style="padding: 8px 15px;">📜 หอสมุดอเล็กซานเดรีย</button>
+            <span>🎮 ห้อง: <span id="displayRoom" style="color:#a8dadc;">ยังไม่ระบุ</span></span>
+            <span>👤 <span id="displayPlayer">ผู้เล่นนิรนาม</span></span>
+            <span class="drachma tooltip" tabindex="0">🪙 1,500
+                <span class="tooltiptext">ดรักมา (Drachma) สกุลเงินโบราณของกรีกที่มีใช้มาตั้งแต่ราวศตวรรษที่ 6 ก่อนคริสตกาล 💰</span>
+            </span>
+            <button class="action-btn" onclick="openCodex()">📜 หอสมุด</button>
         </div>
     </header>
 
     <div class="container">
-        <h2>เลือกเส้นทางแห่งประวัติศาสตร์ของคุณ</h2>
+        <h2>✨ เลือกเส้นทางแห่งประวัติศาสตร์ของคุณ 🧭</h2>
         <p>เริ่มต้นการเรียนรู้อารยธรรมกรีกผ่านการเล่นเกมจำลองสถานการณ์</p>
 
         <div class="game-grid">
             <div class="game-card" onclick="startGame('UNO: Olympus Cards')">
-                <h2>วิหารแห่งโอลิมปัส</h2>
+                <h2>⚡ วิหารโอลิมปัส</h2>
                 <h3>(UNO)</h3>
-                <p>เรียนรู้เหตุการณ์สำคัญและทวยเทพผ่านการแข่งขันไพ่ที่รวดเร็ว</p>
+                <p>เรียนรู้เหตุการณ์สำคัญและทวยเทพผ่านการแข่งขันไพ่ที่รวดเร็ว 🃏</p>
             </div>
             
             <div class="game-card" onclick="startGame('Werewolf: Betrayal at Athens')">
-                <h2>สภาเมืองเอเธนส์</h2>
+                <h2>🏛️ สภาเอเธนส์</h2>
                 <h3>(Werewolf)</h3>
-                <p>สืบสวนและใช้จิตวิทยาในยุคสงครามเพโลพอนนีเซียน</p>
+                <p>จับโกหกและใช้จิตวิทยาในยุคสงครามเพโลพอนนีเซียน 🐺</p>
             </div>
 
             <div class="game-card" onclick="startGame('Monopoly: Hellenic Tycoon')">
-                <h2>ตลาดกลางอะกอรา</h2>
+                <h2>🏺 ตลาดอะกอรา</h2>
                 <h3>(เกมเศรษฐี)</h3>
-                <p>สร้างความมั่งคั่งและบริหารนครรัฐในยุคทอง</p>
+                <p>สร้างความมั่งคั่งและบริหารนครรัฐในยุคทอง 🎲</p>
             </div>
 
             <div class="game-card" onclick="startGame('Ticket to Ride: Routes of Hellas')">
-                <h2>ท่าเรือพิเรอุส</h2>
+                <h2>⚓ ท่าเรือพิเรอุส</h2>
                 <h3>(Ticket to Ride)</h3>
-                <p>วางแผนเส้นทางเดินเรือค้าขายทั่วทะเลอีเจียนและเมดิเตอร์เรเนียน</p>
+                <p>วางแผนเส้นทางเดินเรือค้าขายทั่วทะเลอีเจียน 🚂</p>
             </div>
         </div>
     </div>
@@ -208,35 +314,45 @@
     <div class="modal" id="codexModal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeCodex()">&times;</span>
-            <h2 style="color: var(--aegean-blue);">📜 บันทึกประวัติศาสตร์ที่ปลดล็อกแล้ว</h2>
-            <p id="codexText" style="font-size: 16px;">คุณยังไม่ได้ปลดล็อกความรู้ใหม่ในขณะนี้ ลองเข้าไปเล่นเกมเพื่อค้นหาความลับของอารยธรรมกรีกดูสิ!</p>
+            <h2 style="color: var(--aegean-blue);">📜 บันทึกประวัติศาสตร์</h2>
+            <p id="codexText">คุณยังไม่ได้ปลดล็อกความรู้ใหม่ในขณะนี้ ลองเข้าไปเล่นเกมดูสิ! 🕵️‍♂️</p>
             <hr style="border-top: 1px dashed #ccc; margin: 20px 0;">
-            <p><strong>ความคืบหน้าการเรียนรู้ (Mastery):</strong> 0%</p>
+            <p><strong>ความคืบหน้าการเรียนรู้:</strong> ⭐ 0%</p>
         </div>
     </div>
 
     <script>
+        // ฟังก์ชันเมื่อกดปุ่มเข้าสู่เกมที่หน้า Login
+        function enterGame() {
+            const playerInput = document.getElementById('playerName').value.trim();
+            const roomInput = document.getElementById('roomName').value.trim();
+            
+            // อัปเดตข้อมูลบน Header
+            document.getElementById('displayPlayer').innerText = playerInput !== "" ? playerInput : "ผู้มาเยือน";
+            document.getElementById('displayRoom').innerText = roomInput !== "" ? roomInput : "วิหารจำลอง";
+
+            // ซ่อนหน้าจอ Login พร้อมใส่ Animation เล็กน้อย
+            const loginScreen = document.getElementById('login-screen');
+            loginScreen.style.transition = "opacity 0.5s ease";
+            loginScreen.style.opacity = "0";
+            
+            setTimeout(() => {
+                loginScreen.style.display = "none";
+            }, 500);
+        }
+
+        // ฟังก์ชันจำลองการกดเข้าเกม
         function startGame(gameName) {
-            alert("กำลังเตรียมกระดานสำหรับ " + gameName + "...\n(ในระบบจริงจะเปลี่ยนหน้าต่างไปยังตัวเกม)");
+            alert("เตรียมกระดานสำหรับ " + gameName + "...\n(พร้อมลุยแล้ว! 🚀)");
             document.getElementById('codexText').innerHTML = 
-                "<strong>ความรู้ใหม่ที่ได้รับ:</strong><br><br>อารยธรรมไมโนอัน เป็นอารยธรรมแรกของกรีกที่เลือกตั้งริมฝั่งทะเล (เกาะครีต) ต่างจากอารยธรรมอื่นที่มักตั้งถิ่นฐานใกล้แม่น้ำจืด!";
+                "<strong>ความรู้ใหม่ที่ได้รับ 💡:</strong><br><br>อารยธรรมไมโนอัน เป็นอารยธรรมแรกของกรีกที่เลือกตั้งริมฝั่งทะเล (เกาะครีต) ต่างจากอารยธรรมอื่นที่มักตั้งถิ่นฐานใกล้แม่น้ำจืด!";
         }
 
+        // ระบบ หอสมุด
         const modal = document.getElementById('codexModal');
-
-        function openCodex() {
-            modal.style.display = "flex";
-        }
-
-        function closeCodex() {
-            modal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeCodex();
-            }
-        }
+        function openCodex() { modal.style.display = "flex"; }
+        function closeCodex() { modal.style.display = "none"; }
+        window.onclick = function(event) { if (event.target == modal) closeCodex(); }
     </script>
 </body>
 </html>
