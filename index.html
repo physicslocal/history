@@ -16,10 +16,16 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--marble-white);
+            /* 1. เปลี่ยนฟอนต์ทั้งหมดเป็น สุขุมวิท */
+            font-family: 'Sukhumvit Set', 'Sukhumvit', 'Kanit', sans-serif;
             color: var(--dark-text);
-            background-image: radial-gradient(circle at center, #ffffff 0%, #e0e0eb 100%);
+            
+            /* 2. เปลี่ยนพื้นหลังเป็นรูปกรีกโบราณ พร้อม Overlay สีขาวโปร่งแสง */
+            background-image: linear-gradient(rgba(244, 244, 249, 0.75), rgba(244, 244, 249, 0.85)), 
+                              url('https://images.unsplash.com/photo-1555992828-ca4dbe41d294?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             min-height: 100vh;
         }
 
@@ -36,8 +42,8 @@
 
         header h1 {
             margin: 0;
-            font-family: 'Times New Roman', Times, serif; /* ฟอนต์สไตล์คลาสสิก */
-            letter-spacing: 2px;
+            font-family: 'Sukhumvit Set', 'Sukhumvit', sans-serif; /* ใช้สุขุมวิทแทนฟอนต์เดิม */
+            letter-spacing: 1px;
             color: var(--gold-accent);
         }
 
@@ -45,6 +51,7 @@
             display: flex;
             gap: 20px;
             font-weight: bold;
+            align-items: center;
         }
 
         .drachma { color: var(--gold-accent); }
@@ -57,6 +64,17 @@
             text-align: center;
         }
 
+        .container h2 {
+            font-size: 28px;
+            color: var(--aegean-blue);
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+
+        .container p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
         .game-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -66,10 +84,10 @@
 
         /* Game Cards */
         .game-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95); /* ทำให้การ์ดโปร่งแสงนิดๆ ให้เห็นฉากหลัง */
             border-radius: 15px;
             padding: 30px 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             border-top: 5px solid var(--aegean-blue);
@@ -79,20 +97,27 @@
 
         .game-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,91,150,0.2);
+            box-shadow: 0 15px 30px rgba(0,91,150,0.3);
             border-top: 5px solid var(--gold-accent);
         }
 
         .game-card h2 {
             color: var(--aegean-blue);
             margin-bottom: 10px;
+            font-size: 22px;
         }
 
-        .game-card p { font-size: 14px; color: #7f8c8d; }
+        .game-card h3 {
+            font-size: 16px;
+            color: #e67e22;
+            margin-top: 0;
+        }
+
+        .game-card p { font-size: 15px; color: #555; font-weight: normal; }
 
         /* Modal: หอสมุดอเล็กซานเดรีย (Shared Codex) */
         .modal {
-            display: none; /* ซ่อนไว้เป็นค่าเริ่มต้น */
+            display: none; 
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.7);
@@ -102,7 +127,7 @@
         }
 
         .modal-content {
-            background: #fffaf0; /* สีคล้ายกระดาษเก่า */
+            background: #fffaf0; 
             padding: 40px;
             border-radius: 10px;
             max-width: 600px;
@@ -129,8 +154,8 @@
             font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 20px;
             font-weight: bold;
+            font-family: 'Sukhumvit Set', sans-serif;
             transition: background 0.3s;
         }
 
@@ -145,7 +170,7 @@
         <div class="stats-bar">
             <span>ผู้เล่น: อเล็กซานเดอร์</span>
             <span class="drachma">🪙 ดรักมา: 1,500</span>
-            <button class="action-btn" onclick="openCodex()" style="margin-top: 0; padding: 5px 15px;">📜 หอสมุดอเล็กซานเดรีย</button>
+            <button class="action-btn" onclick="openCodex()" style="padding: 8px 15px;">📜 หอสมุดอเล็กซานเดรีย</button>
         </div>
     </header>
 
@@ -184,22 +209,19 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeCodex()">&times;</span>
             <h2 style="color: var(--aegean-blue);">📜 บันทึกประวัติศาสตร์ที่ปลดล็อกแล้ว</h2>
-            <p id="codexText">คุณยังไม่ได้ปลดล็อกความรู้ใหม่ในขณะนี้ ลองเข้าไปเล่นเกมเพื่อค้นหาความลับของอารยธรรมกรีกดูสิ!</p>
+            <p id="codexText" style="font-size: 16px;">คุณยังไม่ได้ปลดล็อกความรู้ใหม่ในขณะนี้ ลองเข้าไปเล่นเกมเพื่อค้นหาความลับของอารยธรรมกรีกดูสิ!</p>
             <hr style="border-top: 1px dashed #ccc; margin: 20px 0;">
             <p><strong>ความคืบหน้าการเรียนรู้ (Mastery):</strong> 0%</p>
         </div>
     </div>
 
     <script>
-        // ฟังก์ชันจำลองการกดเข้าเกม
         function startGame(gameName) {
             alert("กำลังเตรียมกระดานสำหรับ " + gameName + "...\n(ในระบบจริงจะเปลี่ยนหน้าต่างไปยังตัวเกม)");
-            // ตัวอย่าง: ถ้าผู้เล่นกดเข้าเกม เราจำลองการแจกความรู้เข้าหอสมุด
             document.getElementById('codexText').innerHTML = 
                 "<strong>ความรู้ใหม่ที่ได้รับ:</strong><br><br>อารยธรรมไมโนอัน เป็นอารยธรรมแรกของกรีกที่เลือกตั้งริมฝั่งทะเล (เกาะครีต) ต่างจากอารยธรรมอื่นที่มักตั้งถิ่นฐานใกล้แม่น้ำจืด!";
         }
 
-        // ฟังก์ชันเปิด-ปิด หอสมุด (Shared Codex)
         const modal = document.getElementById('codexModal');
 
         function openCodex() {
@@ -210,7 +232,6 @@
             modal.style.display = "none";
         }
 
-        // ปิด Pop-up เมื่อคลิกพื้นที่ว่างด้านนอก
         window.onclick = function(event) {
             if (event.target == modal) {
                 closeCodex();
