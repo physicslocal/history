@@ -1,1374 +1,930 @@
+```html
 <!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เกมบอร์ดอารยธรรมกรีก 🏛️⚡</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>เกมเศรษฐี อารยธรรมกรีกโบราณ</title>
+    <!-- นำเข้าฟอนต์ TH Sarabun New -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        :root {
+            --primary-blue: #0b3d91;
+            --gold: #d4af37;
+            --light-bg: #f9f6f0;
+            --dark-text: #1a1a1a;
+            --board-bg: #e5e0d8;
+        }
+
         * {
+            box-sizing: border-box;
+            font-family: 'Sarabun', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Sarabun', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #fff;
-            min-height: 100vh;
+            background-color: var(--primary-blue);
+            color: var(--dark-text);
             overflow-x: hidden;
-        }
-
-        /* ============ GREEK KEY BORDER PATTERN ============ */
-        .greek-border {
-            background-image: 
-                repeating-linear-gradient(90deg, #d4af37 0, #d4af37 10px, transparent 10px, transparent 20px),
-                repeating-linear-gradient(0deg, #d4af37 0, #d4af37 10px, transparent 10px, transparent 20px),
-                repeating-linear-gradient(45deg, transparent 0, transparent 10px, #d4af37 10px, #d4af37 20px),
-                repeating-linear-gradient(-45deg, transparent 0, transparent 10px, #d4af37 10px, #d4af37 20px);
-            background-size: 40px 40px, 40px 40px, 60px 60px, 60px 60px;
-            background-position: 0 0, 0 0, 0 0, 0 0;
+            background-image: linear-gradient(rgba(11, 61, 145, 0.9), rgba(11, 61, 145, 0.9)), url('https://placehold.co/1920x1080/0b3d91/ffffff?text=Greek+Pattern');
+            background-size: cover;
             background-attachment: fixed;
-            border: 4px solid #d4af37;
-            padding: 2rem;
-            border-radius: 12px;
         }
 
-        /* ============ BACKGROUND ATHENS ============ */
-        .athens-bg {
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(101, 67, 33, 0.15) 0%, transparent 50%);
-            position: relative;
+        h1, h2, h3 {
+            font-weight: 700;
         }
 
-        /* ============ ZEUS ANIMATION ⚡ ============ */
-        @keyframes zeus-lightning {
-            0% { opacity: 0; }
-            10% { opacity: 1; }
-            12% { opacity: 0; }
-            15% { opacity: 1; }
-            17% { opacity: 0; }
-            100% { opacity: 0; }
-        }
-
-        @keyframes zeus-shake {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-10px) rotate(-2deg); }
-            50% { transform: translateY(0) rotate(2deg); }
-            75% { transform: translateY(-5px) rotate(-1deg); }
-        }
-
-        .zeus-container {
-            position: relative;
-            display: inline-block;
-            width: 150px;
-            height: 200px;
-            animation: zeus-shake 2s ease-in-out;
-        }
-
-        .zeus-body {
-            font-size: 120px;
-            text-align: center;
-            line-height: 1;
-        }
-
-        .lightning {
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 60px;
-            animation: zeus-lightning 2s ease-in-out;
-        }
-
-        /* ============ CONTAINERS & CARDS ============ */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .card {
-            background: rgba(26, 26, 46, 0.95);
-            border: 2px solid #d4af37;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.2);
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            color: #d4af37;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            margin-bottom: 0.5rem;
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            color: #ccc;
-        }
-
-        /* ============ BUTTONS ============ */
-        button {
-            font-family: 'Sarabun', sans-serif;
-            padding: 0.8rem 1.5rem;
-            font-size: 1rem;
-            border: 2px solid #d4af37;
-            background: transparent;
-            color: #d4af37;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        button:hover {
-            background: #d4af37;
-            color: #1a1a2e;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        .button-primary {
-            width: 100%;
-            padding: 1rem;
-            font-size: 1.1rem;
-            background: linear-gradient(135deg, #d4af37, #c9a627);
-            color: #1a1a2e;
-            margin: 0.5rem 0;
-        }
-
-        .button-primary:hover {
-            background: linear-gradient(135deg, #e0c341, #d4af37);
-        }
-
-        /* ============ INPUT FORMS ============ */
-        input[type="text"],
-        select {
-            font-family: 'Sarabun', sans-serif;
-            width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0 1rem 0;
-            background: rgba(212, 175, 55, 0.1);
-            border: 2px solid #d4af37;
-            color: #fff;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        input[type="text"]:focus,
-        select:focus {
-            outline: none;
-            background: rgba(212, 175, 55, 0.2);
-            box-shadow: 0 0 16px rgba(212, 175, 55, 0.5);
-        }
-
-        label {
-            display: block;
-            margin-top: 1rem;
-            color: #d4af37;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        /* ============ GAME MENU ============ */
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .game-card {
-            background: rgba(212, 175, 55, 0.05);
-            border: 3px solid #d4af37;
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .game-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .game-card:hover::before {
-            left: 100%;
-        }
-
-        .game-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 32px rgba(212, 175, 55, 0.4);
-            background: rgba(212, 175, 55, 0.1);
-        }
-
-        .game-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .game-card h3 {
-            font-size: 1.5rem;
-            color: #d4af37;
-            margin-bottom: 0.5rem;
-        }
-
-        .game-card p {
-            color: #ccc;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* ============ GAME BOARD UI ============ */
-        .game-board {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
-            padding: 1.5rem;
-            background: rgba(212, 175, 55, 0.05);
-            border: 2px dashed #d4af37;
-            border-radius: 12px;
-        }
-
-        .game-tile {
-            aspect-ratio: 1;
-            background: rgba(212, 175, 55, 0.1);
-            border: 2px solid #d4af37;
-            border-radius: 8px;
+        /* --- หน้าต่าง Setup เกม --- */
+        #setup-screen {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            min-height: 100vh;
+            background-color: var(--light-bg);
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 100;
         }
 
-        .game-tile:hover {
-            background: rgba(212, 175, 55, 0.2);
-            transform: scale(1.05);
-            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
-        }
-
-        .tile-emoji {
-            font-size: 3rem;
-        }
-
-        .tile-text {
-            font-size: 0.85rem;
-            color: #d4af37;
-            font-weight: 600;
+        .setup-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 4px solid var(--gold);
             text-align: center;
-            margin-top: 0.5rem;
-        }
-
-        /* ============ QUIZ POPUP ============ */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 3px solid #d4af37;
-            border-radius: 12px;
-            padding: 2rem;
-            max-width: 500px;
             width: 90%;
-            box-shadow: 0 16px 48px rgba(212, 175, 55, 0.3);
-            animation: slideUp 0.3s ease;
+            max-width: 600px;
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .setup-box h1 {
+            font-size: 48px;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
         }
 
-        .modal h2 {
-            color: #d4af37;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .modal p {
-            color: #ccc;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .quiz-options {
-            display: grid;
-            gap: 0.8rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .quiz-option {
-            width: 100%;
-            padding: 0.8rem;
-            background: rgba(212, 175, 55, 0.1);
-            border: 2px solid transparent;
-            border-radius: 8px;
-            color: #fff;
-            cursor: pointer;
-            font-family: 'Sarabun', sans-serif;
-            transition: all 0.3s ease;
+        .form-group {
+            margin-bottom: 20px;
             text-align: left;
         }
 
-        .quiz-option:hover {
-            background: rgba(212, 175, 55, 0.2);
-            border-color: #d4af37;
+        .form-group label {
+            font-size: 24px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
         }
 
-        .quiz-option.correct {
-            background: rgba(76, 175, 80, 0.3);
-            border-color: #4caf50;
-        }
-
-        .quiz-option.incorrect {
-            background: rgba(244, 67, 54, 0.3);
-            border-color: #f44336;
-        }
-
-        /* ============ PLAYER PAWNS ============ */
-        .players-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .player-pawn {
-            background: rgba(212, 175, 55, 0.1);
-            border: 2px solid #d4af37;
+        select, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 20px;
+            border: 2px solid #ccc;
             border-radius: 8px;
-            padding: 1rem;
-            text-align: center;
-            position: relative;
         }
 
-        .pawn-icon {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
+        .btn {
+            background-color: var(--gold);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .btn:hover {
+            background-color: #bfa12b;
+            transform: scale(1.05);
+        }
+
+        /* --- หน้าจอเกมหลัก --- */
+        #game-screen {
+            display: none; /* ซ่อนไว้ก่อนจนกว่าจะเริ่มเกม */
+            flex-direction: row;
+            height: 100vh;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* --- แผงผู้เล่น (ด้านซ้าย) --- */
+        #sidebar {
+            width: 300px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border: 3px solid var(--gold);
+            overflow-y: auto;
+        }
+
+        .player-card {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .player-card.active {
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+            transform: scale(1.02);
         }
 
         .player-name {
-            color: #d4af37;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+            font-size: 24px;
+            font-weight: bold;
         }
 
-        .player-score {
-            color: #ccc;
-            font-size: 0.9rem;
+        .player-money {
+            font-size: 22px;
+            color: #2e7d32;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        .player-progress {
+        .player-token-indicator {
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+            border: 2px solid #000;
+        }
+
+        /* แอนิเมชันเงินเด้ง (+ / -) */
+        .float-text {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .float-up {
+            color: #2e7d32;
+            animation: floatUpAnim 2s ease-out forwards;
+        }
+        .float-down {
+            color: #d32f2f;
+            animation: floatDownAnim 2s ease-out forwards;
+        }
+
+        @keyframes floatUpAnim {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-40px); }
+        }
+        @keyframes floatDownAnim {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(40px); }
+        }
+
+        /* --- กระดานเกม --- */
+        #board-container {
+            flex-grow: 1;
+            background: var(--board-bg);
+            border: 5px solid var(--gold);
+            border-radius: 15px;
+            position: relative;
+            display: grid;
+            /* กระดานขนาด 9x9 */
+            grid-template-columns: repeat(9, 1fr);
+            grid-template-rows: repeat(9, 1fr);
+            gap: 2px;
+            background-color: #333;
+            padding: 2px;
+            max-height: calc(100vh - 40px);
+            aspect-ratio: 1 / 1;
+            margin: 0 auto;
+        }
+
+        .cell {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 16px;
+            position: relative;
+            padding: 2px;
+        }
+
+        .cell-header {
             width: 100%;
-            height: 8px;
-            background: rgba(212, 175, 55, 0.2);
-            border-radius: 4px;
-            margin-top: 0.8rem;
-            overflow: hidden;
+            height: 25%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-bottom: 1px solid #333;
         }
 
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #d4af37, #c9a627);
-            transition: width 0.3s ease;
+        /* สีตามโซน (ระดับความยาก) */
+        .color-easy { background-color: #81c784; }
+        .color-medium { background-color: #64b5f6; }
+        .color-hard { background-color: #e57373; }
+        .color-special { background-color: #ffd54f; }
+
+        .cell-content {
+            margin-top: 25%;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 1.2;
+            z-index: 2;
+        }
+        .cell-price {
+            font-size: 16px;
+            color: #555;
+            margin-top: 5px;
         }
 
-        /* ============ GAME SPECIFIC ============ */
-        .uno-card {
-            width: 100px;
-            height: 140px;
-            border-radius: 8px;
+        /* มุมกระดาน */
+        .corner {
+            font-size: 22px;
+            background-color: #e0e0e0;
+        }
+
+        /* --- ตรงกลางกระดาน --- */
+        #board-center {
+            grid-column: 2 / 9;
+            grid-row: 2 / 9;
+            background: url('https://placehold.co/800x800/f9f6f0/e0e0e0?text=Aegean+Sea') center/cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .game-title-center {
+            background: rgba(255,255,255,0.9);
+            padding: 15px 40px;
+            border-radius: 10px;
+            border: 3px solid var(--gold);
+            font-size: 36px;
+            color: var(--primary-blue);
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* กล่องสถานะ (Status / Event Log) */
+        #status-log {
+            background: rgba(255, 255, 255, 0.95);
+            width: 80%;
+            height: 150px;
+            border: 3px solid var(--gold);
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 24px;
+            overflow-y: auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* โมดูลลูกเต๋า มุมขวาล่างของตรงกลางกระดาน */
+        #dice-module {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .dice {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border: 2px solid black;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            border: 2px solid #333;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 0.5rem;
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
         }
 
-        .uno-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-        }
-
-        .card-red { background: linear-gradient(135deg, #e74c3c, #c0392b); }
-        .card-blue { background: linear-gradient(135deg, #3498db, #2980b9); }
-        .card-yellow { background: linear-gradient(135deg, #f39c12, #e67e22); }
-        .card-green { background: linear-gradient(135deg, #27ae60, #229954); }
-
-        .werewolf-info {
-            background: rgba(212, 175, 55, 0.1);
-            border-left: 4px solid #d4af37;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 4px;
-        }
-
-        .game-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .stat-box {
-            background: rgba(212, 175, 55, 0.1);
-            border: 2px solid #d4af37;
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            color: #d4af37;
-            font-weight: 700;
-        }
-
-        .stat-label {
-            color: #ccc;
-            font-size: 0.9rem;
-            margin-top: 0.3rem;
-        }
-
-        /* ============ LEARNING PROGRESSION ============ */
-        .learning-log {
-            background: rgba(212, 175, 55, 0.05);
-            border: 2px dashed #d4af37;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .learning-item {
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            background: rgba(212, 175, 55, 0.1);
-            border-left: 4px solid #d4af37;
-            border-radius: 4px;
-            color: #ccc;
-        }
-
-        .learning-item.unlocked {
-            border-left-color: #4caf50;
-            background: rgba(76, 175, 80, 0.1);
-        }
-
-        .learning-emoji {
-            margin-right: 0.5rem;
-        }
-
-        /* ============ DESCRIPTION TOOLTIP ============ */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: help;
-            border-bottom: 2px dotted #d4af37;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 250px;
-            background-color: rgba(0, 0, 0, 0.95);
-            color: #d4af37;
-            text-align: center;
-            border-radius: 8px;
-            padding: 1rem;
+        /* โทเคนผู้เล่นบนกระดาน */
+        .token {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
             position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -125px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            border: 2px solid #d4af37;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            z-index: 10;
+            transition: all 0.5s ease-in-out;
         }
 
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+        /* จุดบอกเจ้าของที่ดิน */
+        .owner-banner {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 15%;
+            z-index: 5;
         }
 
-        /* ============ RESPONSIVE ============ */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .game-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .game-board {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .modal {
-                width: 95%;
-            }
+        /* --- Modals (Popups) --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
         }
+
+        .modal-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 4px solid var(--gold);
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .modal-box h2 {
+            color: var(--primary-blue);
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .option-btn {
+            background: #f0f0f0;
+            border: 2px solid #ccc;
+            padding: 15px;
+            font-size: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Sarabun', sans-serif;
+        }
+
+        .option-btn:hover {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
+        }
+
+        .modal-controls {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
     </style>
 </head>
-<body class="athens-bg">
-    <div id="root"></div>
+<body>
 
-    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/react.production.min.js"></script>
-    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <!-- หน้าต่างตั้งค่าเกม (Screen 1) -->
+    <div id="setup-screen">
+        <div class="setup-box">
+            <h1>🏛️ เกมเศรษฐี อารยธรรมกรีก</h1>
+            <div class="form-group">
+                <label>จำนวนผู้เล่น (2-4 คน):</label>
+                <select id="player-count" onchange="generatePlayerInputs()">
+                    <option value="2">2 คน</option>
+                    <option value="3">3 คน</option>
+                    <option value="4">4 คน</option>
+                </select>
+            </div>
+            <div id="player-inputs">
+                <!-- ช่องกรอกชื่อจะโผล่มาตรงนี้ -->
+            </div>
+            <button class="btn" onclick="startGame()">เข้าสู่โลกแห่งกรีก <i class="fa-solid fa-play"></i></button>
+        </div>
+    </div>
 
-    <script type="text/babel">
-        // ============ GAME STATE MANAGEMENT ============
-        const GameState = {
-            gameTitle: '',
-            players: [],
-            currentGame: null,
-            learningProgress: {
-                'UNO': { learned: [], quizzesPassed: 0 },
-                'Werewolf': { learned: [], quizzesPassed: 0 },
-                'เกมเศรษฐี': { learned: [], quizzesPassed: 0 },
-                'Ticket to Ride': { learned: [], quizzesPassed: 0 }
-            }
-        };
+    <!-- หน้าจอเกมหลัก (Screen 2) -->
+    <div id="game-screen">
+        <!-- แผงข้อมูลผู้เล่น -->
+        <div id="sidebar">
+            <h2 style="text-align: center; color: var(--primary-blue); border-bottom: 2px solid var(--gold); padding-bottom: 10px;">ข้อมูลผู้เล่น</h2>
+            <div id="players-container">
+                <!-- การ์ดผู้เล่นจะถูกสร้างที่นี่ -->
+            </div>
+        </div>
 
-        // ============ LEARNING CONTENT ============
-        const LearningContent = {
-            UNO: {
-                title: 'อูโน่แห่งปวงเทพโอลิมปัส ⚡',
-                description: 'ไพ่สีแทนเทพและนครรัฐกรีก แบบละครทีมไพ่',
-                items: [
-                    { emoji: '🔴', name: 'สปาร์ตา (Sparta)', desc: 'นครรัฐทหารที่มีอำนาจแข็งแกร่ง' },
-                    { emoji: '🔵', name: 'โพไซดอน (Poseidon)', desc: 'เทพเจ้าแห่งทะเล' },
-                    { emoji: '🟡', name: 'อพอลโล (Apollo)', desc: 'เทพเจ้าแห่งแสงแดด ศิลป์ดนตรี' },
-                    { emoji: '🟢', name: 'เอเธนส์ (Athens)', desc: 'นครรัฐประชาธิปไตย' }
-                ]
-            },
-            Werewolf: {
-                title: 'สภาเอเธนส์และสายลับสปาร์ตา 🐺',
-                description: 'เกมสังคมของการหักเงื่อนว่านครรัฐ',
-                items: [
-                    { emoji: '🏛️', name: 'พลเมืองเอเธนส์', desc: 'สมาชิกสภาผู้พิทักษ์นครรัฐ' },
-                    { emoji: '⚔️', name: 'สายลับสปาร์ตา', desc: 'คนร้ายที่ทำให้นครรัฐเสื่อม' },
-                    { emoji: '🔮', name: 'เทพยากรณ์เดลฟี', desc: 'ผู้หยั่งรู้คำพูดของเทพ' }
-                ]
-            },
-            'เกมเศรษฐี': {
-                title: 'มหาอำนาจแห่งทะเลอีเจียน 💰',
-                description: 'ซื้อขายนครรัฐเพื่อสร้างจักรวรรดิทางการค้า',
-                items: [
-                    { emoji: '🫒', name: 'น้ำมันมะกอก', desc: 'สินค้าส่งออกหลักของเอเธนส์' },
-                    { emoji: '🍷', name: 'ไวน์', desc: 'สินค้าค้นหาในเมืองต่างๆ' },
-                    { emoji: '🏺', name: 'เครื่องปั้นดินเผา', desc: 'งานศิลป์และการค้า' }
-                ]
-            },
-            'Ticket to Ride': {
-                title: 'เส้นทางสายไหมทางทะเล 🚢',
-                description: 'สร้างเส้นทางเดินเรือค้าขายข้ามเมดิเตอร์เรเนียน',
-                items: [
-                    { emoji: '🚢', name: 'เดินเรือค้าขาย', desc: 'เชื่อมต่อเมืองต่างๆ' },
-                    { emoji: '🏺', name: 'สินค้าส่งออก', desc: 'แต่ละเมืองมีสินค้าเฉพาะ' },
-                    { emoji: '🗺️', name: 'แผนที่ทะเลเมดิเตอร์เรเนียน', desc: 'เส้นทางทางการค้าของกรีก' }
-                ]
-            }
-        };
-
-        // ============ QUIZ DATA ============
-        const Quizzes = {
-            UNO: [
-                {
-                    question: 'สีแดงในเกมแทนเทพองค์ไหน?',
-                    options: ['สปาร์ตา', 'เอเธนส์', 'โพไซดอน', 'อพอลโล'],
-                    correct: 0,
-                    fact: 'สปาร์ตา คือนครรัฐที่มีชื่อเสียงในด้านการทหารและวัฒนธรรมทหาร'
-                },
-                {
-                    question: 'นครรัฐไหนจึงเป็นหลวงของประชาธิปไตยตรง?',
-                    options: ['สปาร์ตา', 'เอเธนส์', 'คอรินท์', 'ธีบส์'],
-                    correct: 1,
-                    fact: 'เอเธนส์เป็นที่กำเนิดของประชาธิปไตยแบบตรง (Direct Democracy)'
-                }
-            ],
-            Werewolf: [
-                {
-                    question: 'สภาเอเธนส์สร้างขึ้นเพื่อให้ใครตัดสินใจบ้านเมือง?',
-                    options: ['กษัตริย์', 'พลเมืองทั่วไป', 'ทหารเท่านั้น', 'เทพเจ้า'],
-                    correct: 1,
-                    fact: 'สภาประชาชนเอเธนส์ (Ecclesia) มีสมาชิกจากพลเมืองทั่วไป'
-                },
-                {
-                    question: 'เทพยากรณ์เดลฟีประสูติอยู่ที่ไหน?',
-                    options: ['เอเธนส์', 'สปาร์ตา', 'ภูเขาปาร์นาสซัส', 'เกาะครีต'],
-                    correct: 2,
-                    fact: 'เดลฟีอยู่บนภูเขา ถือเป็นสถานที่บริสุทธิ์สำหรับการพบเพ่นพยากรณ์'
-                }
-            ],
-            'เกมเศรษฐี': [
-                {
-                    question: 'เมืองไหนเด่นในการส่งออกน้ำมันมะกอก?',
-                    options: ['เอเธนส์', 'สปาร์ตา', 'คอรินท์', 'ธีบส์'],
-                    correct: 0,
-                    fact: 'เอเธนส์มีเทพธิดา Athena ซึ่งมอบต้นมะกอกให้กับเมือง'
-                },
-                {
-                    question: 'สกุลเงินของกรีกคืออะไร?',
-                    options: ['สตาเตอร์', 'ดรักมา', 'เดนารีอุส', 'สเตอร์ลิง'],
-                    correct: 1,
-                    fact: 'ดรักมา (Drachma) คือสกุลเงินหลักในยุคกรีกโบราณ'
-                }
-            ],
-            'Ticket to Ride': [
-                {
-                    question: 'กรีกค้นหาสินค้าไหนมากที่สุดจากเพื่อนบ้าน?',
-                    options: ['ไวน์', 'เครื่องปั้นดินเผา', 'น้ำมันมะกอก', 'ข้าว'],
-                    correct: 0,
-                    fact: 'ไวน์เป็นสินค้าค้นหาที่สำคัญแม้ว่ากรีกก็ผลิตเองเหมือนกัน'
-                },
-                {
-                    question: 'ทะเล Aegean ถูกล้อมรอบด้วยเมืองไหน?',
-                    options: ['กรีกและทุรกี', 'กรีกและอียิปต์', 'อิตาลีและกรีก', 'ทุรกีและอียิปต์'],
-                    correct: 0,
-                    fact: 'ทะเล Aegean ตั้งอยู่ระหว่างกรีก (ยุโรป) และทุรกี (เอเชีย)'
-                }
-            ]
-        };
-
-        // ============ REACT COMPONENTS ============
-        function HomePage() {
-            const [gameName, setGameName] = React.useState('');
-            const [players, setPlayers] = React.useState(['']);
-
-            const handleAddPlayer = () => {
-                setPlayers([...players, '']);
-            };
-
-            const handlePlayerChange = (index, value) => {
-                const newPlayers = [...players];
-                newPlayers[index] = value;
-                setPlayers(newPlayers);
-            };
-
-            const handleStart = () => {
-                if (gameName.trim() === '' || players.some(p => p.trim() === '')) {
-                    alert('กรุณากรอกชื่อเกมและชื่อผู้เล่นทั้งหมด');
-                    return;
-                }
-                GameState.gameTitle = gameName;
-                GameState.players = players.filter(p => p.trim() !== '');
-                App.setState({ page: 'menu' });
-            };
-
-            return (
-                <div className="container">
-                    <div className="greek-border">
-                        <div className="header">
-                            <h1>🏛️ เกมบอร์ดอารยธรรมกรีก ⚡</h1>
-                            <p>เรียนรู้ประวัติศาสตร์ผ่านการเล่นเกมสนุกๆ</p>
-                        </div>
-
-                        <div className="card">
-                            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                                <div className="zeus-container">
-                                    <div className="zeus-body">⚡🧔‍♂️⚡</div>
-                                    <div className="lightning">⚡</div>
-                                </div>
-                            </div>
-
-                            <label>ชื่อเกมของคุณ 🎲</label>
-                            <input 
-                                type="text" 
-                                placeholder="เช่น เกมสนุกกรีก"
-                                value={gameName}
-                                onChange={(e) => setGameName(e.target.value)}
-                            />
-
-                            <label>ชื่อผู้เล่น 👥</label>
-                            {players.map((player, index) => (
-                                <input 
-                                    key={index}
-                                    type="text" 
-                                    placeholder={`ผู้เล่น ${index + 1}`}
-                                    value={player}
-                                    onChange={(e) => handlePlayerChange(index, e.target.value)}
-                                />
-                            ))}
-                            
-                            <button 
-                                style={{ marginTop: '1rem', color: '#1a1a2e', background: '#d4af37' }}
-                                onClick={handleAddPlayer}
-                            >
-                                ➕ เพิ่มผู้เล่น
-                            </button>
-
-                            <button 
-                                className="button-primary" 
-                                onClick={handleStart}
-                            >
-                                ▶️ เริ่มเกม
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
-        function GameMenu() {
-            const games = [
-                {
-                    id: 'UNO',
-                    name: 'อูโน่แห่งปวงเทพ ⚡',
-                    emoji: '🎴',
-                    desc: 'เกมไพ่ที่สอดแทรกเทพเจ้าและนครรัฐกรีก'
-                },
-                {
-                    id: 'Werewolf',
-                    name: 'สภาเอเธนส์ 🐺',
-                    emoji: '🏛️',
-                    desc: 'เกมสังคมเกี่ยวกับการหักเงื่อนและการหารือ'
-                },
-                {
-                    id: 'เกมเศรษฐี',
-                    name: 'มหาอำนาจแห่งทะเล 💰',
-                    emoji: '🏦',
-                    desc: 'ซื้อขายนครรัฐและสร้างจักรวรรดิการค้า'
-                },
-                {
-                    id: 'Ticket to Ride',
-                    name: 'สายไหมทางทะเล 🚢',
-                    emoji: '🗺️',
-                    desc: 'สร้างเส้นทางเดินเรือค้าขายทั่วทะเลเมดิเตอร์เรเนียน'
-                }
-            ];
-
-            return (
-                <div className="container">
-                    <div className="greek-border">
-                        <div className="header">
-                            <h1>🎮 เลือกเกม</h1>
-                            <p>ยินดีต้อนรับ {GameState.players.join(', ')}</p>
-                        </div>
-
-                        <div className="game-grid">
-                            {games.map(game => (
-                                <div 
-                                    key={game.id}
-                                    className="game-card"
-                                    onClick={() => {
-                                        GameState.currentGame = game.id;
-                                        App.setState({ page: `game-${game.id}` });
-                                    }}
-                                >
-                                    <div className="game-icon">{game.emoji}</div>
-                                    <h3>{game.name}</h3>
-                                    <p>{game.desc}</p>
-                                    <p style={{ marginTop: '1rem', fontSize: '0.8rem', color: '#d4af37' }}>
-                                        📖 {LearningContent[game.id].description}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-                            <button onClick={() => App.setState({ page: 'home' })}>
-                                ← กลับไปหน้าแรก
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
-        function GameBoard({ gameId }) {
-            const [showQuiz, setShowQuiz] = React.useState(false);
-            const [currentQuiz, setCurrentQuiz] = React.useState(0);
-            const [quizAnswered, setQuizAnswered] = React.useState(false);
-            const [selectedAnswer, setSelectedAnswer] = React.useState(null);
-            const [gameScore, setGameScore] = React.useState(0);
-
-            const content = LearningContent[gameId];
-            const quizzes = Quizzes[gameId] || [];
-
-            const handleQuizOption = (index) => {
-                setSelectedAnswer(index);
-                setQuizAnswered(true);
+        <!-- กระดานเกม -->
+        <div id="board-container">
+            <!-- ช่องกระดาน 32 ช่องจะถูกสร้างด้วย JS -->
+            <div id="board-center">
+                <div class="game-title-center">มหากาพย์กรีกโบราณ</div>
                 
-                if (index === quizzes[currentQuiz].correct) {
-                    setGameScore(gameScore + 10);
-                    GameState.learningProgress[gameId].quizzesPassed++;
-                    GameState.learningProgress[gameId].learned.push(
-                        quizzes[currentQuiz].question
-                    );
-                }
-            };
+                <div id="status-log">
+                    ยินดีต้อนรับสู่ยุคแห่งนครรัฐ! <br>เริ่มเกมได้
+                </div>
 
-            const handleNextQuiz = () => {
-                if (currentQuiz < quizzes.length - 1) {
-                    setCurrentQuiz(currentQuiz + 1);
-                    setQuizAnswered(false);
-                    setSelectedAnswer(null);
+                <div id="dice-module">
+                    <div id="dice-display" class="dice"><i class="fa-solid fa-dice"></i></div>
+                    <button id="btn-roll" class="btn" onclick="rollDice()">ทอยลูกเต๋า</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal คำถาม -->
+    <div id="question-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h2 id="q-title">บททดสอบแห่งปัญญา</h2>
+            <p id="q-text">คำถามจะปรากฏที่นี่</p>
+            <div id="q-options" class="options-grid">
+                <!-- ปุ่มตัวเลือก -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal ซื้อที่ดิน/แจ้งเตือน -->
+    <div id="alert-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h2 id="alert-title">แจ้งเตือน</h2>
+            <p id="alert-text">ข้อความ</p>
+            <div id="alert-controls" class="modal-controls">
+                <button class="btn" onclick="closeAlertModal()">ตกลง</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+    /* ================= ข้อมูลเกมพื้นฐาน ================= */
+    
+    // คลังคำถาม 15 ข้อ พร้อมตัวเลือก (เฉลยคือ index 0, แต่เดี๋ยวจะสับเปลี่ยนตอนแสดง)
+    const questionBank = {
+        easy: [
+            { q: "อารยธรรมใดที่นักโบราณคดีถือว่าเป็น 'อารยธรรมแรก' ที่ยิ่งใหญ่ของกรีก?", options: ["อารยธรรมไมโนอัน", "อารยธรรมไมซีเนียน", "สปาร์ตา", "เอเธนส์"], a: 0 },
+            { q: "การแข่งขันกีฬาที่เริ่มขึ้นเมื่อ 776 ปีก่อนคริสต์ศักราชในกรีก คืออะไร?", options: ["กีฬาโอลิมปิก", "กีฬาพิเธียน", "เนเมียนเกมส์", "อิสเมียนเกมส์"], a: 0 },
+            { q: "อาคารที่ถือเป็นสัญลักษณ์และโด่งดังที่สุดเมื่อพูดถึงอารยธรรมกรีกคืออะไร?", options: ["วิหารพาร์เธนอน", "โคลอสเซียม", "แพนธีออน", "ซิกกูแรต"], a: 0 },
+            { q: "มหากาพย์ชื่อดังที่เขียนขึ้นในยุคถัดจากยุคมืด คือเรื่องอะไร?", options: ["อีเลียด และ โอดีสซี", "กิลกาเมช", "อีเนียด", "มหาภารตะ"], a: 0 },
+            { q: "กษัตริย์ผู้มีชื่อเสียงจากการนำทัพไปรบกับกรุงทรอยในยุคไมซีเนียน คือใคร?", options: ["กษัตริย์อากาเมมนอน", "ลีโอไนดัส", "อเล็กซานเดอร์", "เพริคลีส"], a: 0 }
+        ],
+        medium: [
+            { q: "อารยธรรมไมโนอันมีศูนย์กลางความเจริญอยู่ที่เกาะใด?", options: ["เกาะครีต", "ไซปรัส", "ซิซิลี", "โรดส์"], a: 0 },
+            { q: "เพราะเหตุใดอารยธรรมไมโนอันจึงเชื่อกันว่าล่มสลายลงในทฤษฎีที่น่าเชื่อถือที่สุด?", options: ["ภูเขาไฟระเบิดและสึนามิ", "โรคระบาดครั้งใหญ่", "การรุกรานของเปอร์เซีย", "สงครามกลางเมือง"], a: 0 },
+            { q: "นครรัฐ (City-state) ของกรีกโบราณมีคำเรียกเฉพาะว่าอะไร?", options: ["โพลิส (Polis)", "อะโครโพลิส", "อโกรา", "เดม (Deme)"], a: 0 },
+            { q: "สงครามที่เกิดจากการตกลงกันไม่ได้ระหว่างเอเธนส์และสปาร์ตา คือสงครามอะไร?", options: ["สงครามเพโลพอนนีเซียน", "สงครามเปอร์เซีย", "สงครามพิวนิก", "สงครามกรุงทรอย"], a: 0 },
+            { q: "ใครคืออาจารย์ของพระเจ้าอเล็กซานเดอร์มหาราช?", options: ["อริสโตเติล", "โสกราตีส", "เพลโต", "พีทาโกรัส"], a: 0 }
+        ],
+        hard: [
+            { q: "อักษรโบราณของอารยธรรมไมโนอันที่นักวิชาการยังอ่านไม่ออกคืออะไร?", options: ["อักษรลิเนียร์ เอ", "อักษรลิเนียร์ บี", "ไฮโรกลิฟิก", "คูนิฟอร์ม"], a: 0 },
+            { q: "อักษรที่พบการบูชาเทพเจ้า เช่น ซุส เฮร่า โพไซดอน ในยุคไมซีเนียน เรียกว่าอะไร?", options: ["อักษรลิเนียร์ บี", "อักษรลิเนียร์ เอ", "ฟินิเชียน", "ละติน"], a: 0 },
+            { q: "สาเหตุที่ทำให้นครรัฐกรีกจับมือกันรบที่ยุทธการนาวีซาลามิสคืออะไร?", options: ["การรุกรานจากข้าศึกภายนอก (เปอร์เซีย)", "การขาดแคลนทรัพยากร", "ความขัดแย้งทางศาสนา", "การขยายอำนาจของสปาร์ตา"], a: 0 },
+            { q: "ราชวงศ์ของคลีโอพัตราในยุคเฮเลนิสติก เรียกว่าอะไร?", options: ["ราชวงศ์ทอเลมี", "ราชวงศ์เซลิวซิด", "ราชวงศ์แอนติโกนิด", "ราชวงศ์แอตทาลิด"], a: 0 },
+            { q: "ชื่อภาษาที่ชาวกรีกในยุคเฮเลนิสติกส์ใช้สื่อสารกันอย่างแพร่หลายคืออะไร?", options: ["ภาษาคอยนี (Koine Greek)", "ภาษาแอตติก (Attic Greek)", "ภาษาดอริก", "ภาษาไอโอนิก"], a: 0 }
+        ]
+    };
+
+    // โครงสร้างกระดาน 32 ช่อง
+    // level: กำหนดหมวดหมู่คำถามและสี, hasQ: มีคำถามไหม (70%)
+    const boardLayout = [
+        { name: "จุดเริ่มต้น<br>(รับ 200)", type: "corner", colorClass: "" }, // 0: มุมล่างขวา
+        { name: "เกาะครีต", type: "property", price: 100, level: "easy", hasQ: true },
+        { name: "วิหารคนอสซอส", type: "property", price: 120, level: "easy", hasQ: true },
+        { name: "หีบสมบัติ", type: "chance", colorClass: "color-special" },
+        { name: "กรุงทรอย", type: "property", price: 140, level: "easy", hasQ: false },
+        { name: "ไมซีเนีย", type: "property", price: 150, level: "easy", hasQ: true },
+        { name: "ภาษีสภา<br>(จ่าย 100)", type: "tax", amount: 100 },
+        { name: "ไอโอเนีย", type: "property", price: 160, level: "easy", hasQ: true },
+        { name: "ยมโลก<br>(คุก Hades)", type: "corner" }, // 8: มุมล่างซ้าย
+        { name: "มาราธอน", type: "property", price: 180, level: "medium", hasQ: true },
+        { name: "หีบสมบัติ", type: "chance", colorClass: "color-special" },
+        { name: "เทอร์โมพิลี", type: "property", price: 200, level: "medium", hasQ: true },
+        { name: "ซาลามิส", type: "property", price: 220, level: "medium", hasQ: true },
+        { name: "ภาษีสภา<br>(จ่าย 100)", type: "tax", amount: 100 },
+        { name: "โครินธ์", type: "property", price: 240, level: "medium", hasQ: false },
+        { name: "ธีบส์", type: "property", price: 240, level: "medium", hasQ: true },
+        { name: "วิหารเดลฟี<br>(จุดพัก)", type: "corner" }, // 16: มุมบนซ้าย
+        { name: "สปาร์ตา", type: "property", price: 260, level: "medium", hasQ: true },
+        { name: "หีบสมบัติ", type: "chance", colorClass: "color-special" },
+        { name: "อาร์กอส", type: "property", price: 260, level: "medium", hasQ: false },
+        { name: "ภาษีสภา<br>(จ่าย 100)", type: "tax", amount: 100 },
+        { name: "เอเธนส์", type: "property", price: 300, level: "medium", hasQ: true },
+        { name: "เกาะโรดส์", type: "property", price: 300, level: "hard", hasQ: true },
+        { name: "หีบสมบัติ", type: "chance", colorClass: "color-special" },
+        { name: "ไปยมโลก!", type: "corner" }, // 24: มุมบนขวา
+        { name: "ซีราคิวส์", type: "property", price: 320, level: "hard", hasQ: true },
+        { name: "ภาษีสภา<br>(จ่าย 100)", type: "tax", amount: 100 },
+        { name: "เอเฟซัส", type: "property", price: 350, level: "hard", hasQ: false },
+        { name: "เพอร์กามัม", type: "property", price: 350, level: "hard", hasQ: true },
+        { name: "หีบสมบัติ", type: "chance", colorClass: "color-special" },
+        { name: "มาซิโดเนีย", type: "property", price: 400, level: "hard", hasQ: true },
+        { name: "อเล็กซานเดรีย", type: "property", price: 400, level: "hard", hasQ: true }
+    ];
+
+    const playerColors = ['#e53935', '#1e88e5', '#43a047', '#fdd835'];
+    let players = [];
+    let currentPlayerIndex = 0;
+    let gameState = 'playing'; // playing, moving, answering, buying
+    let currentPropertyToBuy = null;
+
+    /* ================= ระบบ Setup ================= */
+    
+    // สร้างช่องกรอกชื่อตามจำนวนผู้เล่นตอนเริ่ม
+    function generatePlayerInputs() {
+        const count = document.getElementById('player-count').value;
+        const container = document.getElementById('player-inputs');
+        container.innerHTML = '';
+        for(let i=1; i<=count; i++) {
+            container.innerHTML += `
+                <div class="form-group">
+                    <label>ชื่อผู้เล่นที่ ${i}:</label>
+                    <input type="text" id="p-name-${i}" placeholder="กรอกชื่อ..." value="ผู้เล่น ${i}">
+                </div>
+            `;
+        }
+    }
+
+    // เริ่มต้นเกม
+    function startGame() {
+        const count = document.getElementById('player-count').value;
+        players = [];
+        for(let i=1; i<=count; i++) {
+            const name = document.getElementById(`p-name-${i}`).value || `ผู้เล่น ${i}`;
+            players.push({
+                id: i,
+                name: name,
+                money: 1500,
+                position: 0,
+                color: playerColors[i-1],
+                inJail: false
+            });
+        }
+        
+        document.getElementById('setup-screen').style.display = 'none';
+        document.getElementById('game-screen').style.display = 'flex';
+        
+        buildBoard();
+        updatePlayerUI();
+        logStatus(`เริ่มเกม! ตาของ ${players[0].name} ทอยลูกเต๋า`);
+    }
+
+    /* ================= UI และการวาดกระดาน ================= */
+
+    function buildBoard() {
+        const container = document.getElementById('board-container');
+        
+        boardLayout.forEach((space, index) => {
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            cell.id = `space-${index}`;
+            
+            // กำหนดสีหัวการ์ดตามระดับ
+            let headerColor = '#e0e0e0';
+            if(space.level === 'easy') headerColor = '#81c784';
+            if(space.level === 'medium') headerColor = '#64b5f6';
+            if(space.level === 'hard') headerColor = '#e57373';
+            
+            // ตำแหน่ง Grid (9x9)
+            let r, c;
+            if(index >= 0 && index <= 7) { r = 9; c = 9 - index; }
+            else if(index >= 8 && index <= 15) { r = 9 - (index - 8); c = 1; }
+            else if(index >= 16 && index <= 23) { r = 1; c = 1 + (index - 16); }
+            else if(index >= 24 && index <= 31) { r = 1 + (index - 24); c = 9; }
+            
+            cell.style.gridRow = r;
+            cell.style.gridColumn = c;
+
+            // ตกแต่งภายในช่อง
+            if(space.type === 'property') {
+                cell.innerHTML = `
+                    <div class="cell-header" style="background-color: ${headerColor}"></div>
+                    <div class="cell-content">${space.name}</div>
+                    <div class="cell-price">D ${space.price}</div>
+                    <div class="owner-banner" id="owner-banner-${index}"></div>
+                `;
+            } else {
+                cell.classList.add('corner');
+                if(space.colorClass) cell.classList.add(space.colorClass);
+                cell.innerHTML = `<div class="cell-content">${space.name}</div>`;
+            }
+
+            container.appendChild(cell);
+        });
+
+        // สร้าง Token ของผู้เล่น
+        players.forEach((p, i) => {
+            const token = document.createElement('div');
+            token.className = 'token';
+            token.id = `token-${p.id}`;
+            token.style.backgroundColor = p.color;
+            container.appendChild(token);
+        });
+
+        // เลื่อน Token ไปจุดเริ่ม
+        updateTokensPosition();
+    }
+
+    // อัปเดตแถบด้านข้างซ้าย
+    function updatePlayerUI() {
+        const container = document.getElementById('players-container');
+        container.innerHTML = '';
+        players.forEach((p, i) => {
+            const isActive = i === currentPlayerIndex ? 'active' : '';
+            container.innerHTML += `
+                <div class="player-card ${isActive}" id="player-card-${p.id}">
+                    <div class="player-name">
+                        <span class="player-token-indicator" style="background-color: ${p.color}"></span>
+                        ${p.name}
+                    </div>
+                    <div class="player-money" id="money-${p.id}">
+                        <i class="fa-solid fa-coins" style="color:var(--gold);"></i> ${p.money} D
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // จัดการตำแหน่งตัวหมาก
+    function updateTokensPosition() {
+        players.forEach((p, i) => {
+            const token = document.getElementById(`token-${p.id}`);
+            const cell = document.getElementById(`space-${p.position}`);
+            const rect = cell.getBoundingClientRect();
+            const boardRect = document.getElementById('board-container').getBoundingClientRect();
+            
+            // คำนวณตำแหน่งสัมพัทธ์ในกระดาน
+            const left = rect.left - boardRect.left;
+            const top = rect.top - boardRect.top;
+            
+            // เลื่อนเหลื่อมกันเล็กน้อยจะได้ไม่ทับกันสนิท
+            const offsetX = (i % 2) * 15 + 10;
+            const offsetY = Math.floor(i / 2) * 15 + 10;
+
+            token.style.left = `${left + offsetX}px`;
+            token.style.top = `${top + offsetY}px`;
+        });
+    }
+
+    /* ================= ระบบการเงินและข้อความ ================= */
+
+    function logStatus(msg) {
+        const logBox = document.getElementById('status-log');
+        logBox.innerHTML = msg;
+    }
+
+    // แสดงตัวเลขลอยขึ้น/ลง
+    function animateMoney(playerId, amount) {
+        const p = players.find(p => p.id === playerId);
+        p.money += amount;
+        
+        const card = document.getElementById(`player-card-${playerId}`);
+        const floatEl = document.createElement('div');
+        floatEl.className = `float-text ${amount > 0 ? 'float-up' : 'float-down'}`;
+        floatEl.innerText = amount > 0 ? `+${amount}` : `${amount}`;
+        
+        card.appendChild(floatEl);
+        
+        // อัปเดตตัวเลขหลัก
+        document.getElementById(`money-${playerId}`).innerHTML = `<i class="fa-solid fa-coins" style="color:var(--gold);"></i> ${p.money} D`;
+        
+        setTimeout(() => floatEl.remove(), 2000);
+    }
+
+    /* ================= ระบบการเล่น (ทอยเต๋า เดิน ตอบคำถาม) ================= */
+
+    function rollDice() {
+        if(gameState !== 'playing') return;
+        gameState = 'moving';
+        document.getElementById('btn-roll').disabled = true;
+
+        const diceEl = document.getElementById('dice-display');
+        let rolls = 0;
+        const rollAnim = setInterval(() => {
+            diceEl.innerText = Math.floor(Math.random() * 6) + 1;
+            rolls++;
+            if(rolls > 10) {
+                clearInterval(rollAnim);
+                const finalValue = Math.floor(Math.random() * 6) + 1;
+                diceEl.innerText = finalValue;
+                
+                const p = players[currentPlayerIndex];
+                logStatus(`<strong>${p.name}</strong> ทอยได้ ${finalValue} แต้ม`);
+                
+                movePlayer(p, finalValue);
+            }
+        }, 100);
+    }
+
+    function movePlayer(player, spaces) {
+        const oldPos = player.position;
+        player.position += spaces;
+        
+        if (player.position >= boardLayout.length) {
+            player.position -= boardLayout.length;
+            // ผ่านจุดเริ่มต้น รับเงิน
+            setTimeout(() => {
+                animateMoney(player.id, 200);
+                logStatus(`<strong>${player.name}</strong> ผ่านจุดเริ่มต้น รับโบนัส 200 D`);
+            }, 1000);
+        }
+
+        updateTokensPosition();
+        
+        setTimeout(() => {
+            evaluateSpace(player);
+        }, 800); // รอให้ตัวหมากเดินเสร็จ
+    }
+
+    function evaluateSpace(player) {
+        const space = boardLayout[player.position];
+        logStatus(`<strong>${player.name}</strong> เดินมาตกที่ <strong>${space.name.replace('<br>', ' ')}</strong>`);
+
+        if (space.type === 'property') {
+            if (space.owner === undefined) {
+                // ที่ดินว่างเปล่า
+                currentPropertyToBuy = { player, space, index: player.position };
+                if (space.hasQ) {
+                    gameState = 'answering';
+                    triggerQuestion(space.level);
                 } else {
-                    setShowQuiz(false);
+                    promptBuyProperty();
                 }
-            };
-
-            return (
-                <div className="container">
-                    <div className="greek-border">
-                        <div className="header">
-                            <h1>{content.title}</h1>
-                            <p>{content.description}</p>
-                        </div>
-
-                        {/* PLAYER PAWNS */}
-                        <div className="players-container">
-                            {GameState.players.map((player, idx) => (
-                                <div key={idx} className="player-pawn">
-                                    <div className="pawn-icon">
-                                        {['🏛️', '⚔️', '📚', '🎨'][idx % 4]}
-                                    </div>
-                                    <div className="player-name">{player}</div>
-                                    <div className="player-score">คะแนน: {gameScore + idx * 5}</div>
-                                    <div className="player-progress">
-                                        <div 
-                                            className="progress-bar" 
-                                            style={{ width: `${Math.min(gameScore * 10, 100)}%` }}
-                                        />
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* GAME SPECIFIC CONTENT */}
-                        {gameId === 'UNO' && <UNOGame />}
-                        {gameId === 'Werewolf' && <WerewolfGame />}
-                        {gameId === 'เกมเศรษฐี' && <MonopolyGame />}
-                        {gameId === 'Ticket to Ride' && <TicketToRideGame />}
-
-                        {/* LEARNING LOG */}
-                        <div className="learning-log">
-                            <h3 style={{ color: '#d4af37', marginBottom: '1rem' }}>
-                                📚 บันทึกการเรียนรู้
-                            </h3>
-                            {content.items.map((item, idx) => (
-                                <div 
-                                    key={idx} 
-                                    className={`learning-item ${
-                                        GameState.learningProgress[gameId].learned.length > idx ? 'unlocked' : ''
-                                    }`}
-                                >
-                                    <span className="learning-emoji">{item.emoji}</span>
-                                    <strong>{item.name}:</strong> {item.desc}
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* ACTION BUTTONS */}
-                        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-                            <button 
-                                onClick={() => setShowQuiz(!showQuiz)}
-                                style={{ marginRight: '1rem' }}
-                            >
-                                🎯 {showQuiz ? 'ปิด' : 'เปิด'}แบบทดสอบ
-                            </button>
-                            <button onClick={() => App.setState({ page: 'menu' })}>
-                                ← กลับไปเมนูเกม
-                            </button>
-                        </div>
-
-                        {/* QUIZ MODAL */}
-                        {showQuiz && quizzes.length > 0 && (
-                            <div className="modal-overlay" onClick={() => setShowQuiz(false)}>
-                                <div className="modal" onClick={(e) => e.stopPropagation()}>
-                                    <h2>🎯 แบบทดสอบ</h2>
-                                    <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-                                        <strong>คำถาม {currentQuiz + 1}/{quizzes.length}:</strong>
-                                    </p>
-                                    <p>{quizzes[currentQuiz].question}</p>
-                                    
-                                    <div className="quiz-options">
-                                        {quizzes[currentQuiz].options.map((option, idx) => (
-                                            <button 
-                                                key={idx}
-                                                className={`quiz-option ${
-                                                    selectedAnswer === idx ? (
-                                                        idx === quizzes[currentQuiz].correct ? 'correct' : 'incorrect'
-                                                    ) : ''
-                                                }`}
-                                                onClick={() => !quizAnswered && handleQuizOption(idx)}
-                                                disabled={quizAnswered}
-                                            >
-                                                {option}
-                                            </button>
-                                        ))}
-                                    </div>
-
-                                    {quizAnswered && (
-                                        <div style={{ 
-                                            background: selectedAnswer === quizzes[currentQuiz].correct 
-                                                ? 'rgba(76, 175, 80, 0.2)' 
-                                                : 'rgba(244, 67, 54, 0.2)',
-                                            padding: '1rem',
-                                            borderRadius: '8px',
-                                            marginBottom: '1rem',
-                                            borderLeft: `4px solid ${
-                                                selectedAnswer === quizzes[currentQuiz].correct ? '#4caf50' : '#f44336'
-                                            }`
-                                        }}>
-                                            <p>
-                                                {selectedAnswer === quizzes[currentQuiz].correct 
-                                                    ? '✅ ถูกต้อง!' 
-                                                    : '❌ ผิด'
-                                                }
-                                            </p>
-                                            <p style={{ fontSize: '0.95rem', marginTop: '0.5rem' }}>
-                                                💡 {quizzes[currentQuiz].fact}
-                                            </p>
-                                            <button 
-                                                onClick={handleNextQuiz}
-                                                style={{ marginTop: '1rem', width: '100%' }}
-                                            >
-                                                {currentQuiz < quizzes.length - 1 ? '⏭️ คำถามถัดไป' : '✅ จบแบบทดสอบ'}
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            );
-        }
-
-        function UNOGame() {
-            const [hand, setHand] = React.useState(['🔴', '🔵', '🟡', '🟢', '🔴']);
-            const [selectedCard, setSelectedCard] = React.useState(null);
-
-            return (
-                <div className="card">
-                    <h3 style={{ color: '#d4af37', marginBottom: '1rem' }}>
-                        🎴 เล่นไพ่ - แมทช์สีตามเทพเจ้า
-                    </h3>
-                    
-                    <div className="tooltip">
-                        <span>🏛️ The Agora</span>
-                        <span className="tooltiptext">หนึ่งในจตุรัสหลักของเอเธนส์ สถานที่รวมตัวของพลเมืองและผู้ค้าขาย</span>
-                    </div>
-                    <div style={{ marginLeft: '2rem', display: 'inline-block' }}>
-                        อูโน่ แข่งขันไพ่ระหว่างเทพเจ้า
-                    </div>
-
-                    <p style={{ color: '#ccc', margin: '1rem 0' }}>
-                        🎮 เลือกไพ่ที่ตรงสีกับเทพเจ้าที่ปรากฏในกระดานเกม
-                    </p>
-
-                    <div style={{ 
-                        background: 'rgba(212, 175, 55, 0.1)',
-                        padding: '2rem',
-                        borderRadius: '8px',
-                        textAlign: 'center',
-                        marginBottom: '2rem'
-                    }}>
-                        <p style={{ color: '#d4af37', marginBottom: '1rem' }}>กระดานเกม (ไพ่ปัจจุบัน)</p>
-                        <div style={{ fontSize: '4rem' }}>🔴</div>
-                        <p style={{ color: '#ccc', marginTop: '0.5rem' }}>สปาร์ตา</p>
-                    </div>
-
-                    <p style={{ color: '#d4af37', marginBottom: '1rem', fontWeight: 600 }}>
-                        ไพ่ในมือของคุณ:
-                    </p>
-
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center' }}>
-                        {hand.map((card, idx) => (
-                            <div
-                                key={idx}
-                                className={`uno-card ${
-                                    card === '🔴' ? 'card-red' :
-                                    card === '🔵' ? 'card-blue' :
-                                    card === '🟡' ? 'card-yellow' : 'card-green'
-                                }`}
-                                onClick={() => setSelectedCard(idx)}
-                                style={{
-                                    border: selectedCard === idx ? '4px solid #fff' : '2px solid #333',
-                                    opacity: card === '🔴' ? 1 : 0.6
-                                }}
-                            >
-                                {card}
-                            </div>
-                        ))}
-                    </div>
-
-                    {selectedCard !== null && (
-                        <div style={{ 
-                            textAlign: 'center', 
-                            marginTop: '2rem',
-                            padding: '1rem',
-                            background: 'rgba(76, 175, 80, 0.2)',
-                            borderRadius: '8px'
-                        }}>
-                            <p style={{ color: '#4caf50', fontWeight: 600 }}>
-                                ✅ เลือกไพ่ {hand[selectedCard]} คุณสามารถเล่นได้!
-                            </p>
-                        </div>
-                    )}
-
-                    <div className="stat-box" style={{ marginTop: '2rem' }}>
-                        <div className="stat-value">{hand.length}</div>
-                        <div className="stat-label">ไพ่เหลือในมือ</div>
-                    </div>
-                </div>
-            );
-        }
-
-        function WerewolfGame() {
-            const [phase, setPhase] = React.useState('day');
-            const [votes, setVotes] = React.useState(0);
-
-            return (
-                <div className="card">
-                    <h3 style={{ color: '#d4af37', marginBottom: '1rem' }}>
-                        🐺 เกมสภาเอเธนส์
-                    </h3>
-
-                    <div className="tooltip">
-                        <span>⚔️ Sparta vs 🏛️ Athens</span>
-                        <span className="tooltiptext">สปาร์ตามีระบบการปกครองแบบโอลิการ์ชี ส่วนเอเธนส์มีระบบประชาธิปไตย</span>
-                    </div>
-
-                    <div style={{ marginTop: '1.5rem' }}>
-                        <div className="werewolf-info">
-                            <strong>⏰ ช่วง {phase === 'day' ? 'กลางวัน 🌞' : 'กลางคืน 🌙'}:</strong>
-                            <p style={{ marginTop: '0.5rem' }}>
-                                {phase === 'day' 
-                                    ? 'สภาประชาชนหารือและโหวตประหารผู้ต้องสงสัย' 
-                                    : 'สายลับสปาร์ตาเลือกกำจัดผู้เล่นคนหนึ่ง'
-                                }
-                            </p>
-                        </div>
-
-                        <div style={{ 
-                            display: 'grid', 
-                            gridTemplateColumns: '1fr 1fr',
-                            gap: '1rem',
-                            marginTop: '1.5rem'
-                        }}>
-                            <div className="game-tile">
-                                <div className="tile-emoji">🏛️</div>
-                                <div className="tile-text">พลเมืองเอเธนส์</div>
-                                <div style={{ fontSize: '0.8rem', marginTop: '0.3rem', color: '#ccc' }}>
-                                    ปกป้องนครรัฐ
-                                </div>
-                            </div>
-                            <div className="game-tile">
-                                <div className="tile-emoji">⚔️</div>
-                                <div className="tile-text">สายลับสปาร์ตา</div>
-                                <div style={{ fontSize: '0.8rem', marginTop: '0.3rem', color: '#ccc' }}>
-                                    สร้างความวุ่นวาย
-                                </div>
-                            </div>
-                        </div>
-
-                        <button 
-                            style={{ 
-                                width: '100%',
-                                marginTop: '1.5rem',
-                                background: phase === 'day' ? 'rgba(100, 150, 200, 0.2)' : 'rgba(100, 100, 100, 0.2)'
-                            }}
-                            onClick={() => setPhase(phase === 'day' ? 'night' : 'day')}
-                        >
-                            {phase === 'day' ? '🌙 เข้าสู่กลางคืน' : '🌞 เข้าสู่กลางวัน'}
-                        </button>
-
-                        <div className="game-stats" style={{ marginTop: '1.5rem' }}>
-                            <div className="stat-box">
-                                <div className="stat-value">5</div>
-                                <div className="stat-label">ผู้เล่นทั้งหมด</div>
-                            </div>
-                            <div className="stat-box">
-                                <div className="stat-value">3</div>
-                                <div className="stat-label">พลเมืองเอเธนส์</div>
-                            </div>
-                            <div className="stat-box">
-                                <div className="stat-value">2</div>
-                                <div className="stat-label">สายลับสปาร์ตา</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
-        function MonopolyGame() {
-            const [ownedCities, setOwnedCities] = React.useState(['เอเธนส์']);
-            const [money, setMoney] = React.useState(1500);
-
-            const cities = [
-                { emoji: '🏛️', name: 'เอเธนส์', price: 200, trait: 'ประชาธิปไตย' },
-                { emoji: '⚔️', name: 'สปาร์ตา', price: 200, trait: 'ทหาร' },
-                { emoji: '🌊', name: 'คอรินท์', price: 180, trait: 'ท่าเรือค้าขาย' },
-                { emoji: '📚', name: 'ธีบส์', price: 160, trait: 'ศิลป์' }
-            ];
-
-            const handleBuyCity = (city) => {
-                if (money >= city.price && !ownedCities.includes(city.name)) {
-                    setOwnedCities([...ownedCities, city.name]);
-                    setMoney(money - city.price);
-                }
-            };
-
-            return (
-                <div className="card">
-                    <h3 style={{ color: '#d4af37', marginBottom: '1rem' }}>
-                        💰 มหาอำนาจแห่งทะเลอีเจียน
-                    </h3>
-
-                    <div className="tooltip">
-                        <span>🪙 Drachma (ดรักมา)</span>
-                        <span className="tooltiptext">หน่วยเงินหลักของกรีกโบราณ แบ่งออกเป็น 6 obols</span>
-                    </div>
-
-                    <div style={{ marginTop: '1.5rem' }}>
-                        <div className="game-stats">
-                            <div className="stat-box">
-                                <div className="stat-value">{money}</div>
-                                <div className="stat-label">ดรักมา (💰)</div>
-                            </div>
-                            <div className="stat-box">
-                                <div className="stat-value">{ownedCities.length}</div>
-                                <div className="stat-label">นครรัฐที่เป็นเจ้าของ</div>
-                            </div>
-                            <div className="stat-box">
-                                <div className="stat-value">{ownedCities.length > 1 ? ownedCities.length * 10 : 0}</div>
-                                <div className="stat-label">รายได้ต่อเทิร์น</div>
-                            </div>
-                        </div>
-
-                        <p style={{ color: '#d4af37', marginTop: '2rem', marginBottom: '1rem', fontWeight: 600 }}>
-                            🏘️ นครรัฐที่มีให้ซื้อ:
-                        </p>
-
-                        <div className="game-board" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
-                            {cities.map((city, idx) => (
-                                <div 
-                                    key={idx}
-                                    className="game-tile"
-                                    onClick={() => handleBuyCity(city)}
-                                    style={{
-                                        opacity: ownedCities.includes(city.name) ? 0.5 : 1,
-                                        cursor: ownedCities.includes(city.name) || money < city.price ? 'not-allowed' : 'pointer',
-                                        background: ownedCities.includes(city.name) ? 'rgba(76, 175, 80, 0.2)' : 'rgba(212, 175, 55, 0.1)'
-                                    }}
-                                >
-                                    <div className="tile-emoji">{city.emoji}</div>
-                                    <div className="tile-text">{city.name}</div>
-                                    {ownedCities.includes(city.name) ? (
-                                        <div style={{ fontSize: '0.7rem', color: '#4caf50', marginTop: '0.3rem' }}>✓ เป็นของคุณ</div>
-                                    ) : (
-                                        <div style={{ fontSize: '0.7rem', color: '#d4af37', marginTop: '0.3rem' }}>{city.price} 💰</div>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-
-                        <div style={{ 
-                            marginTop: '2rem',
-                            padding: '1rem',
-                            background: 'rgba(212, 175, 55, 0.1)',
-                            borderRadius: '8px'
-                        }}>
-                            <p style={{ color: '#d4af37', fontWeight: 600, marginBottom: '0.5rem' }}>
-                                📖 เกร็ดความรู้:
-                            </p>
-                            <p style={{ fontSize: '0.95rem' }}>
-                                ในสมัยโบราณ เมืองกรีกแต่ละเมืองมีระบบการค้าขายที่แตกต่างกัน เอเธนส์เป็นศูนย์กลางการค้า ส่วนคอรินท์มีท่าเรือสำคัญระหว่างสองทะเล
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
-        function TicketToRideGame() {
-            const [routes, setRoutes] = React.useState([]);
-            const [ships, setShips] = React.useState(10);
-
-            const availableRoutes = [
-                { from: 'เอเธนส์', to: 'คอรินท์', distance: 50, cargo: '🫒 น้ำมันมะกอก' },
-                { from: 'เอเธนส์', to: 'ทรอย', distance: 100, cargo: '🍷 ไวน์' },
-                { from: 'คอรินท์', to: 'ซิซิลี', distance: 80, cargo: '🏺 เครื่องปั้นดินเผา' }
-            ];
-
-            const handleClaimRoute = (route) => {
-                if (ships >= route.distance / 25) {
-                    setRoutes([...routes, route]);
-                    setShips(ships - Math.ceil(route.distance / 25));
-                }
-            };
-
-            return (
-                <div className="card">
-                    <h3 style={{ color: '#d4af37', marginBottom: '1rem' }}>
-                        🚢 สายไหมทางทะเล
-                    </h3>
-
-                    <div className="tooltip">
-                        <span>🗺️ Mediterranean Trade Routes</span>
-                        <span className="tooltiptext">เส้นทางการค้าหลักของชาวกรีกผ่านทะเลเมดิเตอร์เรเนียน</span>
-                    </div>
-
-                    <div style={{ marginTop: '1.5rem' }}>
-                        <div className="game-stats">
-                            <div className="stat-box">
-                                <div className="stat-value">{ships}</div>
-                                <div className="stat-label">เรือเหลือ 🚢</div>
-                            </div>
-                            <div className="stat-box">
-                                <div className="stat-value">{routes.length}</div>
-                                <div className="stat-label">เส้นทางที่สร้าง</div>
-                            </div>
-                            <div className="stat-box">
-                                <div className="stat-value">{routes.length * 10}</div>
-                                <div className="stat-label">คะแนน</div>
-                            </div>
-                        </div>
-
-                        <p style={{ color: '#d4af37', marginTop: '2rem', marginBottom: '1rem', fontWeight: 600 }}>
-                            🛤️ เส้นทางที่สามารถสร้างได้:
-                        </p>
-
-                        {availableRoutes.map((route, idx) => (
-                            <div 
-                                key={idx}
-                                style={{
-                                    background: routes.some(r => r.from === route.from && r.to === route.to) 
-                                        ? 'rgba(76, 175, 80, 0.2)' 
-                                        : 'rgba(212, 175, 55, 0.1)',
-                                    padding: '1rem',
-                                    marginBottom: '1rem',
-                                    borderRadius: '8px',
-                                    border: '2px solid #d4af37',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center'
-                                }}
-                            >
-                                <div>
-                                    <p style={{ color: '#d4af37', fontWeight: 600, marginBottom: '0.3rem' }}>
-                                        {route.from} → {route.to}
-                                    </p>
-                                    <p style={{ fontSize: '0.9rem', color: '#ccc' }}>
-                                        ระยะ: {route.distance}km | สินค้า: {route.cargo}
-                                    </p>
-                                </div>
-                                <button 
-                                    onClick={() => handleClaimRoute(route)}
-                                    disabled={ships < Math.ceil(route.distance / 25) || routes.some(r => r.from === route.from && r.to === route.to)}
-                                    style={{
-                                        opacity: ships < Math.ceil(route.distance / 25) || routes.some(r => r.from === route.from && r.to === route.to) ? 0.5 : 1,
-                                        cursor: ships < Math.ceil(route.distance / 25) || routes.some(r => r.from === route.from && r.to === route.to) ? 'not-allowed' : 'pointer'
-                                    }}
-                                >
-                                    {routes.some(r => r.from === route.from && r.to === route.to) 
-                                        ? '✓ สร้างแล้ว' 
-                                        : `สร้าง (ต้อง ${Math.ceil(route.distance / 25)} เรือ)`
-                                    }
-                                </button>
-                            </div>
-                        ))}
-
-                        <div style={{ 
-                            marginTop: '2rem',
-                            padding: '1rem',
-                            background: 'rgba(212, 175, 55, 0.1)',
-                            borderRadius: '8px',
-                            borderLeft: '4px solid #d4af37'
-                        }}>
-                            <p style={{ color: '#d4af37', fontWeight: 600, marginBottom: '0.5rem' }}>
-                                📚 สมุดบันทึกการค้า:
-                            </p>
-                            <p style={{ fontSize: '0.95rem', lineHeight: '1.5' }}>
-                                🫒 <strong>เอเธนส์</strong> ผลิตน้ำมันมะกอกมากที่สุด | 
-                                🍷 <strong>ทรอย</strong> มีไวน์ดีเด่น | 
-                                🏺 <strong>คอรินท์</strong> ผลิตเครื่องปั้นดินเผา
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
-        // ============ MAIN APP COMPONENT ============
-        class App extends React.Component {
-            constructor(props) {
-                super(props);
-                this.state = { page: 'home' };
-                App.setState = this.setState.bind(this);
+            } else if (space.owner !== player.id) {
+                // ตกที่คนอื่น เสียค่าผ่านทาง (ครึ่งนึงของราคา)
+                const toll = Math.floor(space.price / 2);
+                const owner = players.find(p => p.id === space.owner);
+                animateMoney(player.id, -toll);
+                animateMoney(owner.id, toll);
+                logStatus(`<strong>${player.name}</strong> ถูกหัก ${toll} D เพราะไปตกช่องของ <strong>${owner.name}</strong>!`);
+                endTurn();
+            } else {
+                // ตกที่ตัวเอง
+                logStatus(`พักผ่อนในนครรัฐของตัวเอง...`);
+                endTurn();
             }
-
-            render() {
-                const { page } = this.state;
-
-                return (
-                    <div>
-                        {page === 'home' && <HomePage />}
-                        {page === 'menu' && <GameMenu />}
-                        {page === 'game-UNO' && <GameBoard gameId="UNO" />}
-                        {page === 'game-Werewolf' && <GameBoard gameId="Werewolf" />}
-                        {page === 'game-เกมเศรษฐี' && <GameBoard gameId="เกมเศรษฐี" />}
-                        {page === 'game-Ticket to Ride' && <GameBoard gameId="Ticket to Ride" />}
-                    </div>
-                );
-            }
+        } else if (space.type === 'tax') {
+            animateMoney(player.id, -space.amount);
+            logStatus(`<strong>${player.name}</strong> เสียภาษี ${space.amount} D`);
+            endTurn();
+        } else if (space.type === 'chance') {
+            const chanceAmt = Math.random() > 0.5 ? 100 : -50;
+            animateMoney(player.id, chanceAmt);
+            logStatus(`<strong>${player.name}</strong> เปิดหีบสมบัติ ได้รับ ${chanceAmt > 0 ? '+'+chanceAmt : chanceAmt} D`);
+            endTurn();
+        } else if (player.position === 24) { // มุมบนขวา (ไปยมโลก)
+            player.position = 8;
+            updateTokensPosition();
+            logStatus(`<strong>${player.name}</strong> ถูกส่งตัวไปยังยมโลก!`);
+            endTurn();
+        } else {
+            // มุมอื่นๆ ไม่มีผล
+            endTurn();
         }
+    }
 
-        // ============ RENDER APP ============
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
+    /* ================= ระบบคำถามและการซื้อ ================= */
 
+    function triggerQuestion(level) {
+        const pool = questionBank[level];
+        // สุ่มคำถาม
+        const qIndex = Math.floor(Math.random() * pool.length);
+        const qData = pool[qIndex];
+        
+        // สลับตัวเลือก
+        let options = qData.options.map((opt, i) => ({ text: opt, isCorrect: i === qData.a }));
+        options.sort(() => Math.random() - 0.5);
+
+        document.getElementById('q-title').innerText = "คำถามเพื่ออารยธรรมกรีก";
+        document.getElementById('q-text').innerText = qData.q;
+        
+        const optsContainer = document.getElementById('q-options');
+        optsContainer.innerHTML = '';
+        
+        options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerText = opt.text;
+            btn.onclick = () => answerQuestion(opt.isCorrect);
+            optsContainer.appendChild(btn);
+        });
+
+        document.getElementById('question-modal').style.display = 'flex';
+        logStatus(`<strong>${players[currentPlayerIndex].name}</strong> กำลังตอบคำถาม...`);
+    }
+
+    function answerQuestion(isCorrect) {
+        document.getElementById('question-modal').style.display = 'none';
+        const p = currentPropertyToBuy.player;
+
+        if (isCorrect) {
+            animateMoney(p.id, 200);
+            logStatus(`🎉 <strong>${p.name}</strong> ตอบถูก! รับรางวัล 200 D`);
+            setTimeout(promptBuyProperty, 1500);
+        } else {
+            animateMoney(p.id, -50);
+            logStatus(`❌ <strong>${p.name}</strong> ตอบผิด! โดนหัก 50 D และหมดสิทธิ์ซื้อที่ดินตานี้`);
+            setTimeout(endTurn, 2000);
+        }
+    }
+
+    function promptBuyProperty() {
+        const p = currentPropertyToBuy.player;
+        const sp = currentPropertyToBuy.space;
+        
+        if (p.money >= sp.price) {
+            gameState = 'buying';
+            showAlert(`คุณต้องการซื้อ <strong>${sp.name.replace('<br>',' ')}</strong> ในราคา ${sp.price} D หรือไม่?`, 
+                `<button class="btn" onclick="buyCurrentProperty()">ซื้อเลย</button>
+                 <button class="btn" style="background:#888;" onclick="skipBuyProperty()">ข้าม</button>`
+            );
+        } else {
+            showAlert(`แจ้งเตือน`, `เงินไม่พอซื้อนครรัฐแห่งนี้!`);
+            endTurn();
+        }
+    }
+
+    function buyCurrentProperty() {
+        const p = currentPropertyToBuy.player;
+        const sp = currentPropertyToBuy.space;
+        const idx = currentPropertyToBuy.index;
+
+        animateMoney(p.id, -sp.price);
+        sp.owner = p.id;
+        
+        // แสดงแถบสีเจ้าของ
+        const banner = document.getElementById(`owner-banner-${idx}`);
+        banner.style.backgroundColor = p.color;
+
+        closeAlertModal();
+        logStatus(`<strong>${p.name}</strong> ได้ครอบครอง ${sp.name.replace('<br>',' ')}!`);
+        setTimeout(endTurn, 1500);
+    }
+
+    function skipBuyProperty() {
+        closeAlertModal();
+        logStatus(`<strong>${currentPropertyToBuy.player.name}</strong> ปฏิเสธการซื้อที่ดิน`);
+        endTurn();
+    }
+
+    function showAlert(title, htmlContent) {
+        document.getElementById('alert-title').innerHTML = title;
+        document.getElementById('alert-controls').innerHTML = htmlContent || `<button class="btn" onclick="closeAlertModal(); endTurn();">ตกลง</button>`;
+        document.getElementById('alert-text').innerHTML = '';
+        document.getElementById('alert-modal').style.display = 'flex';
+    }
+
+    function closeAlertModal() {
+        document.getElementById('alert-modal').style.display = 'none';
+    }
+
+    /* ================= จบเทิร์น ================= */
+
+    function endTurn() {
+        document.getElementById('btn-roll').disabled = false;
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+        gameState = 'playing';
+        updatePlayerUI();
+        
+        setTimeout(() => {
+            logStatus(`ตาของ <strong>${players[currentPlayerIndex].name}</strong> ทอยลูกเต๋า...`);
+        }, 1000);
+    }
+
+    // เริ่มสร้าง Setup ตอนโหลดเว็บ
+    generatePlayerInputs();
+
+</script>
 </body>
 </html>
+
+```
